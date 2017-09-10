@@ -1,8 +1,8 @@
-import { combineReducers } from 'redux';
-import FakeAuth from './fake_auth';
+import { combineReducers } from 'redux'
+import Orcamentos from './OrcamentosReducer'
 
 const rootReducer = combineReducers({
-    fakeAuth: FakeAuth
-});
+    orcamentoStateTree: Orcamentos
+})
 
-export default rootReducer;
+export default rootReducer

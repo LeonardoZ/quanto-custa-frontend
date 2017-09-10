@@ -1,24 +1,13 @@
-import React from 'react';
+import React from 'react'
 import {
-  Route,
-  Redirect
-} from 'react-router-dom';
-import LoginForm from './login/LoginForm';
+  Route
+} from 'react-router-dom'
+import OrcamentosPanel from './orcamentos/containers/OrcamentosPanel'
+import OrcamentoCadastro from './orcamentos/containers/OrcamentoCadastro'
+import OrcamentoUnidadesWizard from './orcamentos/containers/OrcamentoUnidadesWizard'
+import OrcamentoParcialAtivo from './orcamentos/containers/OrcamentoParcialAtivo'
 
-// Fake componentes
-const A = () => {
-  return <h1>A</h1>
-}
-
-const B = () => {
-  return <h1>B</h1>
-}
-
-const C = ({ match }) => {
-  return <h1>C - {match.params.id}</h1>
-}
-
-const PrivateRoute = ({ component: Component, isUserAuthenticated, ...rest }) => (
+/** PrivateRoute = ({ component: Component, isUserAuthenticated, ...rest }) => (
   <Route {...rest} render={props => (
     isUserAuthenticated ? (
       <Component {...props} />
@@ -29,13 +18,15 @@ const PrivateRoute = ({ component: Component, isUserAuthenticated, ...rest }) =>
       }} />
     )
   )} />
-);
-
+)
+*/
 export const getRoutes = (isAuthenticated) => {
   return [
-    <Route key='a' exact path='/a' component={A} />,
-    <PrivateRoute key='b' path='/b' isUserAuthenticated={isAuthenticated} component={B} />,
-    <Route key='login' path='/login' component={LoginForm} />,
-    <Route key='c' path='/c/:id' component={C} />
+    <Route key='orcamentos' exact path='/' component={OrcamentosPanel} />,
+    <Route key='orcamento-cadastro' exact path='/orcamento' component={OrcamentoCadastro} />,
+    <Route key='orcamento-unidades-wizard' exact path='/unidade' component={OrcamentoUnidadesWizard} />,
+    <Route key='orcamento-unidades' exact path='/orcamento/ativo' component={OrcamentoParcialAtivo} />
+    //<PrivateRoute key='b' path='/b' isUserAuthenticated={isAuthenticated} component={B} />,
+    //<Route key='login' path='/login' component={LoginForm} />,
   ]
-};
+}
