@@ -11,40 +11,33 @@ class OrcamentoArtefatoForm extends Component {
     this.disableButton = this.disableButton.bind(this)
     this.submit = this.submit.bind(this)
     this.enableButton = this.enableButton.bind(this)
-    this.onFinish = this.onFinish.bind(this)
   }
 
   componentWillMount() {
-    this.setState(
-      {
-        canSubmit: false,
-        nome: "",
-        valor: '0.0',
-        custo: 0.0,
-        valorFormatado: 'R$ 0,00',
-        canFinish: this.props.artefatos.length > 0
-      }
-    )
-  }
-
-  onFinish() {
-    this.props.finalizarUnidade()
+    this.setState({
+      canSubmit: false,
+      nome: "",
+      valor: '0.0',
+      custo: 0.0,
+      valorFormatado: 'R$ 0,00',
+      canFinish: this.props.artefatos.length > 0
+    })
   }
 
   submit(data) {
-    let newData ={
-        ...data,
-        custo: this.state.valorFlutuante
+    let newData = {
+      ...data,
+      custo: this.state.custo
     }
     this.props.salvarArtefato(newData)
     this.setState({
-        canSubmit: false,
-        nome: "",
-        custo: 0.0,
-        valor: '0.0',
-        valorFormatado: 'R$ 0,00',
-        canFinish: this.props.artefatos.length > 0
-      })
+      canSubmit: false,
+      nome: "",
+      custo: 0.0,
+      valor: '0,00',
+      valorFormatado: 'R$ 0,00',
+      canFinish: this.props.artefatos.length > 0
+    })
   }
 
   enableButton() {
@@ -58,12 +51,6 @@ class OrcamentoArtefatoForm extends Component {
   render() {
     return (
       <div>
-        <Row className="show-grid">
-          <Col sm={12} md={12}>
-            <Button type="submit" onClick={this.onFinish} disabled={!this.state.canFinish}
-              className="btn btn-primary pull-right">Terminar Unidade de Software</Button>
-          </Col>
-        </Row>
         <Formsy.Form
           onSubmit={this.submit}
           onValid={this.enableButton}
@@ -73,6 +60,7 @@ class OrcamentoArtefatoForm extends Component {
             <Row className="show-grid">
               <Col sm={12} md={6}>
                 <MyInput name="nome" title="Artefato"
+                  value={this.state.nome}
                   validations="maxLength:150,minLength:3"
                   validationErrors={{
                     minLength: "O nome do artefato não deve possuir menos de 3 caractéres",
@@ -92,7 +80,7 @@ class OrcamentoArtefatoForm extends Component {
                     onChange={(e, values) => {
                       this.setState({
                         valorFormatado: values.formattedValue,
-                        valorFlutuante: values.floatValue,
+                        custo: values.floatValue,
                         valor: values.value
                       })
                     }} />

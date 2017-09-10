@@ -1,11 +1,17 @@
 import React from 'react'
 import { Col, Row, Table } from 'react-bootstrap'
 import UnidadeItem from './UnidadeItem'
+import NenhumItem from './NenhumItemRegistrado'
 
-const UnidadesList = ({ unidades, editarCallback }) => {
-  
+const UnidadesList = ({ unidades, editarCallback, artefatosCallback }) => {
+  if (unidades.length === 0) {
+    <NenhumItem tipoDoItem="Unidade de Software" />
+  }
+
   let items = unidades.map((uni, idx) => {
-    return <UnidadeItem key={idx} unidade={uni} editarCallback={uni => editarCallback(uni)} />
+    return <UnidadeItem key={idx} unidade={uni} 
+      editarCallback={uni => editarCallback(uni)} 
+      artefatosCallback={uni => artefatosCallback(uni)} />
   })
 
   return (

@@ -16,7 +16,6 @@ const OrcamentoUnidadeHeader = ({ orcamento, unidadeAtiva }) => {
     return (
       <div>
         <h1>Unidades de software do Orçamento</h1>
-
         <Well>
           <strong>
             Orçamento:

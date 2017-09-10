@@ -8,21 +8,15 @@ import {
   NOVA_UNIDADE_DE_SOFTWARE,
   NOVO_ORCAMENTO,
   SET_UNIDADE_ATIVA,
-  SET_UNIDADE_PARA_ATIVA,
   ATUALIZAR_UNIDADE,
-  CARREGAR_UNIDADES
+  EDITAR_UNIDADE,
+  CARREGAR_UNIDADES,
+  GET_ARTEFATOS
 
 } from '../actions/ActionTypes'
 
 export default (state = {
-  /*  orcamento: {
-     nome: "Software para tempos e movimentos",
-     cliente: "Sophie houdson",
-     responsavel: "Leonardo Zapparoli"
-   }, */
-  orcamento: {
-
-  },
+  orcamento: {},
   orcamentos: [],
   unidadeAtiva: {
   }, // a unique generated id to identify
@@ -50,8 +44,12 @@ export default (state = {
       return finalizarUnidade(state, action)
     case SET_UNIDADE_ATIVA:
       return setUnidadeParaAtiva(state, action)
+    case EDITAR_UNIDADE:
+      return editarUnidade(state, action)
     case ATUALIZAR_UNIDADE:
       return atualizarUnidade(state, action)
+    case GET_ARTEFATOS:
+      return getArtefatos(state, action)
     default:
       return state
   }
@@ -89,11 +87,10 @@ function editarOrcamento(state, action) {
   return { ...state, orcamento: orcamento }
 }
 
-
 function salvarUnidade(state, action) {
   let unidade = action.payload.data
   let novaUnidade = { ...state.unidadeAtiva, ...unidade }
-  let novaUnidades = { ...state.unidades, ...unidade }
+  let novaUnidades = [ ...state.unidades, ...unidade ]
   return { ...state, unidades: novaUnidades, unidadeAtiva: novaUnidade }
 }
 
@@ -109,12 +106,17 @@ function finalizarUnidade(state, action) {
   return { ...state, unidades: novasUnidades }
 }
 
+function editarUnidade(state, action) {
+  let unidade = action.payload
+  return { ...state, unidadeAtiva: unidade }
+}
+
 function atualizarUnidade(state, action) {
-  let unidade = state.unidadeAtiva
-  let unidadesDiferentesDaAtualizada = state.unidades
-    .filter(u => u.id !== unidade.id)
-  let novasUnidades = [...unidadesDiferentesDaAtualizada, unidade]
-  return { ...state, unidades: novasUnidades }
+  let unidadeAtualizada = action.payload.data
+  let unidadeAtual = state.unidadeAtiva
+  let unidadesDiferentesDaAtualizada = state.unidades.filter(u => u.uuid !== unidadeAtual.uuid)
+  let novasUnidades = [...unidadesDiferentesDaAtualizada, unidadeAtualizada]
+  return { ...state, unidades: novasUnidades, unidadeAtiva: unidadeAtualizada }
 }
 
 function carregarUnidades(state, action) {
@@ -124,8 +126,13 @@ function carregarUnidades(state, action) {
 
 function setUnidadeParaAtiva(state, action) {
   let novaUnidade = action.payload
-  console.log(state)
-  console.log(state.unidade)
   return { ...state, unidadeAtiva: novaUnidade }
+}
+
+function getArtefatos(state, action) {
+  let novosArtefatos = action.payload.data
+  let artefatosSemOsNovos = state.artefatos.filter(a => a.unidadeUuid !== state.unidadeAtiva.uuid )
+  let artefatos = [...artefatosSemOsNovos, ...novosArtefatos] 
+  return { ...state, artefatos: artefatos }
 }
 

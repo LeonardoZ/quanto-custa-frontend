@@ -14,12 +14,9 @@ class App extends Component {
 					<Navbar>
 					<Navbar.Header>
 						<Navbar.Brand>
-							<span><a href="#">Quanto-Custa?</a></span>
+							<span><Link to="/">Quanto-Custa?</Link></span>
 						</Navbar.Brand>
 					</Navbar.Header>
-					<Nav>
-						<NavItem eventKey={1} href="#">Principal</NavItem>
-					</Nav>
 				</Navbar>
 				<Jumbotron bsClass="jumbotron jumbotron-fluid">
 					<h1>Quanto custa?</h1>
@@ -28,10 +25,7 @@ class App extends Component {
 				<div className="container">
 					 <Grid>
 						<Row className="show-grid">
-							<Col sm={12} md={12}>
-								
-							</Col>
-							<Col sm={12} md={12}>
+						  <Col sm={12} md={12}>
 								{ getRoutes(this.props.isAuthenticated) } 
 							</Col>
 						</Row>

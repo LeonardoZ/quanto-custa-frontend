@@ -18,15 +18,13 @@ class OrcamentosPanelComponent extends Component {
   }
 
   editarOrcamento(orcamento) {
-    this.props.editarOrcamento(orcamento);
+    this.props.editarOrcamento(orcamento)
     this.props.history.push("/orcamento")
   }
 
   render() {
     let orcamentos = this.props.orcamentos
-    if (!orcamentos.length || orcamentos.length === 0) {
-      return <p className={"helper-block"}>Nenhum orçamento registrado.</p>
-    }
+  
     return (
       <div>
         <Row className="show-grid">

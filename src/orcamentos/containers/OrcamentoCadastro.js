@@ -31,7 +31,6 @@ class OrcamentoCadastro extends Component {
     })
     if (orcamento.uuid) {
       this.props.carregarUnidades(orcamento)
-      console.log("LLL")
     }
   }
 
@@ -41,8 +40,8 @@ class OrcamentoCadastro extends Component {
     } else {
       this.props.salvarOrcamento(data)
     }
-    this.proximo() 
-    
+    this.proximo()
+
   }
 
   editarOrcamento(orcamento) {
@@ -67,9 +66,9 @@ class OrcamentoCadastro extends Component {
 
   render() {
     let visible = this.props.orcamento.uuid !== undefined
-      let btnNext = (visible) ?
-          <Button onClick={() => this.proximo()}>Próximo</Button>
-          : ""
+    let btnNext = (visible) ?
+      <Button onClick={() => this.proximo()}>Próximo</Button>
+      : ""
     return (
       <div>
         <Row className="show-grid">
@@ -92,7 +91,7 @@ class OrcamentoCadastro extends Component {
                   minLength: "O nome do responsável não de possuir menos de 3 caractéres",
                   maxLength: "O nome do responsável não de possuir mais de 120 caractéres"
                 }} required value={this.props.orcamento.responsavel} />
-            
+
               <Button type="submit" disabled={!this.state.canSubmit}>{this.state.textoEstadoPagina}</Button>
             </Formsy.Form>
             {btnNext}
@@ -104,15 +103,16 @@ class OrcamentoCadastro extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ 
-    salvarOrcamento, atualizarOrcamento, 
-    novaUnidadeDeSoftware, carregarUnidades }, dispatch)
+  return bindActionCreators({
+    salvarOrcamento, atualizarOrcamento,
+    novaUnidadeDeSoftware, carregarUnidades
+  }, dispatch)
 }
 
 function mapStateToProps({ orcamentoStateTree }) {
   return {
     orcamento: orcamentoStateTree.orcamento,
-    unidades: orcamentoStateTree.unidades
+    unidades: orcamentoStateTree.unidades.filter(u => u.orcamentoUuid === orcamentoStateTree.orcamento.uuid)
   }
 }
 

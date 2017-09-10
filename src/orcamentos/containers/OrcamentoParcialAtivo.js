@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 import { Button, Col, Row, ButtonGroup } from 'react-bootstrap'
 import {
   salvarOrcamento, novaUnidadeDeSoftware,
+  editarUnidade, carregarUnidades,
   configurarUnidadeParaAtiva
 } from '../../actions/OrcamentoActions'
 import UnidadesList from '../components/UnidadesList'
@@ -21,6 +22,8 @@ class OrcamentosParcialAtivo extends Component {
     let orcamento = this.props.orcamento;
     if (!orcamento.nome || !orcamento.cliente || !orcamento.responsavel) {
       this.props.history.push("/orcamento")
+    } else {
+      this.props.carregarUnidades(orcamento)
     }
   }
 
@@ -38,8 +41,13 @@ class OrcamentosParcialAtivo extends Component {
   }
 
   editarUnidadeCallback(unidade) {
-    this.props.configurarUnidadeParaAtiva(unidade)
+    this.props.editarUnidade(unidade)
     this.props.history.push("/unidade")
+  }
+
+  artefatosCallback(unidade) {
+    this.props.configurarUnidadeParaAtiva(unidade)
+    this.props.history.push("/artefatos")
   }
 
   finalizarOrcamento() { 
@@ -47,6 +55,9 @@ class OrcamentosParcialAtivo extends Component {
   }
 
   render() {
+    if (!this.props.unidades) {
+      return <p>Carregando unidades...</p>
+    }
     return (
       <div>
         <Row className="show-grid">
@@ -63,7 +74,9 @@ class OrcamentosParcialAtivo extends Component {
             <hr />
             <UnidadesList
               unidades={this.props.unidades}
-              editarCallback={(unidade) => this.editarUnidadeCallback(unidade)} />
+              editarCallback={(unidade) => this.editarUnidadeCallback(unidade)} 
+              artefatosCallback={(unidade) => this.artefatosCallback(unidade)} 
+              />
           </Col>
         </Row>
       </div>
@@ -75,6 +88,8 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     salvarOrcamento,
     novaUnidadeDeSoftware,
+    editarUnidade,
+    carregarUnidades,
     configurarUnidadeParaAtiva
   }, dispatch)
 }
@@ -83,6 +98,7 @@ function mapStateToProps({ orcamentoStateTree }) {
   return {
     orcamento: orcamentoStateTree.orcamento,
     unidades: orcamentoStateTree.unidades
+      .filter(u => u.orcamentoUuid === orcamentoStateTree.orcamento.uuid)
   }
 }
 

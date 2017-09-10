@@ -11,11 +11,12 @@ import {
   NOVO_ORCAMENTO,
   NOVA_UNIDADE_DE_SOFTWARE,
   ATUALIZAR_UNIDADE,
+  EDITAR_UNIDADE,
   GET_ARTEFATOS,
   CARREGAR_UNIDADES
 } from './ActionTypes'
 
-const client = axios.create({ 
+const client = axios.create({
   baseURL: 'http://localhost:8080/quantocusta/api/',
   responseType: 'json'
 });
@@ -38,7 +39,7 @@ export function salvarOrcamento(orcamento) {
 }
 
 export function atualizarOrcamento(orcamentoAtivo, orcamentoData) {
-  let data = {...orcamentoData, validoAte: orcamentoAtivo.validoAte}
+  let data = { ...orcamentoData, validoAte: orcamentoAtivo.validoAte }
   let request = client.put(`/orcamento/${orcamentoAtivo.uuid}`, data);
 
   return {
@@ -63,7 +64,7 @@ export function novaUnidadeDeSoftware() {
 }
 
 export function salvarUnidade(orcamentoAtivo, unidade) {
-  let request = client.post("/unidade/do/orcamento/"+orcamentoAtivo.uuid, unidade)
+  let request = client.post("/unidade/do/orcamento/" + orcamentoAtivo.uuid, unidade)
   return {
     "type": SALVAR_UNIDADE,
     "payload": request
@@ -71,7 +72,7 @@ export function salvarUnidade(orcamentoAtivo, unidade) {
 }
 
 export function carregarUnidades(orcamento) {
-  let request = client.get('/unidades/do/orcamento/'+orcamento.uuid)
+  let request = client.get('/unidades/do/orcamento/' + orcamento.uuid)
   return {
     "type": CARREGAR_UNIDADES,
     "payload": request
@@ -79,20 +80,38 @@ export function carregarUnidades(orcamento) {
 }
 
 
+export function editarUnidade(unidade) {
+
+  return {
+    "type": EDITAR_UNIDADE,
+    "payload": unidade
+  }
+}
+
+export function atualizarUnidade(unidade, data) {
+  let request = client.put("/unidade/" + unidade.uuid, data);
+  return {
+    "type": ATUALIZAR_UNIDADE,
+    "payload": request
+  }
+}
+
 export function novoOrcamento() {
   return {
     "type": NOVO_ORCAMENTO,
   }
 }
 
-export function getArtefatos() {
+export function getArtefatos(unidade) {
+  let request = client.get('/artefatos/da/unidade/' + unidade.uuid)
   return {
     "type": GET_ARTEFATOS,
+    "payload": request
   }
 }
 
 export function salvarArtefato(unidadeAtiva, artefato) {
-  let request = client.post("/artefato/da/unidade/"+unidadeAtiva.uuid, artefato)
+  let request = client.post("/artefato/da/unidade/" + unidadeAtiva.uuid, artefato)
   return {
     "type": SALVAR_ARTEFATO,
     "payload": request
@@ -120,8 +139,3 @@ export function finalizarUnidade() {
   }
 }
 
-export function atualizarUnidade() {
-  return {
-    "type": ATUALIZAR_UNIDADE,
-  }
-}

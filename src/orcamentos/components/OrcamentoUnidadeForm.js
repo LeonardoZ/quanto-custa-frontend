@@ -26,7 +26,6 @@ class OrcamentoUnidadeForm extends Component {
 
   submit(data) {
     this.props.salvarUnidade(data)
-    this.props.aoSalvarCallback()
   }
 
   render() {

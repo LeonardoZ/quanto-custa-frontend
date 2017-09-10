@@ -4,7 +4,8 @@ import {
 } from 'react-router-dom'
 import OrcamentosPanel from './orcamentos/containers/OrcamentosPanel'
 import OrcamentoCadastro from './orcamentos/containers/OrcamentoCadastro'
-import OrcamentoUnidadesWizard from './orcamentos/containers/OrcamentoUnidadesWizard'
+import UnidadeCadastro from './orcamentos/containers/UnidadeCadastro'
+import ArtefatosCadastro from './orcamentos/containers/ArtefatosCadastro'
 import OrcamentoParcialAtivo from './orcamentos/containers/OrcamentoParcialAtivo'
 
 /** PrivateRoute = ({ component: Component, isUserAuthenticated, ...rest }) => (
@@ -24,7 +25,8 @@ export const getRoutes = (isAuthenticated) => {
   return [
     <Route key='orcamentos' exact path='/' component={OrcamentosPanel} />,
     <Route key='orcamento-cadastro' exact path='/orcamento' component={OrcamentoCadastro} />,
-    <Route key='orcamento-unidades-wizard' exact path='/unidade' component={OrcamentoUnidadesWizard} />,
+    <Route key='orcamento-cadastro-unidade' exact path='/unidade' component={UnidadeCadastro} />,
+    <Route key='unidade-cadastro-artefatos' exact path='/artefatos' component={ArtefatosCadastro} />,
     <Route key='orcamento-unidades' exact path='/orcamento/ativo' component={OrcamentoParcialAtivo} />
     //<PrivateRoute key='b' path='/b' isUserAuthenticated={isAuthenticated} component={B} />,
     //<Route key='login' path='/login' component={LoginForm} />,

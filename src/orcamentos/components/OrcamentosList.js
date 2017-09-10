@@ -1,9 +1,12 @@
 import React from 'react'
-import { Col, Row, Table } from 'react-bootstrap'
+import { Col, Row, Table, Alert } from 'react-bootstrap'
 import OrcamentoItem from './OrcamentoItem'
+import NenhumItem from './NenhumItemRegistrado'
 
 const OrcamentosList = ({ orcamentos, editarOrcamento }) => {
-  
+  if (orcamentos.length === 0) {
+    return <NenhumItem tipoDoItem="Orçamento" />
+  }
   let items = orcamentos.map((orc, idx) => {
     return <OrcamentoItem key={idx} orcamento={orc} editarOrcamento={() => editarOrcamento(orc)} />
   })
