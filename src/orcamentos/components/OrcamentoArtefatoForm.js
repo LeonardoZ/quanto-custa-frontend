@@ -5,7 +5,7 @@ import { MyInput } from '../../formulario/FormGroup'
 import NumberFormat from 'react-number-format'
 
 class OrcamentoArtefatoForm extends Component {
-
+  
   constructor(props) {
     super(props)
     this.disableButton = this.disableButton.bind(this)
@@ -13,14 +13,17 @@ class OrcamentoArtefatoForm extends Component {
     this.enableButton = this.enableButton.bind(this)
   }
 
+  componentWillReceiveProps({ artefatoAtivo }) {
+    this.setState({
+      nome: artefatoAtivo.nome,
+      custo: artefatoAtivo.custo,
+      ehArtefatoVelho: artefatoAtivo.uuid
+    });
+  }
+
   componentWillMount() {
     this.setState({
-      canSubmit: false,
-      nome: "",
-      valor: '0.0',
-      custo: 0.0,
-      valorFormatado: 'R$ 0,00',
-      canFinish: this.props.artefatos.length > 0
+      canFinish: this.props.artefatos.length > 0,
     })
   }
 
@@ -30,14 +33,6 @@ class OrcamentoArtefatoForm extends Component {
       custo: this.state.custo
     }
     this.props.salvarArtefato(newData)
-    this.setState({
-      canSubmit: false,
-      nome: "",
-      custo: 0.0,
-      valor: '0,00',
-      valorFormatado: 'R$ 0,00',
-      canFinish: this.props.artefatos.length > 0
-    })
   }
 
   enableButton() {
@@ -48,9 +43,14 @@ class OrcamentoArtefatoForm extends Component {
     this.setState({ canSubmit: false })
   }
 
+  novoArtefato() {
+    this.props.novoArtefato()
+  }
+
   render() {
     return (
       <div>
+        <Button bsClass="defualt" onClick={() => this.props.novoArtefato()}> Novo</Button>
         <Formsy.Form
           onSubmit={this.submit}
           onValid={this.enableButton}
@@ -72,7 +72,7 @@ class OrcamentoArtefatoForm extends Component {
                   <ControlLabel>Valor</ControlLabel>
                   <NumberFormat
                     className="form-control"
-                    value={this.state.valor}
+                    value={this.state.custo}
                     thousandSeparator={"."}
                     decimalPrecision={2}
                     decimalSeparator={","}
@@ -90,7 +90,7 @@ class OrcamentoArtefatoForm extends Component {
             <Row className="show-grid">
               <Col sm={12} md={12}>
                 <Button type="submit" disabled={!this.state.canSubmit}
-                  className="btn btn-success pull-right">Adicionar</Button>
+                  className="btn btn-success pull-right">{!this.state.ehArtefatoVelho ? "Adicionar" : "Atualizar"}</Button>
               </Col>
             </Row>
           </Well>

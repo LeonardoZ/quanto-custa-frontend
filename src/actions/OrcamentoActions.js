@@ -13,7 +13,10 @@ import {
   ATUALIZAR_UNIDADE,
   EDITAR_UNIDADE,
   GET_ARTEFATOS,
-  CARREGAR_UNIDADES
+  CARREGAR_UNIDADES,
+  EDITAR_ARTEFATO,
+  ATUALIZAR_ARTEFATO,
+  NOVO_ARTEFATO
 } from './ActionTypes'
 
 const client = axios.create({
@@ -118,10 +121,18 @@ export function salvarArtefato(unidadeAtiva, artefato) {
   }
 }
 
-export function atualizarArtefato(artefato) {
+export function editarArtefato(artefato) {
+    return {
+      "type": EDITAR_ARTEFATO,
+      "payload": artefato
+    }
+  }
+
+export function atualizarArtefato(artefatoAtivo, data) {
+  let request = client.put("/artefato/" + artefatoAtivo.uuid, data)
   return {
-    "type": SALVAR_ARTEFATO,
-    "payload": artefato
+    "type": ATUALIZAR_ARTEFATO,
+    "payload": request
   }
 }
 
@@ -132,6 +143,14 @@ export function configurarUnidadeParaAtiva(unidade) {
     "payload": unidade
   }
 }
+
+export function novoArtefato() {
+  return {
+    "type": NOVO_ARTEFATO,
+    "payload": novoArtefato,
+  }
+}
+
 
 export function finalizarUnidade() {
   return {

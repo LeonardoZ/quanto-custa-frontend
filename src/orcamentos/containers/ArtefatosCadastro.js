@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { Col, Row } from 'react-bootstrap'
+import { Col, Row, Well } from 'react-bootstrap'
 import { bindActionCreators } from 'redux'
 import {
-  salvarArtefato, getArtefatos
+  salvarArtefato, getArtefatos,
+  editarArtefato, atualizarArtefato,
+  novoArtefato
 } from '../../actions/OrcamentoActions'
 import OrcamentoUnidadeHeader from '../components/OrcamentoUnidadeHeader'
 import OrcamentoArtefatoForm from '../components/OrcamentoArtefatoForm'
@@ -18,25 +20,33 @@ class ArtefatosCadastro extends Component {
 
   componentWillMount() {
     this.props.getArtefatos(this.props.unidadeAtiva)
+    this.setState({ artefatoAtivo: { nome: "", custo: 0.0 } })
   }
 
   salvarArtefato(artefato) {
-    this.props.salvarArtefato(this.props.unidadeAtiva, artefato)
-  }
-
-  editarArtefato(artefato) {
+    if (this.props.artefatoAtivo.uuid) {
+      this.props.atualizarArtefato(this.props.artefatoAtivo, artefato)
+    } else {
+      this.props.salvarArtefato(this.props.unidadeAtiva, artefato)
+    }
+    this.novoArtefato()
   }
 
   finalizarUnidade() {
     this.props.history.push("/orcamento/ativo")
   }
 
-
   voltarAoInicio() {
     this.props.history.push("/")
   }
 
+  novoArtefato() {
+    console.log("novo")
+    this.props.novoArtefato()
+  }
+
   render() {
+    console.log(this.props.artefatoAtivo)
     if (!this.props.orcamento.uuid) {
       return <OrcamentoNaoDefinido voltarAoInicio={() => this.voltarAoInicio()} />
     } else if (!this.props.unidadeAtiva.uuid) {
@@ -45,19 +55,23 @@ class ArtefatosCadastro extends Component {
     return (
       <Row className="show-grid">
         <Col sm={12} md={12}>
-          <OrcamentoUnidadeHeader orcamento={this.props.orcamento}
-            unidadeAtiva={this.props.unidadeAtiva} />
-          <FinalizarUnidade onFinish={() => this.finalizarUnidade()} 
-              canFinish={this.props.artefatos.length > 0}/>
-          <OrcamentoArtefatoForm
-            salvarArtefato={(artefato) => this.salvarArtefato(artefato)}
-            finalizarUnidade={() => this.finalizarUnidade()}
-            unidadeAtiva={this.props.unidadeAtiva}
-            artefatos={this.props.artefatos} />
-          <Row className="show-grid">
-            <ArtefatoItems artefatos={this.props.artefatos}
-              editarArtefato={(artefato) => this.editarArtefato(artefato)} />
-          </Row>
+          <Well>
+            <OrcamentoUnidadeHeader orcamento={this.props.orcamento}
+              unidadeAtiva={this.props.unidadeAtiva} />
+            <FinalizarUnidade onFinish={() => this.finalizarUnidade()}
+              canFinish={this.props.artefatos.length > 0} />
+            <OrcamentoArtefatoForm
+              salvarArtefato={(artefato) => this.salvarArtefato(artefato)}
+              finalizarUnidade={() => this.finalizarUnidade()}
+              novoArtefato={() => this.novoArtefato()}
+              artefatoAtivo={this.props.artefatoAtivo}
+              unidadeAtiva={this.props.unidadeAtiva}
+              artefatos={this.props.artefatos} />
+            <Row className="show-grid">
+              <ArtefatoItems artefatos={this.props.artefatos}
+                editarArtefato={(artefato) => this.props.editarArtefato(artefato)} />
+            </Row>
+          </Well>
         </Col>
       </Row>
     )
@@ -67,7 +81,9 @@ class ArtefatosCadastro extends Component {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    salvarArtefato, getArtefatos
+    salvarArtefato, getArtefatos,
+    editarArtefato, atualizarArtefato,
+    novoArtefato
   }, dispatch)
 }
 
@@ -76,6 +92,7 @@ function mapStateToProps({ orcamentoStateTree }) {
   return {
     orcamento: orcamentoStateTree.orcamento,
     unidadeAtiva: orcamentoStateTree.unidadeAtiva,
+    artefatoAtivo: orcamentoStateTree.artefatoAtivo,
     artefatos: orcamentoStateTree.artefatos
       .filter((a) => a.unidadeUuid === orcamentoStateTree.unidadeAtiva.uuid),
   }

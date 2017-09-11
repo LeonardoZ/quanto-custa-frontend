@@ -11,8 +11,10 @@ import {
   ATUALIZAR_UNIDADE,
   EDITAR_UNIDADE,
   CARREGAR_UNIDADES,
-  GET_ARTEFATOS
-
+  GET_ARTEFATOS,
+  EDITAR_ARTEFATO,
+  ATUALIZAR_ARTEFATO,
+  NOVO_ARTEFATO
 } from '../actions/ActionTypes'
 
 export default (state = {
@@ -21,6 +23,7 @@ export default (state = {
   unidadeAtiva: {
   }, // a unique generated id to identify
   unidades: [],
+  artefatoAtivo: {},
   artefatos: []
 }, action) => {
   switch (action.type) {
@@ -50,6 +53,12 @@ export default (state = {
       return atualizarUnidade(state, action)
     case GET_ARTEFATOS:
       return getArtefatos(state, action)
+    case EDITAR_ARTEFATO:
+      return editarArtefato(state, action)
+    case ATUALIZAR_ARTEFATO:
+      return atualizarArtefato(state, action)
+    case NOVO_ARTEFATO:
+      return novoArtefato(state, action)
     default:
       return state
   }
@@ -66,6 +75,7 @@ function novoOrcamento(state, action) {
     orcamento: {},
     unidadeAtiva: {},
     unidades: [],
+    artefatoAtivo: {},
     artefatos: []
   }
 }
@@ -90,7 +100,7 @@ function editarOrcamento(state, action) {
 function salvarUnidade(state, action) {
   let unidade = action.payload.data
   let novaUnidade = { ...state.unidadeAtiva, ...unidade }
-  let novaUnidades = [ ...state.unidades, ...unidade ]
+  let novaUnidades = [...state.unidades, ...unidade]
   return { ...state, unidades: novaUnidades, unidadeAtiva: novaUnidade }
 }
 
@@ -131,8 +141,30 @@ function setUnidadeParaAtiva(state, action) {
 
 function getArtefatos(state, action) {
   let novosArtefatos = action.payload.data
-  let artefatosSemOsNovos = state.artefatos.filter(a => a.unidadeUuid !== state.unidadeAtiva.uuid )
-  let artefatos = [...artefatosSemOsNovos, ...novosArtefatos] 
+  let artefatosSemOsNovos = state.artefatos.filter(a => a.unidadeUuid !== state.unidadeAtiva.uuid)
+  let artefatos = [...artefatosSemOsNovos, ...novosArtefatos]
   return { ...state, artefatos: artefatos }
 }
 
+function editarArtefato(state, action) {
+  return { ...state, artefatoAtivo: action.payload }
+}
+
+function atualizarArtefato(state, action) {
+  let artefatoAtualizado = action.payload.data
+  let artefatoAtivo = state.artefatoAtivo
+  let artefatosDiferentesDoAtualizado = state.artefatos.filter(a => a.uuid !== artefatoAtivo.uuid)
+  let novosArtefatos = [...artefatosDiferentesDoAtualizado, artefatoAtualizado]
+  return { ...state, artefatos: novosArtefatos, artefatoAtivo: {} }
+}
+
+function novoArtefato(state, action) {
+  console.log("Novo mesmo")
+  return {
+    ...state, 
+    artefatoAtivo: {
+      nome: "",
+      custo: 0.0
+    }
+  }
+}

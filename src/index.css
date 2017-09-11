@@ -1,5 +1,15 @@
 body {
   margin: 0;
   padding: 0;
+  min-height: 100%;
   font-family: sans-serif;
+  background-color: #fff;
+}
+
+.navbar {
+  margin: 0 ; 
+}
+
+.jumbotron {
+  padding-left: 20px;
 }

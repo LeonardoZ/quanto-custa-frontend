@@ -2,10 +2,13 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Button, Col, Row } from 'react-bootstrap'
+import { Button, Col, Row, Well } from 'react-bootstrap'
 import { MyInput } from '../../formulario/FormGroup'
 import Formsy from 'formsy-react'
-import { salvarOrcamento, atualizarOrcamento, novaUnidadeDeSoftware, carregarUnidades } from '../../actions/OrcamentoActions'
+import {
+  salvarOrcamento, atualizarOrcamento,
+  novaUnidadeDeSoftware, carregarUnidades,
+} from '../../actions/OrcamentoActions'
 
 class OrcamentoCadastro extends Component {
 
@@ -67,34 +70,37 @@ class OrcamentoCadastro extends Component {
   render() {
     let visible = this.props.orcamento.uuid !== undefined
     let btnNext = (visible) ?
-      <Button onClick={() => this.proximo()}>Próximo</Button>
+      <Button  bsStyle="success" onClick={() => this.proximo()}>Próximo</Button>
       : ""
     return (
       <div>
         <Row className="show-grid">
-          <Col sm={12} md={12}>
-            <h1>Orçamento</h1>
-            <Formsy.Form onSubmit={this.submit} onValid={this.enableButton} onInvalid={this.disableButton}
-              className="login">
-              <MyInput name="nome" title="Nome" validations="maxLength:120,minLength:3"
-                validationErrors={{
-                  minLength: "O nome do projeto não de possuir menos de 3 caractéres",
-                  maxLength: "O nome do projeto não de possuir mais de 120 caractéres"
-                }} required value={this.props.orcamento.nome} />
-              <MyInput name="cliente" title="Cliente" validations="maxLength:120,minLength:3"
-                validationErrors={{
-                  minLength: "O nome do cliente não de possuir menos de 3 caractéres",
-                  maxLength: "O nome do cliente não de possuir mais de 120 caractéres"
-                }} required value={this.props.orcamento.cliente} />
-              <MyInput name="responsavel" title="Responsável" validations="maxLength:120,minLength:3"
-                validationErrors={{
-                  minLength: "O nome do responsável não de possuir menos de 3 caractéres",
-                  maxLength: "O nome do responsável não de possuir mais de 120 caractéres"
-                }} required value={this.props.orcamento.responsavel} />
-
-              <Button type="submit" disabled={!this.state.canSubmit}>{this.state.textoEstadoPagina}</Button>
-            </Formsy.Form>
-            {btnNext}
+          <Col sm={12} md={8} mdOffset={2}>
+            <Well>
+              <h1>Orçamento</h1>
+              <Formsy.Form onSubmit={this.submit} onValid={this.enableButton} onInvalid={this.disableButton}
+                className="login">
+                <MyInput name="nome" title="Nome" validations="maxLength:120,minLength:3"
+                  validationErrors={{
+                    minLength: "O nome do projeto não de possuir menos de 3 caractéres",
+                    maxLength: "O nome do projeto não de possuir mais de 120 caractéres"
+                  }} required value={this.props.orcamento.nome} />
+                <MyInput name="cliente" title="Cliente" validations="maxLength:120,minLength:3"
+                  validationErrors={{
+                    minLength: "O nome do cliente não de possuir menos de 3 caractéres",
+                    maxLength: "O nome do cliente não de possuir mais de 120 caractéres"
+                  }} required value={this.props.orcamento.cliente} />
+                <MyInput name="responsavel" title="Responsável" validations="maxLength:120,minLength:3"
+                  validationErrors={{
+                    minLength: "O nome do responsável não de possuir menos de 3 caractéres",
+                    maxLength: "O nome do responsável não de possuir mais de 120 caractéres"
+                  }} required value={this.props.orcamento.responsavel} />
+                <div>
+                  <Button type="submit" bsStyle="info" disabled={!this.state.canSubmit}>{this.state.textoEstadoPagina}</Button>
+                  {btnNext}
+                </div>
+              </Formsy.Form>
+            </Well>
           </Col>
         </Row>
       </div>

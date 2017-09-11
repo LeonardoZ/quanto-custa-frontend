@@ -17,7 +17,7 @@ const UnidadesList = ({ unidades, editarCallback, artefatosCallback }) => {
   return (
       <Row className="show-grid">
         <Col sm={12} md={12}>
-          <Table responsive>
+          <Table responsive hover>
             <thead>
               <tr>
                 <th>Unidade de software</th>

@@ -6,6 +6,7 @@
     "axios": "^0.16.2",
     "bootstrap": "^3.3.7",
     "date-fns": "^1.28.5",
+    "designmodo-flat-ui": "^2.3.0",
     "formsy-react": "^0.19.5",
     "react": "^15.5.4",
     "react-bootstrap": "^0.31.0",

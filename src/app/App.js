@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import './App.css'
-//import 'bootstrap-flatly'
 import { BrowserRouter as Router, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getRoutes } from '../Routes'

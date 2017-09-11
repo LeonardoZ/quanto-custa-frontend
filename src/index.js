@@ -1,6 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+// bootstrap
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/css/bootstrap-theme.css'
 import App from './app/App'
 import './index.css'
 
@@ -10,9 +13,6 @@ import { createStore, applyMiddleware } from 'redux'
 import ReduxPromise from 'redux-promise'
 import reducers from './reducers/Reducers'
 
-// bootstrap
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap/dist/css/bootstrap-theme.css'
 
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore)
