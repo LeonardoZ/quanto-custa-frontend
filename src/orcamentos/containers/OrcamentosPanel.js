@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Button, Col, Row } from 'react-bootstrap'
 import { getOrcamentos, editarOrcamento, novoOrcamento } from '../../actions/OrcamentoActions'
 import OrcamentoList from '../components/OrcamentosList'
+import { Grid, Row, Col } from 'react-flexbox-grid'
+import  RaisedButton from 'material-ui/RaisedButton'
 
-class OrcamentosPanelComponent extends Component {
+class OrcamentosPanel extends Component {
 
   componentWillMount() {
     this.props.getOrcamentos()
@@ -24,18 +25,14 @@ class OrcamentosPanelComponent extends Component {
 
   render() {
     let orcamentos = this.props.orcamentos
-  
+
     return (
       <div>
-        <Row className="show-grid">
-          <Col sm={12} md={12}>
-            <Button onClick={() => this.novoOrcamento()} className="btn btn-primary" bsSize="large">
-              Novo Orçamento
-            </Button>
-          </Col>
-        </Row>
-        <OrcamentoList orcamentos={orcamentos} 
-              editarOrcamento={(orcamento) => this.editarOrcamento(orcamento)} />
+        <RaisedButton label="Novo Orçamento" primary={true}
+          onClick={() => this.novoOrcamento()} />
+
+        <OrcamentoList orcamentos={orcamentos}
+          editarOrcamento={(orcamento) => this.editarOrcamento(orcamento)} />
       </div>
     )
   }
@@ -51,4 +48,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OrcamentosPanelComponent))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OrcamentosPanel))

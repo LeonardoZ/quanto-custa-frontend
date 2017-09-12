@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Button, Col, Row, ButtonGroup } from 'react-bootstrap'
 import {
   salvarOrcamento, novaUnidadeDeSoftware,
   editarUnidade, carregarUnidades,
@@ -10,6 +9,8 @@ import {
 } from '../../actions/OrcamentoActions'
 import UnidadesList from '../components/UnidadesList'
 import OrcamentoHeader from '../components/OrcamentoHeader'
+import { Row, Col } from 'react-flexbox-grid'
+import RaisedButton from 'material-ui/RaisedButton'
 
 class OrcamentosParcialAtivo extends Component {
 
@@ -50,7 +51,7 @@ class OrcamentosParcialAtivo extends Component {
     this.props.history.push("/artefatos")
   }
 
-  finalizarOrcamento() { 
+  finalizarOrcamento() {
     this.props.history.push("/")
   }
 
@@ -60,23 +61,19 @@ class OrcamentosParcialAtivo extends Component {
     }
     return (
       <div>
-        <Row className="show-grid">
+        <Row>
           <Col sm={12} md={12}>
             <h1>Orçamento</h1>
             <OrcamentoHeader orcamento={this.props.orcamento} />
-            <ButtonGroup>
-              <Button onClick={() => this.novaUnidade()}>Nova Unidade de Software</Button>
-              <Button className="btn btn-primary"
-                onClick={() => this.editarOrcamento()}>Editar Orçamento</Button>
-              <Button className="btn btn-danger pull-right"
-                onClick={() => this.finalizarOrcamento()}>Finalizar Orçamento</Button>
-            </ButtonGroup>
+            <RaisedButton primary={true} onClick={() => this.novaUnidade()} label="Nova Unidade de Software" />
+            <RaisedButton secondary={true} onClick={() => this.editarOrcamento()} label="Editar Orçamento" />
+            <RaisedButton onClick={() => this.finalizarOrcamento()} label="Finalizar Orçamento" />
             <hr />
             <UnidadesList
               unidades={this.props.unidades}
-              editarCallback={(unidade) => this.editarUnidadeCallback(unidade)} 
-              artefatosCallback={(unidade) => this.artefatosCallback(unidade)} 
-              />
+              editarCallback={(unidade) => this.editarUnidadeCallback(unidade)}
+              artefatosCallback={(unidade) => this.artefatosCallback(unidade)}
+            />
           </Col>
         </Row>
       </div>

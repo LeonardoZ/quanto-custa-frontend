@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import Formsy from 'formsy-react'
-import { Button, Col, Row } from 'react-bootstrap'
 import { MyInput } from '../../formulario/FormGroup'
+import { Grid, Row, Col } from 'react-flexbox-grid'
+import RaisedButton  from 'material-ui/RaisedButton'
 
 class OrcamentoUnidadeForm extends Component {
 
@@ -39,9 +40,9 @@ class OrcamentoUnidadeForm extends Component {
           }} required value={this.props.unidadeAtiva.titulo} 
           placeholder="Ex.: Aplicativo Móvel, Site, ERP, Módulo" />
 
-        <Row className="show-grid">
+        <Row>
           <Col sm={12} md={12}>
-            <Button type="submit" disabled={!this.state.canSubmit}>Salvar</Button>
+            <RaisedButton type="submit" disabled={!this.state.canSubmit} label="Salvar" />
           </Col>
         </Row>
       </Formsy.Form>

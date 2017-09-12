@@ -1,19 +1,21 @@
 import React from 'react'
-import { Button } from 'react-bootstrap'
+import Table, {
+    TableRowColumn,
+    TableRow,
+} from 'material-ui/Table'
+import RaisedButton from 'material-ui/RaisedButton'
 
 const UnidadeItem = ({ unidade, editarCallback, artefatosCallback }) => {
     return (
-        <tr>
-            <td>{unidade.titulo}</td>
-            <td>
-            <Button bsStyle="primary" bsSize="small" 
-                onClick={()=> editarCallback(unidade)}>Editar</Button>
-            </td>
-            <td>
-            <Button bsStyle="primary" bsSize="small" 
-                onClick={()=> artefatosCallback(unidade)}>Artefatos</Button>
-            </td>
-        </tr>
+        <TableRow>
+            <TableRowColumn>{unidade.titulo}</TableRowColumn>
+            <TableRowColumn>
+                <RaisedButton onClick={() => editarCallback(unidade)} label="Editar" />
+            </TableRowColumn>
+            <TableRowColumn>
+                <RaisedButton onClick={() => artefatosCallback(unidade)} label="Artefatos" />
+            </TableRowColumn>
+        </TableRow>
     )
 }
 

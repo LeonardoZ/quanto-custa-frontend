@@ -1,11 +1,19 @@
 import React, { Component } from 'react'
 import Formsy from 'formsy-react'
-import { Button, Col, Row, Well, FormGroup, ControlLabel } from 'react-bootstrap'
 import { MyInput } from '../../formulario/FormGroup'
 import NumberFormat from 'react-number-format'
+import { Row, Col } from 'react-flexbox-grid'
+import RaisedButton from 'material-ui/RaisedButton'
+import TextField from 'material-ui/TextField'
+import Paper from 'material-ui/Paper'
+
+const style = {
+  margin: 12,
+  padding: 12
+};
 
 class OrcamentoArtefatoForm extends Component {
-  
+
   constructor(props) {
     super(props)
     this.disableButton = this.disableButton.bind(this)
@@ -49,53 +57,50 @@ class OrcamentoArtefatoForm extends Component {
 
   render() {
     return (
-      <div>
-        <Button bsClass="defualt" onClick={() => this.props.novoArtefato()}> Novo</Button>
+      <Paper zDepth={3} rounded={false} style={style}>
+        <RaisedButton secondary={true} onClick={() => this.props.novoArtefato()} label="Novo" />
         <Formsy.Form
           onSubmit={this.submit}
           onValid={this.enableButton}
           onInvalid={this.disableButton}>
-          <h3>Artefatos </h3>
-          <Well>
-            <Row className="show-grid">
-              <Col sm={12} md={6}>
-                <MyInput name="nome" title="Artefato"
-                  value={this.state.nome}
-                  validations="maxLength:150,minLength:3"
-                  validationErrors={{
-                    minLength: "O nome do artefato não deve possuir menos de 3 caractéres",
-                    maxLength: "O nome do artefato não deve possuir mais de 200 caractéres"
-                  }} required />
-              </Col>
-              <Col sm={12} md={6}>
-                <FormGroup id="valor">
-                  <ControlLabel>Valor</ControlLabel>
-                  <NumberFormat
-                    className="form-control"
-                    value={this.state.custo}
-                    thousandSeparator={"."}
-                    decimalPrecision={2}
-                    decimalSeparator={","}
-                    prefix={"R$ "}
-                    onChange={(e, values) => {
-                      this.setState({
-                        valorFormatado: values.formattedValue,
-                        custo: values.floatValue,
-                        valor: values.value
-                      })
-                    }} />
-                </FormGroup>
-              </Col>
-            </Row>
-            <Row className="show-grid">
-              <Col sm={12} md={12}>
-                <Button type="submit" disabled={!this.state.canSubmit}
-                  className="btn btn-success pull-right">{!this.state.ehArtefatoVelho ? "Adicionar" : "Atualizar"}</Button>
-              </Col>
-            </Row>
-          </Well>
+          <h3>Artefatos</h3>
+          <Row className="show-grid">
+            <Col sm={12} xs={6}>
+              <MyInput name="nome" title="Artefato"
+                value={this.state.nome}
+                validations="maxLength:150,minLength:3"
+                validationErrors={{
+                  minLength: "O nome do artefato não deve possuir menos de 3 caractéres",
+                  maxLength: "O nome do artefato não deve possuir mais de 200 caractéres"
+                }} required />
+              <NumberFormat
+                name="custo"
+                fullWidth={true}
+                hintText="R$ 0,00"
+                customInput={TextField}
+                className="form-control"
+                value={this.state.custo}
+                thousandSeparator={"."}
+                decimalPrecision={2}
+                decimalSeparator={","}
+                prefix={"R$ "}
+                onChange={(e, values) => {
+                  this.setState({
+                    valorFormatado: values.formattedValue,
+                    custo: values.floatValue,
+                    valor: values.value
+                  })
+                }} />
+            </Col>
+          </Row>
+          <Row>
+            <Col sm={12} md={12}>
+              <RaisedButton type="submit" disabled={!this.state.canSubmit}
+                label={!this.state.ehArtefatoVelho ? "Adicionar" : "Atualizar"} />
+            </Col>
+          </Row>
         </Formsy.Form>
-      </div>
+      </Paper>
     )
   }
 }

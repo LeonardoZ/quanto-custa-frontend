@@ -1,24 +1,29 @@
 import React from 'react'
-import { Well } from 'react-bootstrap'
+import Paper from 'material-ui/Paper'
 
-const OrcamentoHeader = ({ orcamentoParcial }) => {
-  if (orcamentoParcial)
+const style = {
+  margin: 12,
+  padding: 12
+};
+
+const OrcamentoHeader = ({ orcamento }) => {
+  if (orcamento)
     return (
       <div>
-        <Well>
+        <Paper style={style} zDepth={3} rounded={false}>
           <div>
             <strong>Nome: </strong>
-            <span>{orcamentoParcial.nome}</span>
+            <span>{orcamento.nome}</span>
           </div>
           <div>
             <strong>Cliente: </strong>
-            <span>{orcamentoParcial.cliente}</span>
+            <span>{orcamento.cliente}</span>
           </div>
           <div>
             <strong>Responsável: </strong>
-            <span>{orcamentoParcial.responsavel}</span>
+            <span>{orcamento.responsavel}</span>
           </div>
-        </Well>
+        </Paper>
       </div>
     )
   else 

@@ -1,20 +1,27 @@
 import React from 'react'
 import { parseToFormat, daysBetween } from '../ApiDateParser'
-import { Button } from 'react-bootstrap'
-const OrcamentoItem = ({ orcamento, editarOrcamento }) => {
+import RaisedButton  from 'material-ui/RaisedButton'
+
+import Table, {
+    TableRow,
+    TableRowColumn,
+} from 'material-ui/Table'
+
+const OrcamentoItem = ({ key, orcamento, editarOrcamento }) => {
     return (
-        <tr>
-            <td>{orcamento.nome}</td>
-            <td>{orcamento.cliente}</td>
-            <td>{orcamento.responsavel}</td>
-            <td>{parseToFormat(orcamento.criadoEm)}</td>
-            <td>{parseToFormat(orcamento.validoAte)}</td>
-            <td>{daysBetween(orcamento.validoAte, orcamento.criadoEm)}</td>
-            <td><Button className="btn btn-info" bsSize="small"
-                onClick={() => editarOrcamento(orcamento)}>Editar
-                </Button>
-             </td>
-        </tr>
+        <TableRow >
+            <TableRowColumn>{orcamento.nome}</TableRowColumn>
+            <TableRowColumn>{orcamento.cliente}</TableRowColumn>
+            <TableRowColumn>{orcamento.responsavel}</TableRowColumn>
+            <TableRowColumn>{parseToFormat(orcamento.criadoEm)}</TableRowColumn>
+            <TableRowColumn>{parseToFormat(orcamento.validoAte)}</TableRowColumn>
+            <TableRowColumn>{daysBetween(orcamento.validoAte, orcamento.criadoEm)}</TableRowColumn>
+            <TableRowColumn>
+                <RaisedButton 
+                    label="Editar"
+                    onClick={() => editarOrcamento(orcamento)} />
+            </TableRowColumn>
+        </TableRow>
     )
 }
 

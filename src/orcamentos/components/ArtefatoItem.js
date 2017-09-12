@@ -1,19 +1,24 @@
 import React from 'react'
-import { Button } from 'react-bootstrap'
+
+import RaisedButton from 'material-ui/RaisedButton'
+
+import Table, {
+    TableRow,
+    TableRowColumn,
+} from 'material-ui/Table'
 
 const ArtefatoItem = ({ artefato, editarArtefato }) => {
     return (
         // TODO - editar e limpar form
-        <tr>
-            <td>{artefato.nome}</td>
-            <td>{artefato.custo}</td>
-            <td><Button className="btn btn-info" 
-                        bsSize="small"
-                        onClick={() => editarArtefato(artefato)}>
-                    Editar
-                </Button>
-            </td>
-        </tr>
+        <TableRow>
+            <TableRowColumn>{artefato.nome}</TableRowColumn>
+            <TableRowColumn>{artefato.custo}</TableRowColumn>
+            <TableRowColumn>
+                <RaisedButton
+                    onClick={() => editarArtefato(artefato)}
+                    label="Editar" />
+            </TableRowColumn>
+        </TableRow>
     )
 }
 

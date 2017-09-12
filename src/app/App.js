@@ -3,37 +3,32 @@ import './App.css'
 import { BrowserRouter as Router, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getRoutes } from '../Routes'
-import { Navbar, NavItem, Nav, Jumbotron,  Col, Grid, Row } from 'react-bootstrap'
+import { Grid, Row, Col } from 'react-flexbox-grid'
+import AppBar from 'material-ui/AppBar'
+
+const style = {
+  margin: 24,
+};
 
 class App extends Component {
-  render() {
-    return (
+	render() {
+		return (
 			<Router>
-      	<div>
-					<Navbar>
-					<Navbar.Header>
-						<Navbar.Brand>
-							<span><Link to="/">Quanto-Custa?</Link></span>
-						</Navbar.Brand>
-					</Navbar.Header>
-				</Navbar>
-				<Jumbotron bsClass="jumbotron jumbotron-fluid">
-					<h1>Quanto custa?</h1>
-					<p>Defina o custo de seus projetos atráves de um orçamento detalhadamente elaborado.</p>
-				</Jumbotron>
-				<div className="container">
-					 <Grid>
-						<Row className="show-grid">
-						  <Col sm={12} md={12}>
-								{ getRoutes(this.props.isAuthenticated) } 
+				<div>
+					<AppBar
+						title="Quanto-Custa?"
+						iconClassNameRight="muidocs-icon-navigation-expand-more" />
+					<Grid fluid>
+						<Row>
+							<Col sm={12} xs={12} style={style}>
+								{getRoutes(this.props.isAuthenticated)}
 							</Col>
 						</Row>
 					</Grid>
 				</div>
-			</div>
-      </Router>
-    )
-  }
+			</Router >
+		)
+	}
 }
 
 

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { Col, Row, Well } from 'react-bootstrap'
 import { bindActionCreators } from 'redux'
 import {
   salvarArtefato, getArtefatos,
@@ -14,7 +13,8 @@ import ArtefatoItems from '../components/ArtefatosItems'
 import UnidadeNaoDefinida from '../components/UnidadeNaoDefinida'
 import OrcamentoNaoDefinido from '../components/OrcamentoNaoDefinido'
 import FinalizarUnidade from '../components/FinalizarUnidade'
-
+import { Grid, Row, Col } from 'react-flexbox-grid'
+import Paper from 'material-ui/Paper'
 
 class ArtefatosCadastro extends Component {
 
@@ -41,37 +41,31 @@ class ArtefatosCadastro extends Component {
   }
 
   novoArtefato() {
-    console.log("novo")
     this.props.novoArtefato()
   }
 
   render() {
-    console.log(this.props.artefatoAtivo)
-    if (!this.props.orcamento.uuid) {
-      return <OrcamentoNaoDefinido voltarAoInicio={() => this.voltarAoInicio()} />
-    } else if (!this.props.unidadeAtiva.uuid) {
-      return <UnidadeNaoDefinida voltarAoInicio={() => this.voltarAoInicio()} />
-    }
+    // if (!this.props.orcamento.uuid) {
+    //   return <OrcamentoNaoDefinido voltarAoInicio={() => this.voltarAoInicio()} />
+    // } else if (!this.props.unidadeAtiva.uuid) {
+    //   return <UnidadeNaoDefinida voltarAoInicio={() => this.voltarAoInicio()} />
+    // }
     return (
-      <Row className="show-grid">
+      <Row>
         <Col sm={12} md={12}>
-          <Well>
-            <OrcamentoUnidadeHeader orcamento={this.props.orcamento}
-              unidadeAtiva={this.props.unidadeAtiva} />
-            <FinalizarUnidade onFinish={() => this.finalizarUnidade()}
-              canFinish={this.props.artefatos.length > 0} />
-            <OrcamentoArtefatoForm
-              salvarArtefato={(artefato) => this.salvarArtefato(artefato)}
-              finalizarUnidade={() => this.finalizarUnidade()}
-              novoArtefato={() => this.novoArtefato()}
-              artefatoAtivo={this.props.artefatoAtivo}
-              unidadeAtiva={this.props.unidadeAtiva}
-              artefatos={this.props.artefatos} />
-            <Row className="show-grid">
-              <ArtefatoItems artefatos={this.props.artefatos}
-                editarArtefato={(artefato) => this.props.editarArtefato(artefato)} />
-            </Row>
-          </Well>
+          <OrcamentoUnidadeHeader orcamento={this.props.orcamento}
+            unidadeAtiva={this.props.unidadeAtiva} />
+          <FinalizarUnidade onFinish={() => this.finalizarUnidade()}
+            canFinish={this.props.artefatos.length > 0} />
+          <OrcamentoArtefatoForm
+            salvarArtefato={(artefato) => this.salvarArtefato(artefato)}
+            finalizarUnidade={() => this.finalizarUnidade()}
+            novoArtefato={() => this.novoArtefato()}
+            artefatoAtivo={this.props.artefatoAtivo}
+            unidadeAtiva={this.props.unidadeAtiva}
+            artefatos={this.props.artefatos} />
+          <ArtefatoItems artefatos={this.props.artefatos}
+            editarArtefato={(artefato) => this.props.editarArtefato(artefato)} />
         </Col>
       </Row>
     )

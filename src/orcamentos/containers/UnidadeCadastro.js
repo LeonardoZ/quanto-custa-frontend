@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { Col, Row } from 'react-bootstrap'
-
 import { bindActionCreators } from 'redux'
 import {
   salvarUnidade, 
@@ -11,6 +9,7 @@ import {
 import OrcamentoUnidadeHeader from '../components/OrcamentoUnidadeHeader'
 import OrcamentoUnidadeForm from '../components/OrcamentoUnidadeForm'
 import OrcamentoNaoDefinido from '../components/OrcamentoNaoDefinido'
+import { Row, Col } from 'react-flexbox-grid'
 
 class UnidadeCadastro extends Component {
 
@@ -33,7 +32,7 @@ class UnidadeCadastro extends Component {
       return <OrcamentoNaoDefinido voltarAoInicio={() => this.voltarAoInicio()} />
     } else
       return (
-        <Row className="show-grid">
+        <Row>
           <Col sm={12} md={12}>
             <OrcamentoUnidadeHeader
               orcamento={this.props.orcamento} />

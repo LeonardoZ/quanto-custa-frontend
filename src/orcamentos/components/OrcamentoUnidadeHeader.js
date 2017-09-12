@@ -1,5 +1,10 @@
 import React from 'react'
-import { Well } from 'react-bootstrap'
+import Paper from 'material-ui/Paper'
+
+const style = {
+  margin: 12,
+  padding: 12
+}
 
 const OrcamentoUnidadeHeader = ({ orcamento, unidadeAtiva }) => {
   let block = null;
@@ -14,19 +19,17 @@ const OrcamentoUnidadeHeader = ({ orcamento, unidadeAtiva }) => {
   }
   if (orcamento)
     return (
-      <div>
+      <Paper style={style}  zDepth={3} rounded={false}>
         <h1>Unidades de software do Orçamento</h1>
-        <Well>
-          <strong>
-            Orçamento:
+        <strong>
+          Orçamento:
           </strong>
-          <span>{orcamento.nome} - {orcamento.cliente}</span>
-          {block}
-        </Well>
-      </div>
+        <span>{orcamento.nome} - {orcamento.cliente}</span>
+        {block}
+      </Paper>
     )
-    else 
-      return (<p>Carregando orçamento...</p>)
+  else
+    return (<p>Carregando orçamento...</p>)
 }
 
 export default OrcamentoUnidadeHeader

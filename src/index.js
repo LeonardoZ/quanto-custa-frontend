@@ -1,9 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-// bootstrap
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap/dist/css/bootstrap-theme.css'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import App from './app/App'
 import './index.css'
 
@@ -12,15 +10,22 @@ import { createStore, applyMiddleware } from 'redux'
 
 import ReduxPromise from 'redux-promise'
 import reducers from './reducers/Reducers'
+import injectTapEventPlugin from 'react-tap-event-plugin'
 
-
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
+injectTapEventPlugin();
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore)
-
 const store = createStoreWithMiddleware(reducers)
+const MaterialApp = () => (
+  <MuiThemeProvider>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </MuiThemeProvider>
+)
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>
-, document.getElementById('root'))
+  <MaterialApp />
+  , document.getElementById('root'))

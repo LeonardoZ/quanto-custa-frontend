@@ -1,7 +1,15 @@
 import React from 'react'
-import { Col, Row, Table, Alert } from 'react-bootstrap'
 import ArtefatoItem from './ArtefatoItem'
 import NenhumItem from './NenhumItemRegistrado'
+import { Grid, Row, Col } from 'react-flexbox-grid'
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn,
+} from 'material-ui/Table';
 
 const ArtefatoItems = ({ artefatos, editarArtefato }) => {
   if (artefatos.length === 0) {
@@ -13,18 +21,19 @@ const ArtefatoItems = ({ artefatos, editarArtefato }) => {
   })
 
   return (
-    <Row className="show-grid">
+    <Row>
       <Col sm={12} md={12}>
         <Table responsive hover>
-          <thead>
-            <tr>
-              <th>Artefato</th>
-              <th>Preço</th>
-            </tr>
-          </thead>
-          <tbody>
+          <TableHeader displaySelectAll={false}>
+            <TableRow>
+              <TableHeaderColumn>Artefato</TableHeaderColumn>
+              <TableHeaderColumn>Preço</TableHeaderColumn>
+              <TableHeaderColumn>Editar</TableHeaderColumn>
+            </TableRow>
+          </TableHeader>
+          <TableBody displayRowCheckbox={false}>
             {items}
-          </tbody>
+          </TableBody>
         </Table>
       </Col>
     </Row>

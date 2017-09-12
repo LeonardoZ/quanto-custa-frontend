@@ -1,12 +1,18 @@
 import React from 'react'
-import { Button, Row, Col,  } from 'react-bootstrap'
+import { Row, Col } from 'react-flexbox-grid'
+import RaisedButton from 'material-ui/RaisedButton'
+
+const style = {
+  margin: 12,
+  padding: 12
+};
 
 const FinalizarUnidade = ({ onFinish, canFinish }) => {
   return (
-    <Row className="show-grid">
+    <Row style={style} end="xs">
       <Col sm={12} md={12}>
-        <Button type="submit" onClick={() => onFinish()} disabled={!canFinish}
-          className="btn btn-primary pull-right">Terminar Unidade de Software</Button>
+        <RaisedButton type="submit" primary={true} onClick={() => onFinish()} disabled={!canFinish}
+          label="Terminar Unidade de Software" />
       </Col>
     </Row>
   )

@@ -1,7 +1,15 @@
 import React from 'react'
-import { Col, Row, Table } from 'react-bootstrap'
 import UnidadeItem from './UnidadeItem'
 import NenhumItem from './NenhumItemRegistrado'
+import { Grid, Row, Col } from 'react-flexbox-grid'
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn,
+} from 'material-ui/Table';
 
 const UnidadesList = ({ unidades, editarCallback, artefatosCallback }) => {
   if (unidades.length === 0) {
@@ -17,15 +25,17 @@ const UnidadesList = ({ unidades, editarCallback, artefatosCallback }) => {
   return (
       <Row className="show-grid">
         <Col sm={12} md={12}>
-          <Table responsive hover>
-            <thead>
-              <tr>
-                <th>Unidade de software</th>
-              </tr>
-            </thead>
-            <tbody>
+          <Table>
+            <TableHeader displaySelectAll={false} >
+              <TableRow>
+                <TableHeaderColumn>Unidade de software</TableHeaderColumn>
+                <TableHeaderColumn>Editar</TableHeaderColumn>
+                <TableHeaderColumn>Artefatos</TableHeaderColumn>
+              </TableRow>
+            </TableHeader>
+            <TableBody displayRowCheckbox={false}>
               {items}
-            </tbody>
+            </TableBody>
           </Table>
         </Col>
       </Row>

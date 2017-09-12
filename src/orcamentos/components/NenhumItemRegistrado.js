@@ -1,12 +1,17 @@
 import React from 'react'
-import { Button, Alert, HelpBlock } from 'react-bootstrap'
+import Paper from 'material-ui/Paper'
 
-const NenhumItemRegistrado = ({tipoDoItem}) => {
-    return (
-        <Alert bsStyle="info">
-            <HelpBlock><strong>Nenhum {tipoDoItem} registrado.</strong></HelpBlock>
-        </Alert>
-    )
+const style = {
+  margin: 12,
+  padding: 12
+};
+
+const NenhumItemRegistrado = ({ tipoDoItem }) => {
+  return (
+    <Paper style={style} zDepth={3} rounded={false} >
+      <strong>Nenhum {tipoDoItem} registrado.</strong>
+    </Paper>
+  )
 }
 
 export default NenhumItemRegistrado 
