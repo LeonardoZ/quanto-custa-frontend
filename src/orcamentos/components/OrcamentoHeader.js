@@ -11,6 +11,7 @@ const OrcamentoHeader = ({ orcamento }) => {
     return (
       <div>
         <Paper style={style} zDepth={3} rounded={false}>
+          <h1>Orçamento</h1>
           <div>
             <strong>Nome: </strong>
             <span>{orcamento.nome}</span>
@@ -26,7 +27,7 @@ const OrcamentoHeader = ({ orcamento }) => {
         </Paper>
       </div>
     )
-  else 
+  else
     return (<div>aguarde</div>)
 }
 

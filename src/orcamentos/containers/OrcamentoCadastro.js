@@ -122,10 +122,11 @@ function mapDispatchToProps(dispatch) {
   }, dispatch)
 }
 
-function mapStateToProps({ orcamentoStateTree }) {
+function mapStateToProps({ orcamentoStateTree, unidadesStateTree }) {
   return {
     orcamento: orcamentoStateTree.orcamento,
-    unidades: orcamentoStateTree.unidades.filter(u => u.orcamentoUuid === orcamentoStateTree.orcamento.uuid)
+    unidades: unidadesStateTree.unidades
+      .filter(u => u.orcamentoUuid === orcamentoStateTree.orcamento.uuid)
   }
 }
 

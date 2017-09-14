@@ -54,10 +54,10 @@ function mapDispatchToProps(dispatch) {
 }
 
 
-function mapStateToProps({ orcamentoStateTree }) {
+function mapStateToProps({ orcamentoStateTree, unidadesStateTree }) {
   return {
     orcamento: orcamentoStateTree.orcamento,
-    unidadeAtiva: orcamentoStateTree.unidadeAtiva
+    unidadeAtiva: unidadesStateTree.unidadeAtiva
   }
 }
 

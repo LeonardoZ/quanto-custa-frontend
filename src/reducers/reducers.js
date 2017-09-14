@@ -1,8 +1,14 @@
 import { combineReducers } from 'redux'
 import Orcamentos from './OrcamentosReducer'
+import Unidades from './UnidadesReducer'
+import Artefatos from './ArtefatosReducer'
+import Erros from './ErrosReducer'
 
 const rootReducer = combineReducers({
-    orcamentoStateTree: Orcamentos
+    errosStateTree: Erros,
+    orcamentoStateTree: Orcamentos,
+    unidadesStateTree: Unidades,
+    artefatosStateTree: Artefatos
 })
 
 export default rootReducer

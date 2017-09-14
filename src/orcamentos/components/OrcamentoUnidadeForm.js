@@ -2,7 +2,13 @@ import React, { Component } from 'react'
 import Formsy from 'formsy-react'
 import { MyInput } from '../../formulario/FormGroup'
 import { Grid, Row, Col } from 'react-flexbox-grid'
-import RaisedButton  from 'material-ui/RaisedButton'
+import RaisedButton from 'material-ui/RaisedButton'
+import Paper from 'material-ui/Paper'
+
+const style = {
+  margin: 12,
+  padding: 12
+};
 
 class OrcamentoUnidadeForm extends Component {
 
@@ -31,21 +37,23 @@ class OrcamentoUnidadeForm extends Component {
 
   render() {
     return (
-      <Formsy.Form onSubmit={this.submit} onValid={this.enableButton}
-        onInvalid={this.disableButton}>
-        <MyInput name="titulo" title="Título" validations="maxLength:200,minLength:3"
-          validationErrors={{
-            minLength: "O titulo não deve possuir menos de 3 caractéres",
-            maxLength: "O título não de possuir mais de 200 caractéres"
-          }} required value={this.props.unidadeAtiva.titulo} 
-          placeholder="Ex.: Aplicativo Móvel, Site, ERP, Módulo" />
+      <Paper zDepth={3} rounded={false} style={style}>
+        <Formsy.Form onSubmit={this.submit} onValid={this.enableButton}
+          onInvalid={this.disableButton}>
+          <MyInput name="titulo" title="Título" validations="maxLength:200,minLength:3"
+            validationErrors={{
+              minLength: "O titulo não deve possuir menos de 3 caractéres",
+              maxLength: "O título não de possuir mais de 200 caractéres"
+            }} required value={this.props.unidadeAtiva.titulo}
+            placeholder="Ex.: Aplicativo Móvel, Site, ERP, Módulo" />
 
-        <Row>
-          <Col sm={12} md={12}>
-            <RaisedButton type="submit" disabled={!this.state.canSubmit} label="Salvar" />
-          </Col>
-        </Row>
-      </Formsy.Form>
+          <Row>
+            <Col sm={12} md={12}>
+              <RaisedButton type="submit" primary={true} disabled={!this.state.canSubmit} label="Salvar" />
+            </Col>
+          </Row>
+        </Formsy.Form>
+      </Paper>
     )
   }
 }

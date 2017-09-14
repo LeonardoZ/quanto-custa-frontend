@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 import {
   GET_ORCAMENTOS,
   SALVAR_ORCAMENTO,
@@ -16,24 +14,17 @@ import {
   CARREGAR_UNIDADES,
   EDITAR_ARTEFATO,
   ATUALIZAR_ARTEFATO,
-  NOVO_ARTEFATO
+  NOVO_ARTEFATO,
+  LIMPAR_ERROS
 } from './ActionTypes'
-
-const client = axios.create({
-  baseURL: 'http://localhost:8080/quantocusta/api/',
-  responseType: 'json'
-});
+import * as api from '../api/QuantoCustaApi'
 
 export function getOrcamentos() {
-  let request = client.get('/orcamentos')
-  return {
-    "type": GET_ORCAMENTOS,
-    "payload": request
-  }
+  return { type: GET_ORCAMENTOS, payload: api.getOrcamentos() }
 }
 
 export function salvarOrcamento(orcamento) {
-  let request = client.post('/orcamento', orcamento);
+  let request = api.salvarOrcamento(orcamento)
 
   return {
     "type": SALVAR_ORCAMENTO,
@@ -42,8 +33,7 @@ export function salvarOrcamento(orcamento) {
 }
 
 export function atualizarOrcamento(orcamentoAtivo, orcamentoData) {
-  let data = { ...orcamentoData, validoAte: orcamentoAtivo.validoAte }
-  let request = client.put(`/orcamento/${orcamentoAtivo.uuid}`, data);
+  let request = api.atualizarOrcamento(orcamentoAtivo, orcamentoData)
 
   return {
     "type": SALVAR_ORCAMENTO,
@@ -67,7 +57,8 @@ export function novaUnidadeDeSoftware() {
 }
 
 export function salvarUnidade(orcamentoAtivo, unidade) {
-  let request = client.post("/unidade/do/orcamento/" + orcamentoAtivo.uuid, unidade)
+  let request = api.salvarUnidade(orcamentoAtivo, unidade)
+
   return {
     "type": SALVAR_UNIDADE,
     "payload": request
@@ -75,7 +66,7 @@ export function salvarUnidade(orcamentoAtivo, unidade) {
 }
 
 export function carregarUnidades(orcamento) {
-  let request = client.get('/unidades/do/orcamento/' + orcamento.uuid)
+  let request = api.carregarUnidades(orcamento)
   return {
     "type": CARREGAR_UNIDADES,
     "payload": request
@@ -84,7 +75,6 @@ export function carregarUnidades(orcamento) {
 
 
 export function editarUnidade(unidade) {
-
   return {
     "type": EDITAR_UNIDADE,
     "payload": unidade
@@ -92,7 +82,7 @@ export function editarUnidade(unidade) {
 }
 
 export function atualizarUnidade(unidade, data) {
-  let request = client.put("/unidade/" + unidade.uuid, data);
+  let request = api.atualizarUnidade(unidade, data)
   return {
     "type": ATUALIZAR_UNIDADE,
     "payload": request
@@ -106,7 +96,8 @@ export function novoOrcamento() {
 }
 
 export function getArtefatos(unidade) {
-  let request = client.get('/artefatos/da/unidade/' + unidade.uuid)
+  let request = api.getArtefatos(unidade)
+
   return {
     "type": GET_ARTEFATOS,
     "payload": request
@@ -114,7 +105,7 @@ export function getArtefatos(unidade) {
 }
 
 export function salvarArtefato(unidadeAtiva, artefato) {
-  let request = client.post("/artefato/da/unidade/" + unidadeAtiva.uuid, artefato)
+  let request = api.salvarArtefato(unidadeAtiva, artefato)
   return {
     "type": SALVAR_ARTEFATO,
     "payload": request
@@ -122,14 +113,14 @@ export function salvarArtefato(unidadeAtiva, artefato) {
 }
 
 export function editarArtefato(artefato) {
-    return {
-      "type": EDITAR_ARTEFATO,
-      "payload": artefato
-    }
+  return {
+    "type": EDITAR_ARTEFATO,
+    "payload": artefato
   }
+}
 
 export function atualizarArtefato(artefatoAtivo, data) {
-  let request = client.put("/artefato/" + artefatoAtivo.uuid, data)
+  let request = api.atualizarArtefato(artefatoAtivo, data)
   return {
     "type": ATUALIZAR_ARTEFATO,
     "payload": request
@@ -158,3 +149,8 @@ export function finalizarUnidade() {
   }
 }
 
+export function limparErros(unidade, data) {
+  return {
+    "type": LIMPAR_ERROS,
+  }
+}

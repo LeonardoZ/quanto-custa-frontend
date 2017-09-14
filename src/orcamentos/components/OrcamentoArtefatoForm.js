@@ -38,7 +38,7 @@ class OrcamentoArtefatoForm extends Component {
   submit(data) {
     let newData = {
       ...data,
-      custo: this.state.custo
+      custo: this.state.custo || 0.0
     }
     this.props.salvarArtefato(newData)
   }
@@ -65,7 +65,7 @@ class OrcamentoArtefatoForm extends Component {
           onInvalid={this.disableButton}>
           <h3>Artefatos</h3>
           <Row className="show-grid">
-            <Col sm={12} xs={6}>
+            <Col xs>
               <MyInput name="nome" title="Artefato"
                 value={this.state.nome}
                 validations="maxLength:150,minLength:3"
@@ -73,6 +73,9 @@ class OrcamentoArtefatoForm extends Component {
                   minLength: "O nome do artefato não deve possuir menos de 3 caractéres",
                   maxLength: "O nome do artefato não deve possuir mais de 200 caractéres"
                 }} required />
+
+            </Col>
+            <Col xs>
               <NumberFormat
                 name="custo"
                 fullWidth={true}

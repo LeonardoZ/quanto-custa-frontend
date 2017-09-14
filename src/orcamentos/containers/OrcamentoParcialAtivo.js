@@ -63,7 +63,7 @@ class OrcamentosParcialAtivo extends Component {
       <div>
         <Row>
           <Col sm={12} md={12}>
-            <h1>Orçamento</h1>
+          
             <OrcamentoHeader orcamento={this.props.orcamento} />
             <RaisedButton primary={true} onClick={() => this.novaUnidade()} label="Nova Unidade de Software" />
             <RaisedButton secondary={true} onClick={() => this.editarOrcamento()} label="Editar Orçamento" />
@@ -91,10 +91,10 @@ function mapDispatchToProps(dispatch) {
   }, dispatch)
 }
 
-function mapStateToProps({ orcamentoStateTree }) {
+function mapStateToProps({ orcamentoStateTree, unidadesStateTree }) {
   return {
     orcamento: orcamentoStateTree.orcamento,
-    unidades: orcamentoStateTree.unidades
+    unidades: unidadesStateTree.unidades
       .filter(u => u.orcamentoUuid === orcamentoStateTree.orcamento.uuid)
   }
 }

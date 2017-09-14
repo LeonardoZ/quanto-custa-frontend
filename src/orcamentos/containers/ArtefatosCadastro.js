@@ -45,11 +45,11 @@ class ArtefatosCadastro extends Component {
   }
 
   render() {
-    // if (!this.props.orcamento.uuid) {
-    //   return <OrcamentoNaoDefinido voltarAoInicio={() => this.voltarAoInicio()} />
-    // } else if (!this.props.unidadeAtiva.uuid) {
-    //   return <UnidadeNaoDefinida voltarAoInicio={() => this.voltarAoInicio()} />
-    // }
+    if (!this.props.orcamento.uuid) {
+      return <OrcamentoNaoDefinido voltarAoInicio={() => this.voltarAoInicio()} />
+    } else if (!this.props.unidadeAtiva.uuid) {
+      return <UnidadeNaoDefinida voltarAoInicio={() => this.voltarAoInicio()} />
+    }
     return (
       <Row>
         <Col sm={12} md={12}>
@@ -82,13 +82,13 @@ function mapDispatchToProps(dispatch) {
 }
 
 
-function mapStateToProps({ orcamentoStateTree }) {
+function mapStateToProps({ orcamentoStateTree, unidadesStateTree, artefatosStateTree }) {
   return {
     orcamento: orcamentoStateTree.orcamento,
-    unidadeAtiva: orcamentoStateTree.unidadeAtiva,
-    artefatoAtivo: orcamentoStateTree.artefatoAtivo,
-    artefatos: orcamentoStateTree.artefatos
-      .filter((a) => a.unidadeUuid === orcamentoStateTree.unidadeAtiva.uuid),
+    unidadeAtiva: unidadesStateTree.unidadeAtiva,
+    artefatoAtivo: artefatosStateTree.artefatoAtivo,
+    artefatos: artefatosStateTree.artefatos
+      .filter((a) => a.unidadeUuid === unidadesStateTree.unidadeAtiva.uuid),
   }
 }
 
