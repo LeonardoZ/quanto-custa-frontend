@@ -9,7 +9,7 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 
 import ReduxPromise from 'redux-promise'
-import reducers from './reducers/Reducers'
+import reducers from './reducers/reducers'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 
 // Needed for onTouchTap

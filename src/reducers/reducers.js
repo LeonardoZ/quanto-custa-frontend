@@ -3,12 +3,14 @@ import Orcamentos from './OrcamentosReducer'
 import Unidades from './UnidadesReducer'
 import Artefatos from './ArtefatosReducer'
 import Erros from './ErrosReducer'
+import Auth from './AuthStateTree'
 
 const rootReducer = combineReducers({
     errosStateTree: Erros,
     orcamentoStateTree: Orcamentos,
     unidadesStateTree: Unidades,
-    artefatosStateTree: Artefatos
+    artefatosStateTree: Artefatos,
+    authStateTree: Auth
 })
 
 export default rootReducer
