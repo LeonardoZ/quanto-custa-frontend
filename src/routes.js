@@ -8,8 +8,8 @@ import OrcamentoCadastro from './orcamentos/containers/OrcamentoCadastro'
 import UnidadeCadastro from './orcamentos/containers/UnidadeCadastro'
 import ArtefatosCadastro from './orcamentos/containers/ArtefatosCadastro'
 import OrcamentoParcialAtivo from './orcamentos/containers/OrcamentoParcialAtivo'
-import LoginPagina from './login/LoginPagina'
-import { Admin } from './app/Admin'
+import LoginPagina from './login/components/LoginPagina'
+import { Admin } from './app/components/Admin'
 
 const PrivateRoute =
   ({ component: Component, erro, limparErros, isUserAuthenticated, ...rest }) => (

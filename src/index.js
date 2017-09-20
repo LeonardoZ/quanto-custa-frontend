@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import './index.css'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import App from './app/App'
-import './index.css'
+import App from './app/containers/App'
 
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'

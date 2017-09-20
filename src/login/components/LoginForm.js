@@ -1,22 +1,26 @@
-import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import React, { Component } from 'react';
 import Formsy from 'formsy-react'
-import { MyInput } from '../formulario/FormGroup'
+import { MyInput } from '../../formulario/FormGroup'
 import { Row, Col } from 'react-flexbox-grid'
 import RaisedButton from 'material-ui/RaisedButton'
+import FlatButton from 'material-ui/FlatButton'
 import { BrowserRouter as Router, Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import AppBar from 'material-ui/AppBar'
 import Paper from 'material-ui/Paper'
 
 const style = {
-  margin: 12,
   padding: 12
 };
 
-class Login extends Component {
+const btnSubmitStyle = {
+  alignSelf: 'flex-end'
+}
 
+
+const btnEsqueceuStyle = {
+  alignSelf: 'flex-start'
+}
+
+class LoginForm extends Component {
   constructor(props) {
     super(props)
     this.disableButton = this.disableButton.bind(this)
@@ -31,27 +35,32 @@ class Login extends Component {
       senha: ""
     })
   }
-
   enableButton() {
-
+    this.setState({ canSubmit: true })
   }
 
   disableButton() {
-
+    this.setState({ canSubmit: false })
   }
 
-  submit() {
-
+  submit(data) {
+    this.props.onLoginSubmit(data)
   }
 
   render() {
+    let block = ""
+    let erro = this.props.erro
+
+    if (erro && erro.temErro) {
+      block = <p>{this.props.erro.mensagem}</p>
+    }
     return (
-      <Paper zDepth={3} rounded={false} style={style}>
+      <Paper zDepth={1} rounded={false} style={style}>
+        {block}
         <Formsy.Form
           onSubmit={this.submit}
           onValid={this.enableButton}
           onInvalid={this.disableButton}>
-          <h3>Login</h3>
           <Row className="show-grid">
             <Col xs>
               <MyInput name="login" title="Login"
@@ -59,42 +68,33 @@ class Login extends Component {
                 validations="maxLength:150,minLength:3"
                 validationErrors={{
                   minLength: "O login não deve possuir menos de 3 caractéres",
-                  maxLength: "O login não deve possuir mais de 200 caractéres"
+                  maxLength: "O login não deve possuir mais de 120 caractéres"
                 }} required />
 
-            </Col>
-            <Col xs>
               <MyInput name="senha" title="Senha"
                 value={this.state.senha}
+                type="password"
                 validations="minLength:6"
                 validationErrors={{
-                  minLength: "A senha não deve possuir menos de 3 caractéres",
+                  minLength: "A senha não deve possuir menos de 6 digitos",
                 }} required />
 
             </Col>
           </Row>
-          <Row>
-            <Col sm={12} md={12}>
-              <RaisedButton type="submit" disabled={!this.state.canSubmit}
+          <Row end={"xs"}>
+            <Col xs={12} md={6}>
+              <FlatButton style={btnEsqueceuStyle} label="Esqueceu a senha?" />
+            </Col>
+            <Col xs={12} md={6}>
+              <RaisedButton style={btnSubmitStyle} type="submit" disabled={!this.state.canSubmit}
                 label="Entrar" />
             </Col>
           </Row>
         </Formsy.Form>
-      </Paper>
-    )
+      </Paper>)
+
   }
+
 }
 
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-  }, dispatch)
-}
-
-
-function mapStateToProps({ orcamentoStateTree, unidadesStateTree, artefatosStateTree }) {
-  return {
-  }
-}
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login))
+export default LoginForm;

@@ -1,8 +1,7 @@
 import lidarComErro from './LidarComErro'
 
-
 export default (state = PADRAO, action) => {
-  if (action && action.error) {
+  if (action && action.error || (action.payload && action.payload.error)) {
     return lidarComErro(state, action)
   } else {
     return {...state, ...PADRAO}
@@ -12,6 +11,7 @@ export default (state = PADRAO, action) => {
 const PADRAO = {
   erro: {
     temErro: false,
-    mensagem: ""
+    mensagem: "",
+    status: 0
   }
 }

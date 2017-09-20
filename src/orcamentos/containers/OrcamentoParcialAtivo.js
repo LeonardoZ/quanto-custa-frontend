@@ -28,10 +28,6 @@ class OrcamentosParcialAtivo extends Component {
     }
   }
 
-  componentDidMount() {
-
-  }
-
   novaUnidade() {
     this.props.novaUnidadeDeSoftware()
     this.props.history.push("/unidade");

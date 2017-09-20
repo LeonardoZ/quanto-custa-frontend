@@ -47,7 +47,7 @@ class OrcamentoCadastro extends Component {
     if (this.props.orcamento.uuid) {
       this.props.atualizarOrcamento(this.props.orcamento, data)
     } else {
-      this.props.salvarOrcamento(data)
+      this.props.salvarOrcamento(this.props.usuarioAtivo, data)
     }
     this.proximo()
 
@@ -122,8 +122,9 @@ function mapDispatchToProps(dispatch) {
   }, dispatch)
 }
 
-function mapStateToProps({ orcamentoStateTree, unidadesStateTree }) {
+function mapStateToProps({ orcamentoStateTree, unidadesStateTree, authStateTree }) {
   return {
+    usuarioAtivo: authStateTree.usuarioAtivo,
     orcamento: orcamentoStateTree.orcamento,
     unidades: unidadesStateTree.unidades
       .filter(u => u.orcamentoUuid === orcamentoStateTree.orcamento.uuid)

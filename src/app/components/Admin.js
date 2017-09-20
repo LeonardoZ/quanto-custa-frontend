@@ -1,7 +1,7 @@
 import React from 'react'
 import { Grid, Row, Col } from 'react-flexbox-grid'
 import AppBar from 'material-ui/AppBar'
-import ErroPanel from '../erro/ErroPanel'
+import ErroPanel from '../../erro/ErroPanel'
 
 const style = {
   margin: 24,

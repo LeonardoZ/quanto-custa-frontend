@@ -1,9 +1,18 @@
 function lidarComErro(state, action) {
-  if (action.payload) {
-    let mensagem = action.payload.response.data.mensagem
-    return { ...state, erro: { temErro: true, mensagem: mensagem } }
+  console.log(action)
+  if (action.payload.response) {
+    let data = action.payload.response.data
+    console.log(data)
+    return { ...state, 
+      erro: { 
+          temErro: true, 
+          mensagem: data.mensagem, 
+          status: data.status
+        } 
+      }
   } else {
-    return { ...state, erro: { temErro: true, mensagem: action.payload.message } }
+    let mensagem = action.payload.message
+    return { ...state, erro: { temErro: true, mensagem: mensagem } }
   }
 
 }

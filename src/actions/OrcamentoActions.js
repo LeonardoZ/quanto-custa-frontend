@@ -15,17 +15,20 @@ import {
   EDITAR_ARTEFATO,
   ATUALIZAR_ARTEFATO,
   NOVO_ARTEFATO,
-  LIMPAR_ERROS
+  LIMPAR_ERROS,
+  FAZER_LOGIN,
+  CADASTRAR_USUARIO,
+  GET_USUARIO
 } from './ActionTypes'
+
 import * as api from '../api/QuantoCustaApi'
 
-export function getOrcamentos() {
-  return { type: GET_ORCAMENTOS, payload: api.getOrcamentos() }
+export function getOrcamentos(usuario) {
+  return { type: GET_ORCAMENTOS, payload: api.getOrcamentos(usuario) }
 }
 
-export function salvarOrcamento(orcamento) {
-  let request = api.salvarOrcamento(orcamento)
-
+export function salvarOrcamento(usuario, orcamento) {
+  let request = api.salvarOrcamento(usuario, orcamento)
   return {
     "type": SALVAR_ORCAMENTO,
     "payload": request
@@ -34,7 +37,6 @@ export function salvarOrcamento(orcamento) {
 
 export function atualizarOrcamento(orcamentoAtivo, orcamentoData) {
   let request = api.atualizarOrcamento(orcamentoAtivo, orcamentoData)
-
   return {
     "type": SALVAR_ORCAMENTO,
     "payload": request
@@ -42,7 +44,6 @@ export function atualizarOrcamento(orcamentoAtivo, orcamentoData) {
 }
 
 export function editarOrcamento(orcamento) {
-
   return {
     "type": EDITAR_ORCAMENTO,
     "payload": orcamento
@@ -58,7 +59,6 @@ export function novaUnidadeDeSoftware() {
 
 export function salvarUnidade(orcamentoAtivo, unidade) {
   let request = api.salvarUnidade(orcamentoAtivo, unidade)
-
   return {
     "type": SALVAR_UNIDADE,
     "payload": request
@@ -97,7 +97,6 @@ export function novoOrcamento() {
 
 export function getArtefatos(unidade) {
   let request = api.getArtefatos(unidade)
-
   return {
     "type": GET_ARTEFATOS,
     "payload": request
@@ -138,10 +137,8 @@ export function configurarUnidadeParaAtiva(unidade) {
 export function novoArtefato() {
   return {
     "type": NOVO_ARTEFATO,
-    "payload": novoArtefato,
   }
 }
-
 
 export function finalizarUnidade() {
   return {
@@ -149,8 +146,31 @@ export function finalizarUnidade() {
   }
 }
 
-export function limparErros(unidade, data) {
+export function limparErros() {
   return {
     "type": LIMPAR_ERROS,
+  }
+}
+
+export function fazerLogin(dadosLogin) {
+  let request = api.fazerLogin(dadosLogin)
+  return {
+    "type": FAZER_LOGIN,
+    "payload": request
+  }
+}
+
+export function cadastrarUsuario(unidade, data) {
+  return {
+    "type": CADASTRAR_USUARIO
+  }
+}
+
+export function getUsuario() {
+  let token = sessionStorage.getItem("jwtToken")
+  let request = api.getUsuario()
+  return {
+    "type": GET_USUARIO,
+    "payload": request
   }
 }

@@ -3,29 +3,36 @@ import './App.css'
 import { BrowserRouter as Router, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getRoutes } from '../Routes'
-import Admin from './Admin'
-import { limparErros } from '../actions/OrcamentoActions'
-
+import { getRoutes } from '../../Routes'
+import Admin from '../components/Admin'
+import { limparErros, getUsuario } from '../../actions/OrcamentoActions'
 
 class App extends Component {
 
+	componentWillMount() {
+
+		this.logarSeTiverTokenRegistrado()
+	}
+
 	render() {
+
 		return (
 			<Router>
-				{/* <div>
-					{getUnauthRoutes()}
-					<Admin routes={getRoutes(this.props.isAuthenticated)}
-						erro={this.props.erro}
-						limparErros={() => this.props.limparErros()} />
-				</div> */}
 				<div>
 					{getRoutes(this.props.erro, () => this.props.limparErros(), this.props.isAuthenticated)}
 				</div>
 			</Router>
 		)
 	}
+
+	logarSeTiverTokenRegistrado() {
+		let token = sessionStorage.getItem("jwtToken")
+		if (token) {
+			this.props.getUsuario(token)
+		}
+	}
 }
+
 
 function mapStateToProps({ errosStateTree, authStateTree }) {
 	return {
@@ -36,7 +43,8 @@ function mapStateToProps({ errosStateTree, authStateTree }) {
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
-		limparErros
+		limparErros,
+		getUsuario
 	}, dispatch)
 }
 

@@ -5,12 +5,14 @@ import { connect } from 'react-redux'
 import { getOrcamentos, editarOrcamento, novoOrcamento } from '../../actions/OrcamentoActions'
 import OrcamentoList from '../components/OrcamentosList'
 import { Grid, Row, Col } from 'react-flexbox-grid'
-import  RaisedButton from 'material-ui/RaisedButton'
+import RaisedButton from 'material-ui/RaisedButton'
 
 class OrcamentosPanel extends Component {
 
-  componentWillMount() {
-    this.props.getOrcamentos()
+  componentDidMount() {
+    if (this.props.usuario) {
+      this.props.getOrcamentos(this.props.usuario)
+    }
   }
 
   novoOrcamento() {
@@ -24,6 +26,7 @@ class OrcamentosPanel extends Component {
   }
 
   render() {
+    
     let orcamentos = this.props.orcamentos
 
     return (
@@ -44,7 +47,8 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
-    orcamentos: state.orcamentoStateTree.orcamentos
+    orcamentos: state.orcamentoStateTree.orcamentos,
+    usuario: state.authStateTree.usuarioAtivo
   }
 }
 
