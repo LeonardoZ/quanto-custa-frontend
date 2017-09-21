@@ -1,0 +1,7 @@
+#grid-login {
+  background: url('../../util/img/bg_login.jpg') no-repeat;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}

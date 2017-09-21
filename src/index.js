@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import './index.css'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import App from './app/containers/App'
+import App from './app/container/App'
 
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'

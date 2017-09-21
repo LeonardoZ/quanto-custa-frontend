@@ -3,13 +3,13 @@ import {
   Route
 } from 'react-router-dom'
 import { Redirect } from 'react-router-dom'
-import OrcamentosPanel from './orcamentos/containers/OrcamentosPanel'
-import OrcamentoCadastro from './orcamentos/containers/OrcamentoCadastro'
-import UnidadeCadastro from './orcamentos/containers/UnidadeCadastro'
-import ArtefatosCadastro from './orcamentos/containers/ArtefatosCadastro'
-import OrcamentoParcialAtivo from './orcamentos/containers/OrcamentoParcialAtivo'
-import LoginPagina from './login/components/LoginPagina'
-import { Admin } from './app/components/Admin'
+import OrcamentosPainel from './orcamentos/painel/container/OrcamentosPanel'
+import OrcamentoCadastro from './orcamentos/cadastro/container/OrcamentoCadastro'
+import UnidadeCadastro from './unidades/container/UnidadeCadastro'
+import ArtefatosCadastro from './artefatos/container/ArtefatosCadastro'
+import ResumoOrcamento from './resumo/container/ResumoOrcamento'
+import LoginPagina from './login/pagina/LoginPagina'
+import { Admin } from './app/admin/Admin'
 
 const PrivateRoute =
   ({ component: Component, erro, limparErros, isUserAuthenticated, ...rest }) => (
@@ -31,7 +31,7 @@ export const getRoutes = (erro, limparErros, isAuthenticated) => {
   return [
     <PrivateRoute key='orcamentos' exact isUserAuthenticated={isAuthenticated}
       erro={erro} limparErros={limparErros}
-      path='/' component={OrcamentosPanel} />,
+      path='/' component={OrcamentosPainel} />,
     <PrivateRoute key='orcamento-cadastro' exact isUserAuthenticated={isAuthenticated}
       erro={erro} limparErros={limparErros}
       path='/orcamento' component={OrcamentoCadastro} />,
@@ -43,7 +43,7 @@ export const getRoutes = (erro, limparErros, isAuthenticated) => {
       path='/artefatos' component={ArtefatosCadastro} />,
     <PrivateRoute key='orcamento-unidades' exact isUserAuthenticated={isAuthenticated}
       erro={erro} limparErros={limparErros}
-      path='/orcamento/ativo' component={OrcamentoParcialAtivo} />,
+      path='/resumo/orcamento' component={ResumoOrcamento} />,
     <Route key='login' path='/login' component={LoginPagina} />
   ]
 }
