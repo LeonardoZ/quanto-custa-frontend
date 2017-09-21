@@ -26,7 +26,6 @@ class OrcamentosPanel extends Component {
   }
 
   render() {
-    
     let orcamentos = this.props.orcamentos
 
     return (
