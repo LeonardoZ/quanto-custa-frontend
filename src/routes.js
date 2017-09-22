@@ -3,7 +3,7 @@ import {
   Route
 } from 'react-router-dom'
 import { Redirect } from 'react-router-dom'
-import OrcamentosPainel from './orcamentos/painel/container/OrcamentosPanel'
+import OrcamentosPainel from './orcamentos/painel/container/OrcamentosPainel'
 import OrcamentoCadastro from './orcamentos/cadastro/container/OrcamentoCadastro'
 import UnidadeCadastro from './unidades/container/UnidadeCadastro'
 import ArtefatosCadastro from './artefatos/container/ArtefatosCadastro'

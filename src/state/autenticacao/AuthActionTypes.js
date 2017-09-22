@@ -1,0 +1,3 @@
+export const FAZER_LOGIN = "FAZER_LOGIN"
+export const GET_USUARIO = "GET_USUARIO"
+export const CADASTRAR_USUARIO = "CADASTRAR_USUARIO"

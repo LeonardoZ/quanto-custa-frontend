@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
-import Orcamentos from './OrcamentosReducer'
-import Unidades from './UnidadesReducer'
-import Artefatos from './ArtefatosReducer'
-import Erros from './ErrosReducer'
-import Auth from './AuthReducer'
+import Orcamentos from './orcamentos/OrcamentosReducer'
+import Unidades from './unidades_de_software/UnidadesReducer'
+import Artefatos from './artefatos/ArtefatosReducer'
+import Erros from './erros/ErrosReducer'
+import Auth from './autenticacao/AuthReducer'
 
 const rootReducer = combineReducers({
     errosStateTree: Erros,

@@ -4,13 +4,15 @@ import {
   EDITAR_ARTEFATO,
   ATUALIZAR_ARTEFATO,
   NOVO_ARTEFATO
-} from '../actions/ActionTypes'
+} from './ArtefatosActionTypes'
+
+const ARTEFATO_ATIVO = {
+  nome: "",
+  custo: 0.0
+}
 
 export default (state = {
-  artefatoAtivo: {
-    nome: "",
-    custo: 0.00
-  },
+  artefatoAtivo: ARTEFATO_ATIVO,
   artefatos: [],
   artefatosCarregando: false
 }, action) => {
@@ -43,7 +45,7 @@ function getArtefatos(state, action) {
 function salvarArtefato(state, action) {
   let artefato = { ...action.payload.data }
   let artefatos = [...state.artefatos, artefato]
-  return { ...state, artefatos: artefatos }
+  return { ...state, artefatos: artefatos, artefatoAtivo: ARTEFATO_ATIVO }
 }
 
 function editarArtefato(state, action) {
@@ -54,16 +56,16 @@ function atualizarArtefato(state, action) {
   let artefatoAtualizado = action.payload.data
   let artefatoAtivo = state.artefatoAtivo
   let artefatosDiferentesDoAtualizado = state.artefatos.filter(a => a.uuid !== artefatoAtivo.uuid)
+  console.log(artefatoAtivo)
+  console.log(artefatoAtualizado)
+  console.log(artefatosDiferentesDoAtualizado)
   let novosArtefatos = [...artefatosDiferentesDoAtualizado, artefatoAtualizado]
-  return { ...state, artefatos: novosArtefatos, artefatoAtivo: {} }
+  return { ...state, artefatos: novosArtefatos, artefatoAtivo: ARTEFATO_ATIVO }
 }
 
 function novoArtefato(state, action) {
   return {
     ...state,
-    artefatoAtivo: {
-      nome: "",
-      custo: 0.0
-    }
+    artefatoAtivo: ARTEFATO_ATIVO
   }
 }

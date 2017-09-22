@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Grid, Row, Col } from 'react-flexbox-grid'
-import RaisedButton from 'material-ui/RaisedButton'
-import { getOrcamentos, editarOrcamento, novoOrcamento } from '../../../actions/OrcamentoActions'
+import { getOrcamentos, editarOrcamento, novoOrcamento }
+  from '../../../state/orcamentos/OrcamentosActions'
 import OrcamentoList from '../orcamentos/list/OrcamentosList'
+import BotaoNovo from '../botao_novo/BotaoNovoOrcamento'
 
 class OrcamentosPainel extends Component {
 
@@ -30,9 +30,7 @@ class OrcamentosPainel extends Component {
 
     return (
       <div>
-        <RaisedButton label="Novo Orçamento" primary={true}
-          onClick={() => this.novoOrcamento()} />
-
+        <BotaoNovo novoOrcamento={()=> this.novoOrcamento()}/>
         <OrcamentoList orcamentos={orcamentos}
           editarOrcamento={(orcamento) => this.editarOrcamento(orcamento)} />
       </div>

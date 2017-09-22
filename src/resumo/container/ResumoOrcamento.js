@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { salvarOrcamento } from '../../state/orcamentos/OrcamentosActions'
 import {
-  salvarOrcamento, novaUnidadeDeSoftware,
-  editarUnidade, carregarUnidades,
-  configurarUnidadeParaAtiva
-} from '../../actions/OrcamentoActions'
+  novaUnidadeDeSoftware, editarUnidade, 
+  carregarUnidades, configurarUnidadeParaAtiva
+} from '../../state/unidades_de_software/UnidadesActions'
 import UnidadesList from '../list/UnidadesList'
 import OrcamentoHeader from '../../util/orcamento_header/OrcamentoHeader'
 import Pagina from '../pagina/ResumoOrcamentoPagina'

@@ -6,7 +6,7 @@ import {
   EDITAR_UNIDADE,
   CARREGAR_UNIDADES,
   FINALIZAR_UNIDADE
-} from '../actions/ActionTypes'
+} from './UnidadesActionTypes'
 
 export default (state = {
   unidadeAtiva: {}, 

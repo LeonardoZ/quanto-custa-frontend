@@ -1,4 +1,4 @@
-import { FAZER_LOGIN, CADASTRAR_USUARIO, GET_USUARIO } from '../actions/ActionTypes'
+import { FAZER_LOGIN, CADASTRAR_USUARIO, GET_USUARIO } from './AuthActionTypes'
 
 const PADRAO = {
   isAuthenticated: false,

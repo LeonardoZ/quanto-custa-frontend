@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 import {
   salvarUnidade,
   atualizarUnidade, editarUnidade
-} from '../../actions/OrcamentoActions'
+} from '../../state/unidades_de_software/UnidadesActions'
 import OrcamentoNaoDefinido from '../../util/orcamento_nao_definido/OrcamentoNaoDefinido'
 import UnidadeCadastroPagina from '../pagina/UnidadeCadastroPagina'
 import OrcamentoUnidadeHeader from '../header/UnidadeHeader'

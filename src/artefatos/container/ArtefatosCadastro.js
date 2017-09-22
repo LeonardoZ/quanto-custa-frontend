@@ -4,11 +4,10 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {
   salvarArtefato, getArtefatos,
-  editarArtefato, atualizarArtefato,
-  novoArtefato
-} from '../../actions/OrcamentoActions'
-import OrcamentoUnidadeHeader from '../../util/orcamento_header/OrcamentoHeader'
+  editarArtefato, atualizarArtefato, novoArtefato
+} from '../../state/artefatos/ArtefatosActions'
 import OrcamentoArtefatoForm from '../form/OrcamentoArtefatoForm'
+import OrcamentoUnidadeHeader from '../../util/orcamento_header/OrcamentoHeader'
 import ArtefatoItems from '../list/ArtefatosList'
 import UnidadeNaoDefinida from '../../util/unidade_nao_definida/UnidadeNaoDefinida'
 import OrcamentoNaoDefinido from '../../util/orcamento_nao_definido/OrcamentoNaoDefinido'
@@ -28,7 +27,6 @@ class ArtefatosCadastro extends Component {
     } else {
       this.props.salvarArtefato(this.props.unidadeAtiva, artefato)
     }
-    this.novoArtefato()
   }
 
   finalizarUnidade() {

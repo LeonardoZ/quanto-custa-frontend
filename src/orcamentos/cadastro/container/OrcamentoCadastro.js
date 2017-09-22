@@ -3,9 +3,9 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {
-  salvarOrcamento, atualizarOrcamento,
-  novaUnidadeDeSoftware, carregarUnidades,
-} from '../../../actions/OrcamentoActions'
+  salvarOrcamento, atualizarOrcamento, novaUnidadeDeSoftware
+} from '../../../state/orcamentos/OrcamentosActions'
+import { carregarUnidades } from '../../../state/unidades_de_software/UnidadesActions'
 import Form from '../form/OrcamentoForm'
 import BtnProximo from '../proximo/BotaoProximo'
 
@@ -54,7 +54,7 @@ class OrcamentoCadastro extends Component {
 
     return (
       <Form orcamento={this.props.orcamento}
-        submitOrcamento={(dados) => this.props.submitOrcamento(dados)}
+        submitOrcamento={(dados) => this.submitOrcamento(dados)}
         btnNext={btnNext} />
     )
   }

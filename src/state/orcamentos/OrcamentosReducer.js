@@ -3,7 +3,7 @@ import {
   SALVAR_ORCAMENTO,
   EDITAR_ORCAMENTO,
   NOVO_ORCAMENTO,
-} from '../actions/ActionTypes'
+} from './OrcamentosActionTypes'
 
 export default (state = {
   orcamento: {},

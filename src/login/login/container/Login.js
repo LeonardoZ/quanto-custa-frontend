@@ -3,7 +3,8 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import LoginForm from '../form/LoginForm'
-import { fazerLogin, limparErros } from '../../../actions/OrcamentoActions'
+import { fazerLogin } from '../../../state/autenticacao/AuthActions'
+import { limparErros } from '../../../state/erros/ErrosActions'
 
 class Login extends Component {
 

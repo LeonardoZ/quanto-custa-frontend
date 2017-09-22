@@ -5,7 +5,8 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getRoutes } from '../../routes'
 import { Admin } from '../admin/Admin'
-import { limparErros, getUsuario } from '../../actions/OrcamentoActions'
+import { limparErros } from '../../state/erros/ErrosActions'
+import { getUsuario } from '../../state/autenticacao/AuthActions'
 
 class App extends Component {
 
