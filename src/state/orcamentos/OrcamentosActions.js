@@ -1,10 +1,17 @@
 
-import { GET_ORCAMENTOS, SALVAR_ORCAMENTO, 
-  EDITAR_ORCAMENTO, NOVO_ORCAMENTO, ATUALIZAR_ORCAMENTO } 
+import { 
+  GET_ORCAMENTOS, SALVAR_ORCAMENTO, 
+  EDITAR_ORCAMENTO, NOVO_ORCAMENTO, 
+  ATUALIZAR_ORCAMENTO, CARREGANDO_ORCAMENTO } 
 from './OrcamentosActionTypes'
 
 import * as api from '../../api/QuantoCustaApi'
 
+export function setCarregandoOrcamento(params) {
+  return {
+    type: CARREGANDO_ORCAMENTO
+  }
+}
 
 export function getOrcamentos(usuario) {
   return { type: GET_ORCAMENTOS, payload: api.getOrcamentos(usuario) }

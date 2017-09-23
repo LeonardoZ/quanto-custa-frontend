@@ -2,15 +2,17 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { getOrcamentos, editarOrcamento, novoOrcamento }
+import { getOrcamentos, editarOrcamento, novoOrcamento, setCarregandoOrcamento }
   from '../../../state/orcamentos/OrcamentosActions'
 import OrcamentoList from '../orcamentos/list/OrcamentosList'
 import BotaoNovo from '../botao_novo/BotaoNovoOrcamento'
+import CarregandoPanel from '../../../util/carregando/CarregandoPanel'
 
 class OrcamentosPainel extends Component {
 
   componentDidMount() {
     if (this.props.usuario) {
+      this.props.setCarregandoOrcamento()
       this.props.getOrcamentos(this.props.usuario)
     }
   }
@@ -26,6 +28,9 @@ class OrcamentosPainel extends Component {
   }
 
   render() {
+    if (this.props.carregando) {
+      return <CarregandoPanel />
+    }
     let orcamentos = this.props.orcamentos
 
     return (
@@ -39,11 +44,15 @@ class OrcamentosPainel extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getOrcamentos, editarOrcamento, novoOrcamento }, dispatch)
+  return bindActionCreators({ 
+     getOrcamentos, editarOrcamento,
+     novoOrcamento, setCarregandoOrcamento 
+  }, dispatch)
 }
 
 function mapStateToProps(state) {
   return {
+    carregando: state.orcamentoStateTree.carregandoOrcamento,
     orcamentos: state.orcamentoStateTree.orcamentos,
     usuario: state.authStateTree.usuarioAtivo
   }

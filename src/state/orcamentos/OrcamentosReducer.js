@@ -3,12 +3,13 @@ import {
   SALVAR_ORCAMENTO,
   EDITAR_ORCAMENTO,
   NOVO_ORCAMENTO,
+  CARREGANDO_ORCAMENTO
 } from './OrcamentosActionTypes'
 
 export default (state = {
   orcamento: {},
   orcamentos: [],
-  orcamentoCarregando: false,
+  carregandoOrcamento: true,
 }, action) => {
   if (action.error) { return state }
   switch (action.type) {
@@ -20,14 +21,20 @@ export default (state = {
       return editarOrcamento(state, action)
     case NOVO_ORCAMENTO:
       return novoOrcamento(state, action)
+    case CARREGANDO_ORCAMENTO:
+      return carregandoOrcamento(state, action)
     default:
       return state
   }
 }
 
+function carregandoOrcamento(state, action) {
+  return { ...state, carregandoOrcamento: true }
+}
+
 function getOrcamentos(state, action) {
   let orcamentosRecebidos = action.payload.data.content
-  return { ...state, orcamentos: orcamentosRecebidos }
+  return { ...state, orcamentos: orcamentosRecebidos, carregandoOrcamento: false }
 }
 
 function novoOrcamento(state, action) {

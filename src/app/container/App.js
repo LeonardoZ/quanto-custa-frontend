@@ -11,7 +11,6 @@ import { getUsuario } from '../../state/autenticacao/AuthActions'
 class App extends Component {
 
 	componentWillMount() {
-
 		this.logarSeTiverTokenRegistrado()
 	}
 
