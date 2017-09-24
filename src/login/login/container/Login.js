@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import LoginForm from '../form/LoginForm'
-import { fazerLogin } from '../../../state/autenticacao/AuthActions'
+import { fazerLogin, getUsuario } from '../../../state/autenticacao/AuthActions'
 import { limparErros } from '../../../state/erros/ErrosActions'
 
 class Login extends Component {
@@ -15,18 +15,17 @@ class Login extends Component {
       password: formData.senha
     }
     this.props.fazerLogin(login)
-    this.irParaAdminSeAutorizado()
-  }
-
-  componentWillMount() {
-    this.irParaAdminSeAutorizado()
   }
 
   render() {
-    this.irParaAdminSeAutorizado()
-    return (
-      <LoginForm erro={this.props.erro} onLoginSubmit={(formData) => this.onLoginSubmit(formData)} />
-    )
+    if (this.props.isAuthenticated) {
+      return <Redirect to={{
+        pathname: '/'
+      }} />
+    } else
+      return (
+        <LoginForm erro={this.props.erro} onLoginSubmit={(formData) => this.onLoginSubmit(formData)} />
+      )
   }
 
   irParaAdminSeAutorizado() {

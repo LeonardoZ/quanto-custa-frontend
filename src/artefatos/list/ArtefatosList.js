@@ -7,9 +7,11 @@ import {
   TableHeaderColumn,
   TableRow,
   TableRowColumn,
+  TableFooter
 } from 'material-ui/Table';
 import ArtefatoItem from '../item/ArtefatoItem'
 import NenhumItem from '../../util/nenhum_item_registrado/NenhumItemRegistrado'
+import { formatarMoeda } from '../../util/number_format/NumberFormat'
 
 const ArtefatosList = ({ artefatos, editarArtefato }) => {
   if (artefatos.length === 0) {
@@ -20,6 +22,9 @@ const ArtefatosList = ({ artefatos, editarArtefato }) => {
     return <ArtefatoItem key={i} artefato={art} editarArtefato={() => editarArtefato(art)} />
   })
 
+  let valorTotal = artefatos.map(x => x.custo).reduce((acc = 0, x) => acc + x)
+  valorTotal = formatarMoeda(valorTotal)
+  
   return (
     <Row>
       <Col sm={12} md={12}>
@@ -27,13 +32,23 @@ const ArtefatosList = ({ artefatos, editarArtefato }) => {
           <TableHeader displaySelectAll={false}>
             <TableRow>
               <TableHeaderColumn>Artefato</TableHeaderColumn>
-              <TableHeaderColumn>Preço</TableHeaderColumn>
+              <TableHeaderColumn>Custo</TableHeaderColumn>
               <TableHeaderColumn>Editar</TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false}>
             {items}
           </TableBody>
+          <TableFooter>
+            <TableRow>
+              <TableHeaderColumn>
+                Total: 
+              </TableHeaderColumn>
+              <TableHeaderColumn>
+                {valorTotal}
+              </TableHeaderColumn>
+            </TableRow>
+          </TableFooter>
         </Table>
       </Col>
     </Row>

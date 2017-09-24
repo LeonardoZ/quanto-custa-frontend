@@ -10,7 +10,7 @@ import CarregandoPanel from '../../../util/carregando/CarregandoPanel'
 
 class OrcamentosPainel extends Component {
 
-  componentDidMount() {
+  componentWillMount() {
     if (this.props.usuario) {
       this.props.setCarregandoOrcamento()
       this.props.getOrcamentos(this.props.usuario)

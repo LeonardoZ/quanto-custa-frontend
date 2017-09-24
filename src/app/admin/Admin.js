@@ -10,7 +10,7 @@ const style = {
 export const Admin = ({ routes, erro, limparErros, children }) => {
   let erroPanel = erro.temErro ?
     <Row>
-      <Col sm={12} xs={12}>
+      <Col sm={12} >
         <ErroPanel limparErros={() => limparErros()} erroMsg={erro.mensagem} />
       </Col>
     </Row>
@@ -23,7 +23,7 @@ export const Admin = ({ routes, erro, limparErros, children }) => {
       {erroPanel}
       <Grid fluid>
         <Row>
-          <Col sm={12} xs={12} style={style}>
+          <Col sm={12} style={style}>
             {children}
           </Col>
         </Row>

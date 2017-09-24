@@ -1,4 +1,5 @@
 import { FAZER_LOGIN, CADASTRAR_USUARIO, GET_USUARIO } from './AuthActionTypes'
+// TODO - procurar alternative para isso 
 
 const PADRAO = {
   isAuthenticated: false,
@@ -17,7 +18,6 @@ export default (state = PADRAO, action) => {
     default:
       return state
   }
-
 }
 
 function cadastrarUsuario(state, action) {
@@ -37,7 +37,6 @@ function fazerLogin(state, action) {
   }
   return { ...state }
 }
-
 
 function getUsuario(state, action) {
   let usuario = action.payload.data

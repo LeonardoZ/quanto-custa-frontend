@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { actionCreator } from 'actionCreatorPath'
 import CadastroUsuarioForm from '../form/CadastroUsuarioForm'
 
+// TODO
 class CadastroUsuario extends Component {
 
   render() {
