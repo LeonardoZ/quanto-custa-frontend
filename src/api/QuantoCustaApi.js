@@ -77,23 +77,23 @@ export function fazerLogin(loginData) {
   return request
 }
 
-export function fazerLogin2(loginData, successCalback) {
-  axios.defaults.headers.common['Authorization'] = null
-  let request = cliente.post("/auth", loginData)
-    .then((resultado) => {
-      sessionStorage.setItem("jwtToken", resultado.data.token)
-      axios.defaults.headers.common['Authorization'] = "Bearer " + sessionStorage.getItem('jwtToken')
-      successCalback()
-      let usuarioPromise = getUsuario()
-      return Promise.all([resultado, usuarioPromise])
-    }).catch(err => {
-      return { ...err, error: true }
-    })
+export function getUsuario() {
+  let request = cliente.get("/usuario")
   return request
 }
 
+export function cadastrarUsuario(usuario) {
+  let request = cliente.post("/usuario", usuario)
+  return request
+}
 
-export function getUsuario() {
-  let request = cliente.get("/usuario")
+export function reenviarEmail(email) {
+  let request = cliente.post("/reenviar/email", { email })
+  return request
+}
+
+export function validarEmail(validar) {
+  let request = cliente.post("/validar", validar)
+   
   return request
 }

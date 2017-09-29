@@ -20,7 +20,7 @@ const btnEsqueceuStyle = {
   alignSelf: 'flex-start'
 }
 
-class LoginForm extends Component {
+class AtivarCadastroForm extends Component {
   constructor(props) {
     super(props)
     this.disableButton = this.disableButton.bind(this)
@@ -43,58 +43,54 @@ class LoginForm extends Component {
     this.setState({ canSubmit: false })
   }
 
-  submit(data) {
-    this.props.onLoginSubmit(data)
+  submit(dados) {
+    this.props.reenviarEmail(dados)
   }
 
   render() {
-    let block = ""
+    let erroBlock = ""
+    let infoBlock = ""
     let erro = this.props.erro
+    let enviado = this.props.enviado
 
     if (erro && erro.temErro) {
-      block = <p>{this.props.erro.mensagem}</p>
+      erroBlock = <p>{this.props.erro.mensagem}</p>
+    }
+
+    if (enviado) {
+      infoBlock = (
+        <div>
+          <p>Mensagem enviada ao e-mail informado.</p>
+          <br />
+          <RaisedButton onClick={() => this.props.voltarAoLogin()} label="Voltar para login." />
+        </div>)
+    } else {
+       infoBlock = (<p>Digite seu e-mail para que a mensagem de ativação seja reenviada.</p>)
     }
     return (
       <Paper zDepth={1} rounded={false} style={style}>
-        {block}
-        <Formsy.Form
+        {erroBlock}
+        {infoBlock}
+         <Formsy.Form
           onSubmit={this.submit}
           onValid={this.enableButton}
           onInvalid={this.disableButton}>
           <Row className="show-grid">
             <Col xs>
-              <MyInput name="login" title="Login"
+              <MyInput name="email" title="E-mail de cadastro"
                 value={this.state.login}
-                validations="maxLength:150,minLength:3"
+                validations="isEmail"
                 validationErrors={{
-                  minLength: "O login não deve possuir menos de 3 caractéres",
-                  maxLength: "O login não deve possuir mais de 120 caractéres"
-                }} required />
-
-              <MyInput name="senha" title="Senha"
-                value={this.state.senha}
-                type="password"
-                validations="minLength:6"
-                validationErrors={{
-                  minLength: "A senha não deve possuir menos de 6 digitos",
-                }} required />
+                  isEmail: "Digite um e-mail válido."
+                }} required autocomplete="off" />
 
             </Col>
           </Row>
           <Row end={"xs"}>
             <Col xs={12} md={6}>
-              <FlatButton style={btnEsqueceuStyle} label="Esqueceu a senha?" />
-            </Col>
-            <Col xs={12}>
-              <FlatButton style={btnEsqueceuStyle} 
-                onClick={() => this.props.ativarCadastro()}
-                label="Ativar cadastro" />
-            </Col>
-            <Col xs={12} md={6}>
               <RaisedButton style={btnSubmitStyle} type="submit" disabled={!this.state.canSubmit}
-                label="Entrar" />
+                label="Reenviar email" />
             </Col>
-           
           </Row>
         </Formsy.Form>
       </Paper>)
@@ -103,4 +99,4 @@ class LoginForm extends Component {
 
 }
 
-export default LoginForm;
+export default AtivarCadastroForm;

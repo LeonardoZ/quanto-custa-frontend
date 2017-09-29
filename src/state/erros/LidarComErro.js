@@ -9,7 +9,7 @@ function lidarComErro(state, action) {
         } 
       }
   } else {
-    let mensagem = action.payload.message
+    let mensagem = action.payload.message || action.payload.mensagem
     return { ...state, erro: { temErro: true, mensagem: mensagem } }
   }
 

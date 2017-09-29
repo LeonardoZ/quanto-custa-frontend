@@ -17,6 +17,10 @@ class Login extends Component {
     this.props.fazerLogin(login)
   }
 
+  ativarCadastro() {
+    this.props.history.push("/ativar/cadastro")
+  }
+
   render() {
     if (this.props.isAuthenticated) {
       return <Redirect to={{
@@ -24,7 +28,10 @@ class Login extends Component {
       }} />
     } else
       return (
-        <LoginForm erro={this.props.erro} onLoginSubmit={(formData) => this.onLoginSubmit(formData)} />
+        <LoginForm 
+            erro={this.props.erro} 
+            onLoginSubmit={(formData) => this.onLoginSubmit(formData)}
+            ativarCadastro={(dados) => this.ativarCadastro(dados)} />
       )
   }
 

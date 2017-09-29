@@ -12,6 +12,7 @@ const style = {
 };
 
 class CadastroUsuarioForm extends Component {
+  
   constructor(props) {
     super(props)
     this.disableButton = this.disableButton.bind(this)
@@ -34,8 +35,8 @@ class CadastroUsuarioForm extends Component {
     this.setState({ canSubmit: false })
   }
 
-  submit() {
-
+  submit(dados) {
+    this.props.cadastrarUsuarioSubmit(dados)
   }
 
   render() {
@@ -45,6 +46,7 @@ class CadastroUsuarioForm extends Component {
           onSubmit={this.submit}
           onValid={this.enableButton}
           onInvalid={this.disableButton}>
+
           <Row className="show-grid">
             <Col xs>
               <MyInput name="email" title="E-mail"

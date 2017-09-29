@@ -8,7 +8,9 @@ import OrcamentoCadastro from './orcamentos/cadastro/container/OrcamentoCadastro
 import UnidadeCadastro from './unidades/container/UnidadeCadastro'
 import ArtefatosCadastro from './artefatos/container/ArtefatosCadastro'
 import ResumoOrcamento from './resumo/container/ResumoOrcamento'
-import LoginPagina from './login/pagina/LoginPagina'
+import Principal from './login/principal/Principal'
+import ValidarCadastro from './login/validar_cadastro/container/ValidarCadastro'
+import AtivarCadastro from './login/ativar/container/AtivarCadastro'
 import { Admin } from './app/admin/Admin'
 
 const PrivateRoute =
@@ -44,6 +46,8 @@ export const getRoutes = (erro, limparErros, isAuthenticated) => {
     <PrivateRoute key='orcamento-unidades' exact isUserAuthenticated={isAuthenticated}
       erro={erro} limparErros={limparErros}
       path='/resumo/orcamento' component={ResumoOrcamento} />,
-    <Route key='login' path='/login' component={LoginPagina} />
+    <Route key='login' path='/login' component={Principal} />,    
+    <Route key='ativar' path='/ativar/cadastro' component={AtivarCadastro} />,
+    <Route key='validar' path='/validar/token/:token/email/:email' component={ValidarCadastro} />
   ]
 }
