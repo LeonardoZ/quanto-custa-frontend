@@ -13,7 +13,7 @@ export function setCarregandoOrcamento(params) {
   }
 }
 
-export function getOrcamentos(usuario) {
+export function getOrcamentos(usuario) {      
   return { type: GET_ORCAMENTOS, payload: api.getOrcamentos(usuario) }
 }
 

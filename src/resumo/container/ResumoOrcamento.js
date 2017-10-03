@@ -11,6 +11,8 @@ import UnidadesList from '../list/UnidadesList'
 import OrcamentoHeader from '../../util/orcamento_header/OrcamentoHeader'
 import Pagina from '../pagina/ResumoOrcamentoPagina'
 import ButtonBar from '../button_bar/ButtonBar'
+import Carregando from '../../util/carregando/CarregandoPanel'
+import OrcamentoNaoDefinido from '../../util/orcamento_nao_definido/OrcamentoNaoDefinido'
 
 class ResumoOrcamento extends Component {
 
@@ -51,13 +53,20 @@ class ResumoOrcamento extends Component {
     this.props.history.push("/")
   }
 
+  voltarAoInicio() {
+    this.props.history.push("/")
+  }
+
   render() {
-    if (!this.props.unidades) {
-      return <p>Carregando unidades...</p>
+    let orcamenoNaoDefinido = !this.props.carregandoOrcamento && !this.props.orcamento.uuid
+    
+     if (orcamenoNaoDefinido) {
+      return <OrcamentoNaoDefinido
+        voltarAoInicio={() => this.voltarAoInicio()} />
     }
     return (
       <Pagina>
-        <OrcamentoHeader orcamento={this.props.orcamento} />
+        <OrcamentoHeader orcamento={this.props.orcamento} titulo="Resumo do Orçamento" />
         <ButtonBar
           novaUnidade={() => this.novaUnidade()}
           editarOrcamento={() => this.editarOrcamento()}
@@ -65,8 +74,7 @@ class ResumoOrcamento extends Component {
         <UnidadesList
           unidades={this.props.unidades}
           editarCallback={(unidade) => this.editarUnidadeCallback(unidade)}
-          artefatosCallback={(unidade) => this.artefatosCallback(unidade)}
-        />
+          artefatosCallback={(unidade) => this.artefatosCallback(unidade)} />
       </Pagina>
     )
   }
@@ -85,8 +93,11 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps({ orcamentoStateTree, unidadesStateTree }) {
   return {
     orcamento: orcamentoStateTree.orcamento,
+    carregandoOrcamento: orcamentoStateTree.carregandoOrcamento,
     unidades: unidadesStateTree.unidades
-      .filter(u => u.orcamentoUuid === orcamentoStateTree.orcamento.uuid)
+      .filter(u => u.orcamentoUuid === orcamentoStateTree.orcamento.uuid),
+    processandoUnidades: unidadesStateTree.processandoUnidades,
+    unidadeAtiva: unidadesStateTree.unidadeAtiva
   }
 }
 

@@ -3,11 +3,12 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {
-  salvarOrcamento, atualizarOrcamento, novaUnidadeDeSoftware
+  salvarOrcamento, atualizarOrcamento, novaUnidadeDeSoftware, setCarregandoOrcamento
 } from '../../../state/orcamentos/OrcamentosActions'
 import { carregarUnidades } from '../../../state/unidades_de_software/UnidadesActions'
 import Form from '../form/OrcamentoForm'
 import BtnProximo from '../proximo/BotaoProximo'
+import Pagina from '../pagina/OrcamentoCadastroPagina'
 
 class OrcamentoCadastro extends Component {
 
@@ -25,13 +26,13 @@ class OrcamentoCadastro extends Component {
   }
 
   submitOrcamento(data) {
+    this.props.setCarregandoOrcamento()
     if (this.props.orcamento.uuid) {
       this.props.atualizarOrcamento(this.props.orcamento, data)
     } else {
       this.props.salvarOrcamento(this.props.usuarioAtivo, data)
     }
     this.proximo()
-
   }
 
   editarOrcamento(orcamento) {
@@ -53,9 +54,11 @@ class OrcamentoCadastro extends Component {
       : ""
 
     return (
-      <Form orcamento={this.props.orcamento}
-        submitOrcamento={(dados) => this.submitOrcamento(dados)}
-        btnNext={btnNext} />
+      <Pagina>
+        <Form orcamento={this.props.orcamento}
+          submitOrcamento={(dados) => this.submitOrcamento(dados)}
+          btnNext={btnNext} />
+      </Pagina>
     )
   }
 }
@@ -63,7 +66,8 @@ class OrcamentoCadastro extends Component {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     salvarOrcamento, atualizarOrcamento,
-    novaUnidadeDeSoftware, carregarUnidades
+    novaUnidadeDeSoftware, carregarUnidades,
+    setCarregandoOrcamento
   }, dispatch)
 }
 

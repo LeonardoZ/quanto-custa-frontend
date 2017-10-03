@@ -21,6 +21,11 @@ class Login extends Component {
     this.props.history.push("/ativar/cadastro")
   }
 
+  esqueciSenha() {
+    this.props.history.push("/esqueci/senha")
+  }  
+  
+
   render() {
     if (this.props.isAuthenticated) {
       return <Redirect to={{
@@ -31,7 +36,8 @@ class Login extends Component {
         <LoginForm 
             erro={this.props.erro} 
             onLoginSubmit={(formData) => this.onLoginSubmit(formData)}
-            ativarCadastro={(dados) => this.ativarCadastro(dados)} />
+            esqueciSenha={() => this.esqueciSenha()}
+            ativarCadastro={() => this.ativarCadastro()} />
       )
   }
 

@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {
-  salvarArtefato, getArtefatos,
+  salvarArtefato, getArtefatos, carregandoArtefatos,
   editarArtefato, atualizarArtefato, novoArtefato
 } from '../../state/artefatos/ArtefatosActions'
 import OrcamentoArtefatoForm from '../form/OrcamentoArtefatoForm'
@@ -13,11 +13,14 @@ import UnidadeNaoDefinida from '../../util/unidade_nao_definida/UnidadeNaoDefini
 import OrcamentoNaoDefinido from '../../util/orcamento_nao_definido/OrcamentoNaoDefinido'
 import FinalizarUnidade from '../finalizar/FinalizarUnidadeArtefatos'
 import CadastrarArtefatosPagina from '../pagina/CadastrarArtefatosPagina'
+import Carregando from '../../util/carregando/CarregandoPanel'
 
 class ArtefatosCadastro extends Component {
 
   componentWillMount() {
-    this.props.getArtefatos(this.props.unidadeAtiva)
+    if (this.props.unidadeAtiva.uuid) {
+      this.props.getArtefatos(this.props.unidadeAtiva)
+    }
     this.setState({ artefatoAtivo: { nome: "", custo: 0.0 } })
   }
 
@@ -41,22 +44,55 @@ class ArtefatosCadastro extends Component {
     this.props.novoArtefato()
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    // TODO revisar lógica para evitar chamadas desnecessárias
+    if (!this.props.unidadeAtiva) return
+    let unidadeVazia = this.props.unidadeAtiva === {}
+    if (unidadeVazia) return
+
+    let unidadeCarregadaEArtefatosNaoCarregados = !this.props.processandoUnidade
+      && this.props.unidadeAtiva.uuid
+      && !this.props.carregadoMasVazio
+      && !this.state.carregando
+      && this.props.artefatos.length === 0
+    if (unidadeCarregadaEArtefatosNaoCarregados) {
+      this.setState({carregando: true})
+      this.props.carregandoArtefatos()
+      this.props.carregandoArtefatos()
+      this.props.getArtefatos(this.props.unidadeAtiva)
+    }
+  }
+
   render() {
-    if (!this.props.orcamento.uuid) {
+    let esperandoUnidade = this.props.processandoUnidade && !this.props.unidadeAtiva.uuid
+    let orcamentoNaoDefinido = !this.props.orcamento.uuid
+    let unidadeNaoDefinida = !this.props.processandoUnidade && !this.props.unidadeAtiva.uuid
+    let unidadeCarregadaEArtefatosNaoCarregados =
+      !this.props.processandoUnidade
+      && this.props.unidadeAtiva.uuid
+      && !this.props.carregadoMasVazio
+      && this.props.artefatos.length === 0
+
+    if (esperandoUnidade) {
+      return <Carregando carregando={this.props.processandoUnidade} />
+    } else if (orcamentoNaoDefinido) {
       return <OrcamentoNaoDefinido voltarAoInicio={() => this.voltarAoInicio()} />
-    } else if (!this.props.unidadeAtiva.uuid) {
+    } else if (unidadeNaoDefinida) {
       return <UnidadeNaoDefinida voltarAoInicio={() => this.voltarAoInicio()} />
+    } else if (unidadeCarregadaEArtefatosNaoCarregados) {
+      return <Carregando carregando={this.props.carregandoArtefatosState} />
     }
     return (
       <CadastrarArtefatosPagina>
         <OrcamentoUnidadeHeader orcamento={this.props.orcamento}
-          unidadeAtiva={this.props.unidadeAtiva} />
+          titulo="Artefatos da Unidade de software"
+          unidade={this.props.unidadeAtiva} />
         <FinalizarUnidade onFinish={() => this.finalizarUnidade()}
           canFinish={this.props.artefatos.length > 0} />
         <OrcamentoArtefatoForm
           salvarArtefato={(artefato) => this.salvarArtefato(artefato)}
+          novoArtefato={() => this.props.novoArtefato()}
           finalizarUnidade={() => this.finalizarUnidade()}
-          novoArtefato={() => this.novoArtefato()}
           artefatoAtivo={this.props.artefatoAtivo}
           unidadeAtiva={this.props.unidadeAtiva}
           artefatos={this.props.artefatos} />
@@ -72,7 +108,7 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     salvarArtefato, getArtefatos,
     editarArtefato, atualizarArtefato,
-    novoArtefato
+    novoArtefato, carregandoArtefatos
   }, dispatch)
 }
 
@@ -81,9 +117,12 @@ function mapStateToProps({ orcamentoStateTree, unidadesStateTree, artefatosState
   return {
     orcamento: orcamentoStateTree.orcamento,
     unidadeAtiva: unidadesStateTree.unidadeAtiva,
+    processandoUnidade: unidadesStateTree.processandoUnidade,
+    carregandoArtefatosState: unidadesStateTree.carregandoArtefatos,
+    carregadoMasVazio: artefatosStateTree.carregadoMasVazio,
     artefatoAtivo: artefatosStateTree.artefatoAtivo,
     artefatos: artefatosStateTree.artefatos
-      .filter((a) => a.unidadeUuid === unidadesStateTree.unidadeAtiva.uuid),
+      .filter((a) => a.unidadeUuid === unidadesStateTree.unidadeAtiva.uuid)
   }
 }
 

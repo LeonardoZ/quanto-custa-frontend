@@ -5,14 +5,15 @@ import {
   ATUALIZAR_UNIDADE,
   EDITAR_UNIDADE,
   CARREGAR_UNIDADES,
-  FINALIZAR_UNIDADE
+  FINALIZAR_UNIDADE,
+  PROCESSAR_UNIDADE
 } from './UnidadesActionTypes'
 
 export default (state = {
-  unidadeAtiva: {}, 
+  unidadeAtiva: {},
   unidades: [],
-  unidadesCarregando: false,
- 
+  processandoUnidade: false,
+  unidadesCarregando: false
 }, action) => {
 
   if (action.error) { return state }
@@ -31,11 +32,12 @@ export default (state = {
       return editarUnidade(state, action)
     case ATUALIZAR_UNIDADE:
       return atualizarUnidade(state, action)
+    case PROCESSAR_UNIDADE:
+      return processarUnidade(state, action)
     default:
       return state
   }
 }
-
 
 function novaUnidadeDeSoftware(state, action) {
   return {
@@ -47,7 +49,7 @@ function salvarUnidade(state, action) {
   let unidade = action.payload.data
   let novaUnidade = { ...state.unidadeAtiva, ...unidade }
   let novaUnidades = [...state.unidades, ...unidade]
-  return { ...state, unidades: novaUnidades, unidadeAtiva: novaUnidade }
+  return { ...state, unidades: novaUnidades, unidadeAtiva: novaUnidade, processandoUnidade: false }
 }
 
 function finalizarUnidade(state, action) {
@@ -66,7 +68,7 @@ function atualizarUnidade(state, action) {
   let unidadeAtual = state.unidadeAtiva
   let unidadesDiferentesDaAtualizada = state.unidades.filter(u => u.uuid !== unidadeAtual.uuid)
   let novasUnidades = [...unidadesDiferentesDaAtualizada, unidadeAtualizada]
-  return { ...state, unidades: novasUnidades, unidadeAtiva: unidadeAtualizada }
+  return { ...state, unidades: novasUnidades, unidadeAtiva: unidadeAtualizada, processandoUnidade: false }
 }
 
 function carregarUnidades(state, action) {
@@ -80,4 +82,8 @@ function carregarUnidades(state, action) {
 function setUnidadeParaAtiva(state, action) {
   let novaUnidade = action.payload
   return { ...state, unidadeAtiva: novaUnidade }
+}
+
+function processarUnidade(state, action) {
+  return { ...state, processandoUnidade: true }
 }

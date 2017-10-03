@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import LoginPagina from '../../pagina/LoginPagina'
 import Form from '../form/AtivarCadastroForm'
-import { reenviarEmail } from '../../../state/autenticacao/AuthActions'
+import { reenviarEmailAtivacao } from '../../../state/autenticacao/AuthActions'
 import { limparErros } from '../../../state/erros/ErrosActions'
 
 class AtivarCadastro extends Component {
@@ -14,7 +14,7 @@ class AtivarCadastro extends Component {
   }
 
   reenviarEmail(dados) {
-    reenviarEmail(dados.email)
+    this.props.reenviarEmailAtivacao(dados.email)
     this.props.limparErros()
     this.setState({enviado: true})
   }
@@ -42,7 +42,7 @@ function mapStateToProps({ errosStateTree }) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ reenviarEmail, limparErros }, dispatch)
+  return bindActionCreators({ reenviarEmailAtivacao, limparErros }, dispatch)
 
 }
 

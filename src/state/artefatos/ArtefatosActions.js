@@ -1,6 +1,6 @@
 
 import {
-  SALVAR_ARTEFATO, EDITAR_ARTEFATO,
+  SALVAR_ARTEFATO, EDITAR_ARTEFATO, CARREGANDO_ARTEFATOS,
   NOVO_ARTEFATO, GET_ARTEFATOS, ATUALIZAR_ARTEFATO
 } from './ArtefatosActionTypes'
 
@@ -23,8 +23,6 @@ export function salvarArtefato(unidadeAtiva, artefato) {
 }
 
 export function editarArtefato(artefato) {
-  console.log("Editar")
-  console.log(artefato)
   return {
     "type": EDITAR_ARTEFATO,
     "payload": artefato
@@ -42,5 +40,11 @@ export function atualizarArtefato(artefatoAtivo, data) {
 export function novoArtefato() {
   return {
     "type": NOVO_ARTEFATO,
+  }
+}
+
+export function carregandoArtefatos() {
+  return {
+    "type": CARREGANDO_ARTEFATOS,
   }
 }

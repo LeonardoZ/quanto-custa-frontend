@@ -6,8 +6,7 @@ import Paper from 'material-ui/Paper'
 import { MyInput } from '../../util/formulario/form_group/FormGroup'
 
 const style = {
-  margin: 12,
-  padding: 12
+  padding: "8px"
 };
 
 class OrcamentoUnidadeForm extends Component {
@@ -37,7 +36,7 @@ class OrcamentoUnidadeForm extends Component {
 
   render() {
     return (
-      <Paper zDepth={3} rounded={false} style={style}>
+      <Paper zDepth={1} rounded={false} style={style}>
         <Formsy.Form onSubmit={this.submit} onValid={this.enableButton}
           onInvalid={this.disableButton}>
           <MyInput name="titulo" title="Título" validations="maxLength:200,minLength:3"

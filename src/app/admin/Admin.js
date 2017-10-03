@@ -4,28 +4,32 @@ import AppBar from 'material-ui/AppBar'
 import ErroPanel from '../../util/erro/ErroPanel'
 
 const style = {
-  margin: 24,
+  content: {
+    paddingTop: "24px"
+  }
 };
+
+const root = {
+  width: '100%'
+}
 
 export const Admin = ({ routes, erro, limparErros, children }) => {
   let erroPanel = erro.temErro ?
     <Row>
-      <Col sm={12} >
+      <Col xs={12} >
         <ErroPanel limparErros={() => limparErros()} erroMsg={erro.mensagem} />
       </Col>
     </Row>
     : ""
   return (
-    <div>
+    <div style={root}>
       <AppBar
         title="Quanto-Custa?"
         iconClassNameRight="muidocs-icon-navigation-expand-more" />
       {erroPanel}
-      <Grid fluid>
-        <Row>
-          <Col sm={12} style={style}>
-            {children}
-          </Col>
+      <Grid>
+        <Row around="xs" style={style.content}>
+          {children}
         </Row>
       </Grid>
     </div>

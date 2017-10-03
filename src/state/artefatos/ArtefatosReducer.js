@@ -3,7 +3,8 @@ import {
   GET_ARTEFATOS,
   EDITAR_ARTEFATO,
   ATUALIZAR_ARTEFATO,
-  NOVO_ARTEFATO
+  NOVO_ARTEFATO,
+  CARREGANDO_ARTEFATOS
 } from './ArtefatosActionTypes'
 
 const ARTEFATO_ATIVO = {
@@ -14,7 +15,8 @@ const ARTEFATO_ATIVO = {
 export default (state = {
   artefatoAtivo: ARTEFATO_ATIVO,
   artefatos: [],
-  artefatosCarregando: false
+  carregandoArtefatos: false,
+  carregadoMasVazio: false
 }, action) => {
 
   if (action.error) { return state }
@@ -29,6 +31,8 @@ export default (state = {
       return atualizarArtefato(state, action)
     case NOVO_ARTEFATO:
       return novoArtefato(state, action)
+    case CARREGANDO_ARTEFATOS:
+      return carregando(state, action)
     default:
       return state
   }
@@ -36,10 +40,12 @@ export default (state = {
 
 function getArtefatos(state, action) {
   let novosArtefatos = action.payload[0].data
+  if (novosArtefatos.length === 0)
+    return { ...state, carregadoMasVazio: true }
   let unidadeAtiva = action.payload[1]
   let artefatosSemOsNovos = state.artefatos.filter(a => a.unidadeUuid !== unidadeAtiva.uuid)
   let artefatos = [...artefatosSemOsNovos, ...novosArtefatos]
-  return { ...state, artefatos: artefatos }
+  return { ...state, artefatos: artefatos, carregandoArtefatos: false }
 }
 
 function salvarArtefato(state, action) {
@@ -55,10 +61,7 @@ function editarArtefato(state, action) {
 function atualizarArtefato(state, action) {
   let artefatoAtualizado = action.payload.data
   let artefatoAtivo = state.artefatoAtivo
-  let artefatosDiferentesDoAtualizado = state.artefatos.filter(a => a.uuid !== artefatoAtivo.uuid)
-  console.log(artefatoAtivo)
-  console.log(artefatoAtualizado)
-  console.log(artefatosDiferentesDoAtualizado)
+  let artefatosDiferentesDoAtualizado = state.artefatos.filter(a => a.uuid !== artefatoAtualizado.uuid)
   let novosArtefatos = [...artefatosDiferentesDoAtualizado, artefatoAtualizado]
   return { ...state, artefatos: novosArtefatos, artefatoAtivo: ARTEFATO_ATIVO }
 }
@@ -67,5 +70,12 @@ function novoArtefato(state, action) {
   return {
     ...state,
     artefatoAtivo: ARTEFATO_ATIVO
+  }
+}
+
+function carregando(state, action) {
+  return {
+    ...state,
+    carregandoArtefatos: true
   }
 }

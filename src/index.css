@@ -19,3 +19,16 @@ body,
   left: 0;
   right: 0;
 }
+
+/* https://github.com/roylee0704/react-flexbox-grid/issues/57#issuecomment-314114985 */
+@media screen and (max-width: 768px) {
+  :global .hideOnMobile {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  :global .hideOnLarge {
+    display: none;
+  }
+}

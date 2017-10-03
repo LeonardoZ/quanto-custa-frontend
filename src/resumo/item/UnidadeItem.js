@@ -3,19 +3,23 @@ import Table, {
   TableRowColumn,
   TableRow,
 } from 'material-ui/Table'
-import RaisedButton from 'material-ui/RaisedButton'
+import FlatButtom from 'material-ui/FlatButton'
 import { formatarMoeda } from '../../util/number_format/NumberFormat'
+
+const styles = {
+  textAlign: 'center'
+}
 
 const UnidadeItem = ({ unidade, editarCallback, artefatosCallback }) => {
   return (
-    <TableRow>
-      <TableRowColumn>{unidade.titulo}</TableRowColumn>
-      <TableRowColumn>{formatarMoeda(unidade.subTotal)}</TableRowColumn>
-      <TableRowColumn>
-        <RaisedButton onClick={() => editarCallback(unidade)} label="Editar" />
+    <TableRow selectable={true}>
+      <TableRowColumn style={styles}>{unidade.titulo}</TableRowColumn>
+      <TableRowColumn style={styles}>{formatarMoeda(unidade.subTotal)}</TableRowColumn>
+      <TableRowColumn style={styles}>
+        <FlatButtom onClick={() => editarCallback(unidade)} primary={true} label="Editar" />
       </TableRowColumn>
-      <TableRowColumn>
-        <RaisedButton onClick={() => artefatosCallback(unidade)} label="Artefatos" />
+      <TableRowColumn style={styles}>
+        <FlatButtom onClick={() => artefatosCallback(unidade)} secondary={true} label="Artefatos" />
       </TableRowColumn>
     </TableRow>
   )

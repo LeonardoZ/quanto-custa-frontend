@@ -1,5 +1,5 @@
 import {
-  EDITAR_UNIDADE, SALVAR_UNIDADE,
+  EDITAR_UNIDADE, SALVAR_UNIDADE, PROCESSAR_UNIDADE,
   NOVA_UNIDADE_DE_SOFTWARE, ATUALIZAR_UNIDADE,
   FINALIZAR_UNIDADE, CARREGAR_UNIDADES, SET_UNIDADE_ATIVA
 } from './UnidadesActionTypes'
@@ -54,6 +54,13 @@ export function configurarUnidadeParaAtiva(unidade) {
 export function finalizarUnidade() {
   return {
     "type": FINALIZAR_UNIDADE,
+  }
+}
+
+
+export function processarUnidade() {
+  return {
+    "type": PROCESSAR_UNIDADE,
   }
 }
 

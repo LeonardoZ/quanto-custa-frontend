@@ -49,11 +49,11 @@ class OrcamentoForm extends Component {
   render() {
     return (
       <Row>
-        <Col xs={6} xsOffset={3}>
-          <Paper style={style}>
-            <h1>Orçamento</h1>
-            <Formsy.Form onSubmit={this.submit} onValid={this.enableButton} onInvalid={this.disableButton}
-              className="login">
+        <Col xs={12}>
+          <Formsy.Form onSubmit={this.submit} onValid={this.enableButton} onInvalid={this.disableButton}
+            className="login">
+
+            <Paper style={style}>
               <MyInput name="nome" title="Nome" validations="maxLength:120,minLength:3"
                 validationErrors={{
                   minLength: "O nome do projeto não de possuir menos de 3 caractéres",
@@ -70,13 +70,13 @@ class OrcamentoForm extends Component {
                   maxLength: "O nome do responsável não de possuir mais de 120 caractéres"
                 }} required value={this.props.orcamento.responsavel} />
               <div>
+                {this.props.btnNext}
                 <RaisedButton primary={true} type="submit"
                   label={this.state.textoEstadoPagina || "Aguarde"}
                   disabled={!this.state.canSubmit} />
-                {this.props.btnNext}
               </div>
-            </Formsy.Form>
-          </Paper>
+            </Paper>
+          </Formsy.Form>
         </Col>
       </Row>
     )

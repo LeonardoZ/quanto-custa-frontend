@@ -35,7 +35,7 @@ export function salvarUnidade(orcamentoAtivo, unidade) {
   let request = cliente.post("/unidade/do/orcamento/" + orcamentoAtivo.uuid, unidade)
   return request
 }
-
+ 
 export function carregarUnidades(orcamento) {
   let request = cliente.get('/unidades/do/orcamento/' + orcamento.uuid)
   let orcamentoPromise = Promise.resolve(orcamento)
@@ -95,5 +95,16 @@ export function reenviarEmail(email) {
 export function validarEmail(validar) {
   let request = cliente.post("/validar", validar)
    
+  return request
+}
+
+export function enviarEmailEsqueciSenha(email) {
+  let request = cliente.post("/esqueci/senha", { email })
+  return request
+}
+
+
+export function alterarSenha(alterarSenha) {
+  let request = cliente.post("/alterar/senha", alterarSenha)
   return request
 }

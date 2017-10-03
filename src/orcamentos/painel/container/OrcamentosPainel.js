@@ -7,6 +7,7 @@ import { getOrcamentos, editarOrcamento, novoOrcamento, setCarregandoOrcamento }
 import OrcamentoList from '../orcamentos/list/OrcamentosList'
 import BotaoNovo from '../botao_novo/BotaoNovoOrcamento'
 import CarregandoPanel from '../../../util/carregando/CarregandoPanel'
+import Pagina from '../pagina/OrcamentoPanelPagina'
 
 class OrcamentosPainel extends Component {
 
@@ -27,26 +28,31 @@ class OrcamentosPainel extends Component {
     this.props.history.push("/orcamento")
   }
 
+  abrirResumo(orcamento) {
+    this.props.editarOrcamento(orcamento)
+    this.props.history.push("/resumo/orcamento")
+  }
+
   render() {
     if (this.props.carregando) {
-      return <CarregandoPanel />
+      return <CarregandoPanel carregando={this.props.carregando} />
     }
     let orcamentos = this.props.orcamentos
 
     return (
-      <div>
-        <BotaoNovo novoOrcamento={()=> this.novoOrcamento()}/>
+      <Pagina novoOrcamento={() => this.novoOrcamento()}>
         <OrcamentoList orcamentos={orcamentos}
-          editarOrcamento={(orcamento) => this.editarOrcamento(orcamento)} />
-      </div>
+          editarOrcamento={(orcamento) => this.editarOrcamento(orcamento)}
+          abrirResumo={(orcamento) => this.abrirResumo(orcamento)} />
+      </Pagina>
     )
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ 
-     getOrcamentos, editarOrcamento,
-     novoOrcamento, setCarregandoOrcamento 
+  return bindActionCreators({
+    getOrcamentos, editarOrcamento,
+    novoOrcamento, setCarregandoOrcamento
   }, dispatch)
 }
 

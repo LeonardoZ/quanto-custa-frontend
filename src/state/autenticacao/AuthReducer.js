@@ -1,7 +1,8 @@
 import {
   FAZER_LOGIN, CADASTRAR_USUARIO,
   GET_USUARIO, REENVIAR_EMAIL,
-  VALIDAR_EMAIL
+  VALIDAR_EMAIL, ENVIAR_EMAIL_SENHA,
+  ALTERAR_SENHA
 } from './AuthActionTypes'
 // TODO - procurar alternative para isso 
 
@@ -10,7 +11,9 @@ const PADRAO = {
   token: "",
   usuarioAtivo: {},
   validando: false,
-  jaValidado: false
+  jaValidado: false,
+  alterando: false,
+  jaAlterado: false
 }
 
 export default (state = PADRAO, action) => {
@@ -23,8 +26,12 @@ export default (state = PADRAO, action) => {
       return getUsuario(state, action)
     case REENVIAR_EMAIL:
       return reenviarEmail(state, action)
+    case ENVIAR_EMAIL_SENHA:
+      return enviarEmailSenha(state, action)
     case VALIDAR_EMAIL:
       return validarEmail(state, action)
+    case ALTERAR_SENHA:
+      return alterarSenha(state, action)
     default:
       return state
   }
@@ -57,6 +64,12 @@ function reenviarEmail(state, action) {
   return { ...state }
 }
 
+
+function enviarEmailSenha(state, action) {
+  return { ...state }
+}
+
+
 function validarEmail(state, action) {
   let status = action.payload.status
   switch (status) {
@@ -67,6 +80,21 @@ function validarEmail(state, action) {
     case 400:
       return { ...state, validando: false }
 
-  } 
-  return {...state}
+  }
+  return { ...state }
+}
+
+
+function alterarSenha(state, action) {
+  let status = action.payload.status
+  switch (status) {
+    case 200:
+      return { ...state, alterando: true }
+    case 226:
+      return { ...state, alterando: false, jaAlterado: true }
+    case 400:
+      return { ...state, alterando: false }
+
+  }
+  return { ...state }
 }

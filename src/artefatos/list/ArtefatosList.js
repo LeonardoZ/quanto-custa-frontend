@@ -24,34 +24,32 @@ const ArtefatosList = ({ artefatos, editarArtefato }) => {
 
   let valorTotal = artefatos.map(x => x.custo).reduce((acc = 0, x) => acc + x)
   valorTotal = formatarMoeda(valorTotal)
-  
+
   return (
-    <Row>
-      <Col sm={12} md={12}>
-        <Table responsive hover>
-          <TableHeader displaySelectAll={false}>
-            <TableRow>
-              <TableHeaderColumn>Artefato</TableHeaderColumn>
-              <TableHeaderColumn>Custo</TableHeaderColumn>
-              <TableHeaderColumn>Editar</TableHeaderColumn>
-            </TableRow>
-          </TableHeader>
-          <TableBody displayRowCheckbox={false}>
-            {items}
-          </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TableHeaderColumn>
-                Total: 
+    <Col xs={12}>
+      <Table responsive hover>
+        <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+          <TableRow>
+            <TableHeaderColumn>Artefato</TableHeaderColumn>
+            <TableHeaderColumn>Custo</TableHeaderColumn>
+            <TableHeaderColumn>Editar</TableHeaderColumn>
+          </TableRow>
+        </TableHeader>
+        <TableBody displayRowCheckbox={false}>
+          {items}
+        </TableBody>
+        <TableFooter adjustForCheckbox={false}>
+          <TableRow>
+            <TableHeaderColumn>
+              Total:
               </TableHeaderColumn>
-              <TableHeaderColumn>
-                {valorTotal}
-              </TableHeaderColumn>
-            </TableRow>
-          </TableFooter>
-        </Table>
-      </Col>
-    </Row>
+            <TableHeaderColumn>
+              {valorTotal}
+            </TableHeaderColumn>
+          </TableRow>
+        </TableFooter>
+      </Table>
+    </Col>
   )
 }
 

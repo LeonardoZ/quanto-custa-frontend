@@ -10,12 +10,17 @@ import {
   TableRow,
   TableRowColumn,
   TableFooter
-} from 'material-ui/Table';
+} from 'material-ui/Table'
 import { formatarMoeda } from '../../util/number_format/NumberFormat'
+import Paper from 'material-ui/Paper'
+
+const styles = {
+  textAlign: 'center'
+}
 
 const UnidadesList = ({ unidades, editarCallback, artefatosCallback }) => {
   if (unidades.length === 0) {
-    <NenhumItem tipoDoItem="Unidade de Software" />
+    return <NenhumItem tipoDoItem="Unidade de Software" feminino={true} />
   }
 
   let items = unidades.map((uni, idx) => {
@@ -28,34 +33,37 @@ const UnidadesList = ({ unidades, editarCallback, artefatosCallback }) => {
   valorTotal = formatarMoeda(valorTotal)
 
   return (
-    <Row className="show-grid">
-      <Col sm={12} md={12}>
+    <Col xs={12} className="show-grid">
+      <Paper zDepth={1}>
         <Table>
-          <TableHeader displaySelectAll={false} >
+          <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow>
-              <TableHeaderColumn>Unidade de software</TableHeaderColumn>
-              <TableHeaderColumn>SubTotal</TableHeaderColumn>
-              <TableHeaderColumn>Editar</TableHeaderColumn>
-              <TableHeaderColumn>Artefatos</TableHeaderColumn>
+              <TableHeaderColumn style={styles}>Unidade de software</TableHeaderColumn>
+              <TableHeaderColumn style={styles}>SubTotal</TableHeaderColumn>
+              <TableHeaderColumn style={styles}>Editar</TableHeaderColumn>
+              <TableHeaderColumn style={styles}>Artefatos</TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false}>
             {items}
           </TableBody>
-          <TableFooter>
+          <TableFooter adjustForCheckbox={false}>
             <TableRow>
-              <TableHeaderColumn>
-                Total: 
+              <TableHeaderColumn style={styles}>
+                <strong>Total:</strong>
               </TableHeaderColumn>
-              
+              <TableHeaderColumn style={styles}>
+                <strong>{valorTotal}</strong>
+              </TableHeaderColumn>
               <TableHeaderColumn>
-                {valorTotal}
+              </TableHeaderColumn>
+              <TableHeaderColumn>
               </TableHeaderColumn>
             </TableRow>
           </TableFooter>
         </Table>
-      </Col>
-    </Row>
+      </Paper>
+    </Col>
   )
 }
 

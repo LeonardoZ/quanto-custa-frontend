@@ -10,37 +10,49 @@ import {
 } from 'material-ui/Table'
 import OrcamentoItem from '../item/OrcamentoItem'
 import NenhumItem from '../../../../util/nenhum_item_registrado/NenhumItemRegistrado'
+import { GridList } from 'material-ui/GridList'
 
-const OrcamentosList = ({ orcamentos, editarOrcamento }) => {
+const styles = {
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap'
+  },
+  gridList: {
+    flexDirection: 'column',
+  },
+  titleStyle: {
+    color: 'rgb(0, 188, 212)',
+  },
+  item: {
+    marginBottom: '8px',
+    marginTop: '8px',
+  }
+}
+const OrcamentosList = ({ orcamentos, editarOrcamento, abrirResumo }) => {
   if (orcamentos.lengTableHeaderColumn === 0) {
     return <NenhumItem tipoDoItem="Orçamento" />
   }
   let items = orcamentos.map((orc, idx) => {
-    return <OrcamentoItem key={idx} orcamento={orc} editarOrcamento={() => editarOrcamento(orc)} />
+    return (
+      <Col xs={12} md={6} key={idx} style={styles.item}>
+        <OrcamentoItem 
+          orcamento={orc} 
+          editarOrcamento={() => editarOrcamento(orc)}  
+          abrirResumo={() =>  abrirResumo(orc)}/>
+      </Col>
+    )
   })
 
   return (
-    <Row>
-      <Col sm={12} md={12}>
-        <Table >
-          <TableHeader displaySelectAll={false} >
-            <TableRow>
-              <TableHeaderColumn>Projeto </TableHeaderColumn>
-              <TableHeaderColumn>Cliente </TableHeaderColumn>
-              <TableHeaderColumn>Responsável </TableHeaderColumn>
-              <TableHeaderColumn>Criado em </TableHeaderColumn>
-              <TableHeaderColumn>Válido até </TableHeaderColumn>
-              <TableHeaderColumn>Dias restantes</TableHeaderColumn>
-              <TableHeaderColumn>Ações</TableHeaderColumn>
-            </TableRow>
-          </TableHeader>
-          <TableBody displayRowCheckbox={false}>
-            {items}
-          </TableBody>
-        </Table>
-      </Col>
-    </Row>
+    <Grid>
+      <Row>
+        <div style={styles.root}>
+          {items}
+        </div>
+      </Row>
+    </Grid>
   )
+
 }
 
 export default OrcamentosList
