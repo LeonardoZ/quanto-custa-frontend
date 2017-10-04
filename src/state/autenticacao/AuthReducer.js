@@ -69,7 +69,6 @@ function enviarEmailSenha(state, action) {
   return { ...state }
 }
 
-
 function validarEmail(state, action) {
   let status = action.payload.status
   switch (status) {

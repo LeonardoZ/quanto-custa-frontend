@@ -6,6 +6,7 @@ import {
   salvarUnidade, processarUnidade,
   atualizarUnidade, editarUnidade
 } from '../../state/unidades_de_software/UnidadesActions'
+import { cadastroUnidades } from '../../state/stepper/StepperActions'
 import OrcamentoNaoDefinido from '../../util/orcamento_nao_definido/OrcamentoNaoDefinido'
 import UnidadeCadastroPagina from '../pagina/UnidadeCadastroPagina'
 import OrcamentoUnidadeHeader from '../../util/orcamento_header/OrcamentoHeader'
@@ -13,6 +14,10 @@ import OrcamentoUnidadeForm from '../form/UnidadeForm'
 import Carregando from '../../util/carregando/CarregandoPanel'
 
 class UnidadeCadastro extends Component {
+
+  componentWillMount() {
+    this.props.cadastroUnidades()
+  }
 
   salvarUnidade(unidade) {
     this.props.processarUnidade()
@@ -58,7 +63,8 @@ function mapDispatchToProps(dispatch) {
     processarUnidade,
     salvarUnidade,
     atualizarUnidade,
-    editarUnidade
+    editarUnidade,
+    cadastroUnidades
   }, dispatch)
 }
 

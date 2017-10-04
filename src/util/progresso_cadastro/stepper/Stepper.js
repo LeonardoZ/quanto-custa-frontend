@@ -1,15 +1,19 @@
-import React from 'react';
+import React from 'react'
 import {
   Step,
   Stepper,
   StepLabel,
-} from 'material-ui/Stepper';
-import WarningIcon from 'material-ui/svg-icons/alert/add-alert'
-import { red500 } from 'material-ui/styles/colors'
+} from 'material-ui/Stepper'
+import AssignmentIcon from 'material-ui/svg-icons/action/assignment'
+import DevicesIcon from 'material-ui/svg-icons/action/important-devices'
+import DriveFileIcon from 'material-ui/svg-icons/editor/insert-drive-file'
+import DoneIcon from 'material-ui/svg-icons/action/done-all'
+import { cyan500, red500 } from 'material-ui/styles/colors'
 import Paper from 'material-ui/Paper'
 import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-ui/Toolbar'
 
-export const Component = (props) => {
+export const StepperPanel = (props) => {
+  let estado = props.estado
   let styles = props.styles || {}
   let orientation = props.isVertical ? "vertical" : "horizontal"
   return (
@@ -21,24 +25,22 @@ export const Component = (props) => {
       </Toolbar>
       <Stepper linear={false}
         orientation={orientation}>
-        <Step completed={false}>
+        <Step completed={estado.informacaoOrcamento}>
           <StepLabel>
             Informações sobre o Orçamento
           </StepLabel>
         </Step>
-        <Step completed={false}>
-          <StepLabel
-            icon={<WarningIcon color={red500} />}
-            style={{ color: red500 }}>
-            Criar unidades de software
-          </StepLabel>
-        </Step>
-        <Step completed={false}>
+        <Step completed={estado.cadastroUnidades}>
           <StepLabel>
-            Adicionar Artefatos
+            Definir Unidades de Software
           </StepLabel>
         </Step>
-        <Step completed={false}>
+        <Step completed={estado.cadastroArtefatos}>
+          <StepLabel>
+            Definir Artefatos
+          </StepLabel>
+        </Step>
+        <Step completed={estado.finalizar}>
           <StepLabel>
             Finalizar Orçamento
           </StepLabel>
@@ -48,4 +50,4 @@ export const Component = (props) => {
   )
 }
 
-export default Component
+export default StepperPanel

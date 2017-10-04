@@ -10,26 +10,19 @@ class ProgressoCadastro extends Component {
     super(props)
   }
 
-  componentWillMount() {
-  }
-
-
   render() {
     return (
-      <Stepper isVertical={this.props.isVertical} styles={this.props.styles} />
+      <Stepper isVertical={this.props.isVertical} styles={this.props.styles} estado={this.props.estado} />
     )
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
 
-  }, dispatch)
-}
-
-function mapStateToProps({ orcamentoStateTree, unidadesStateTree, artefatosStateTree }) {
+function mapStateToProps({ stepperStateTree }) {
+  console.log(stepperStateTree)
   return {
+    estado: stepperStateTree
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProgressoCadastro))
+export default withRouter(connect(mapStateToProps, null)(ProgressoCadastro))

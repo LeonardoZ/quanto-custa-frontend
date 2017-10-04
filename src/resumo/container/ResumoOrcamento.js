@@ -7,6 +7,7 @@ import {
   novaUnidadeDeSoftware, editarUnidade, 
   carregarUnidades, configurarUnidadeParaAtiva
 } from '../../state/unidades_de_software/UnidadesActions'
+import { finalizar } from '../../state/stepper/StepperActions'
 import UnidadesList from '../list/UnidadesList'
 import OrcamentoHeader from '../../util/orcamento_header/OrcamentoHeader'
 import Pagina from '../pagina/ResumoOrcamentoPagina'
@@ -28,6 +29,7 @@ class ResumoOrcamento extends Component {
     } else {
       this.props.carregarUnidades(orcamento)
     }
+    this.props.finalizar()
   }
 
   novaUnidade() {
@@ -86,7 +88,8 @@ function mapDispatchToProps(dispatch) {
     novaUnidadeDeSoftware,
     editarUnidade,
     carregarUnidades,
-    configurarUnidadeParaAtiva
+    configurarUnidadeParaAtiva,
+    finalizar
   }, dispatch)
 }
 

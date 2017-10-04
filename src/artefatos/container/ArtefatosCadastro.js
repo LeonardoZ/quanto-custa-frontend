@@ -6,6 +6,7 @@ import {
   salvarArtefato, getArtefatos, carregandoArtefatos,
   editarArtefato, atualizarArtefato, novoArtefato
 } from '../../state/artefatos/ArtefatosActions'
+import { cadastroArtefatos } from '../../state/stepper/StepperActions'
 import OrcamentoArtefatoForm from '../form/OrcamentoArtefatoForm'
 import OrcamentoUnidadeHeader from '../../util/orcamento_header/OrcamentoHeader'
 import ArtefatoItems from '../list/ArtefatosList'
@@ -20,6 +21,7 @@ class ArtefatosCadastro extends Component {
   componentWillMount() {
     if (this.props.unidadeAtiva.uuid) {
       this.props.getArtefatos(this.props.unidadeAtiva)
+      this.props.cadastroArtefatos()
     }
     this.setState({ artefatoAtivo: { nome: "", custo: 0.0 } })
   }
@@ -108,7 +110,8 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     salvarArtefato, getArtefatos,
     editarArtefato, atualizarArtefato,
-    novoArtefato, carregandoArtefatos
+    novoArtefato, carregandoArtefatos,
+    cadastroArtefatos
   }, dispatch)
 }
 

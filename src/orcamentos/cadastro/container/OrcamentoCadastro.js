@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 import {
   salvarOrcamento, atualizarOrcamento, novaUnidadeDeSoftware, setCarregandoOrcamento
 } from '../../../state/orcamentos/OrcamentosActions'
+import { informacaoOrcamento } from '../../../state/stepper/StepperActions'
 import { carregarUnidades } from '../../../state/unidades_de_software/UnidadesActions'
 import Form from '../form/OrcamentoForm'
 import BtnProximo from '../proximo/BotaoProximo'
@@ -22,6 +23,7 @@ class OrcamentoCadastro extends Component {
     let orcamento = this.props.orcamento;
     if (orcamento.uuid) {
       this.props.carregarUnidades(orcamento)
+      this.props.informacaoOrcamento()
     }
   }
 
@@ -67,11 +69,11 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     salvarOrcamento, atualizarOrcamento,
     novaUnidadeDeSoftware, carregarUnidades,
-    setCarregandoOrcamento
+    setCarregandoOrcamento, informacaoOrcamento
   }, dispatch)
 }
 
-function mapStateToProps({ orcamentoStateTree, unidadesStateTree, authStateTree }) {
+function mapStateToProps({ orcamentoStateTree, unidadesStateTree, authStateTree, stepperStateTree }) {
   return {
     usuarioAtivo: authStateTree.usuarioAtivo,
     orcamento: orcamentoStateTree.orcamento,
