@@ -31,6 +31,11 @@ export function atualizarOrcamento(orcamentoAtivo, orcamentoData) {
   return request
 }
 
+export function removerOrcamento(orcamento) {
+  let request = cliente.delete("/orcamento/" + orcamento.uuid)
+  return request
+}
+
 export function salvarUnidade(orcamentoAtivo, unidade) {
   let request = cliente.post("/unidade/do/orcamento/" + orcamentoAtivo.uuid, unidade)
   return request
@@ -47,6 +52,11 @@ export function atualizarUnidade(unidade, data) {
   return request
 }
 
+export function removerUnidade(unidade) {
+  let request = cliente.delete("/unidade/" + unidade.uuid)
+  return request
+}
+
 export function getArtefatos(unidade) {
   let request = cliente.get('/artefatos/da/unidade/' + unidade.uuid)
   let unidadePromise = Promise.resolve(unidade)
@@ -60,6 +70,11 @@ export function salvarArtefato(unidadeAtiva, artefato) {
 
 export function atualizarArtefato(artefatoAtivo, data) {
   let request = cliente.put("/artefato/" + artefatoAtivo.uuid, data)
+  return request
+}
+
+export function removerArtefato(artefato) {
+  let request = cliente.delete("/artefato/" + artefato.uuid)
   return request
 }
 
@@ -87,6 +102,7 @@ export function cadastrarUsuario(usuario) {
   return request
 }
 
+
 export function reenviarEmail(email) {
   let request = cliente.post("/reenviar/email", { email })
   return request
@@ -102,7 +118,6 @@ export function enviarEmailEsqueciSenha(email) {
   let request = cliente.post("/esqueci/senha", { email })
   return request
 }
-
 
 export function alterarSenha(alterarSenha) {
   let request = cliente.post("/alterar/senha", alterarSenha)

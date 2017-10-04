@@ -6,7 +6,8 @@ import {
   EDITAR_UNIDADE,
   CARREGAR_UNIDADES,
   FINALIZAR_UNIDADE,
-  PROCESSAR_UNIDADE
+  PROCESSAR_UNIDADE,
+  REMOVER_UNIDADE
 } from './UnidadesActionTypes'
 
 export default (state = {
@@ -34,6 +35,8 @@ export default (state = {
       return atualizarUnidade(state, action)
     case PROCESSAR_UNIDADE:
       return processarUnidade(state, action)
+    case REMOVER_UNIDADE:
+      return removerUnidade(state, action)
     default:
       return state
   }
@@ -86,4 +89,15 @@ function setUnidadeParaAtiva(state, action) {
 
 function processarUnidade(state, action) {
   return { ...state, processandoUnidade: true }
+}
+
+function removerUnidade(state, action) {
+  if (action.payload.status === 200) {
+    return { ...state,
+             unidadeAtiva: {}, 
+             unidades: state.unidades.filter(u => u.uuid !== action.payload.data.uuid), 
+             processandoUnidade: false }
+  } else {
+    return state
+  }
 }

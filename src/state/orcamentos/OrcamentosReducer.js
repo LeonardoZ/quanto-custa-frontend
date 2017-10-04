@@ -3,7 +3,8 @@ import {
   SALVAR_ORCAMENTO,
   EDITAR_ORCAMENTO,
   NOVO_ORCAMENTO,
-  CARREGANDO_ORCAMENTO
+  CARREGANDO_ORCAMENTO,
+  REMOVER_ORCAMENTO
 } from './OrcamentosActionTypes'
 
 export default (state = {
@@ -19,6 +20,8 @@ export default (state = {
       return salvarOrcamento(state, action)
     case EDITAR_ORCAMENTO:
       return editarOrcamento(state, action)
+    case REMOVER_ORCAMENTO:
+      return removerOrcamento(state, action)
     case NOVO_ORCAMENTO:
       return novoOrcamento(state, action)
     case CARREGANDO_ORCAMENTO:
@@ -41,6 +44,16 @@ function novoOrcamento(state, action) {
   return {
     ...state,
     orcamento: {}
+  }
+}
+function removerOrcamento(state, action) {
+  if (action.payload.status === 200) {
+    return { ...state,
+             orcamento: {}, 
+             orcamentos: state.orcamentos.filter(o => o.uuid !== action.payload.data.uuid), 
+             carregandoOrcamento: false }
+  } else {
+    return state
   }
 }
 

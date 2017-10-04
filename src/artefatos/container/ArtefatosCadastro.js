@@ -3,8 +3,13 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {
-  salvarArtefato, getArtefatos, carregandoArtefatos,
-  editarArtefato, atualizarArtefato, novoArtefato
+  salvarArtefato,
+  getArtefatos,
+  carregandoArtefatos,
+  editarArtefato,
+  atualizarArtefato,
+  novoArtefato,
+  removerArtefato
 } from '../../state/artefatos/ArtefatosActions'
 import { cadastroArtefatos } from '../../state/stepper/StepperActions'
 import OrcamentoArtefatoForm from '../form/OrcamentoArtefatoForm'
@@ -15,6 +20,7 @@ import OrcamentoNaoDefinido from '../../util/orcamento_nao_definido/OrcamentoNao
 import FinalizarUnidade from '../finalizar/FinalizarUnidadeArtefatos'
 import CadastrarArtefatosPagina from '../pagina/CadastrarArtefatosPagina'
 import Carregando from '../../util/carregando/CarregandoPanel'
+import RemoverRegistro from '../../util/remover_registro/RemoverRegistro'
 
 class ArtefatosCadastro extends Component {
 
@@ -23,7 +29,7 @@ class ArtefatosCadastro extends Component {
       this.props.getArtefatos(this.props.unidadeAtiva)
       this.props.cadastroArtefatos()
     }
-    this.setState({ artefatoAtivo: { nome: "", custo: 0.0 } })
+    this.setState({ artefatoAtivo: { nome: "", custo: 0.0 }, removerArtefato: false })
   }
 
   salvarArtefato(artefato) {
@@ -46,6 +52,17 @@ class ArtefatosCadastro extends Component {
     this.props.novoArtefato()
   }
 
+  selecionarParaRemover(artefato) {
+    this.setState({artefatoParaRemover: artefato})
+    this.setState({ removerArtefato: true })
+  }
+
+  aoRemoverArtefato() {
+    this.props.removerArtefato(this.state.artefatoParaRemover)
+    this.setState({ removerArtefato: false })
+    this.props.novoArtefato()
+  }
+
   componentDidUpdate(prevProps, prevState) {
     // TODO revisar lógica para evitar chamadas desnecessárias
     if (!this.props.unidadeAtiva) return
@@ -58,8 +75,7 @@ class ArtefatosCadastro extends Component {
       && !this.state.carregando
       && this.props.artefatos.length === 0
     if (unidadeCarregadaEArtefatosNaoCarregados) {
-      this.setState({carregando: true})
-      this.props.carregandoArtefatos()
+      this.setState({ carregando: true })
       this.props.carregandoArtefatos()
       this.props.getArtefatos(this.props.unidadeAtiva)
     }
@@ -98,8 +114,15 @@ class ArtefatosCadastro extends Component {
           artefatoAtivo={this.props.artefatoAtivo}
           unidadeAtiva={this.props.unidadeAtiva}
           artefatos={this.props.artefatos} />
-        <ArtefatoItems artefatos={this.props.artefatos}
-          editarArtefato={(artefato) => this.props.editarArtefato(artefato)} />
+        <RemoverRegistro
+          abrirModal={this.state.removerArtefato}
+          titulo={this.state.artefatoParaRemover ? this.state.artefatoParaRemover.nome : ""}
+          texto="Deseja remover o Artefato?"
+          aoRemover={() => this.aoRemoverArtefato()} />
+        <ArtefatoItems
+          artefatos={this.props.artefatos}
+          editarArtefato={(artefato) => this.props.editarArtefato(artefato)}
+          remover={(artefato) => this.selecionarParaRemover(artefato)} />
       </CadastrarArtefatosPagina>
     )
   }
@@ -108,10 +131,14 @@ class ArtefatosCadastro extends Component {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    salvarArtefato, getArtefatos,
-    editarArtefato, atualizarArtefato,
-    novoArtefato, carregandoArtefatos,
-    cadastroArtefatos
+    salvarArtefato,
+    getArtefatos,
+    editarArtefato,
+    atualizarArtefato,
+    novoArtefato,
+    carregandoArtefatos,
+    cadastroArtefatos,
+    removerArtefato
   }, dispatch)
 }
 

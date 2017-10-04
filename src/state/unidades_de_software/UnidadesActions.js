@@ -1,7 +1,13 @@
 import {
-  EDITAR_UNIDADE, SALVAR_UNIDADE, PROCESSAR_UNIDADE,
-  NOVA_UNIDADE_DE_SOFTWARE, ATUALIZAR_UNIDADE,
-  FINALIZAR_UNIDADE, CARREGAR_UNIDADES, SET_UNIDADE_ATIVA
+  EDITAR_UNIDADE, 
+  SALVAR_UNIDADE, 
+  PROCESSAR_UNIDADE,
+  NOVA_UNIDADE_DE_SOFTWARE, 
+  ATUALIZAR_UNIDADE,
+  FINALIZAR_UNIDADE, 
+  CARREGAR_UNIDADES, 
+  SET_UNIDADE_ATIVA,
+  REMOVER_UNIDADE
 } from './UnidadesActionTypes'
 
 import * as api from '../../api/QuantoCustaApi'
@@ -40,6 +46,14 @@ export function atualizarUnidade(unidade, data) {
   let request = api.atualizarUnidade(unidade, data)
   return {
     "type": ATUALIZAR_UNIDADE,
+    "payload": request
+  }
+}
+
+export function removerUnidade(unidade) {
+  let request = api.removerUnidade(unidade)
+  return {
+    "type": REMOVER_UNIDADE,
     "payload": request
   }
 }

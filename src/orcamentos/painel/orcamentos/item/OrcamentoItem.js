@@ -14,7 +14,6 @@ import Chip from 'material-ui/Chip'
 import FontIcon from 'material-ui/FontIcon'
 import Avatar from 'material-ui/Avatar'
 import SvgIconFace from 'material-ui/svg-icons/action/face'
-
 import {
   green100,
   green700,
@@ -51,7 +50,7 @@ const textStyles = {
   fontSize: 20
 }
 
-const OrcamentoItem = ({ key, orcamento, editarOrcamento, abrirResumo }) => {
+const OrcamentoItem = ({ key, orcamento, editarOrcamento, abrirResumo, remover }) => {
   let primeiraLetra = orcamento.nome.substring(0, 1)
 
   const cliente = "Cliente: " + orcamento.cliente
@@ -76,6 +75,10 @@ const OrcamentoItem = ({ key, orcamento, editarOrcamento, abrirResumo }) => {
             label="Resumo"
             primary={true}
             onClick={() => abrirResumo(orcamento)} />
+          <FlatButton
+            label="Remover"
+            primary={true}
+            onClick={() => remover(orcamento)} />
         </CardActions>
 
         <CardText expandable={true}>

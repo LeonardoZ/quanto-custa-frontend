@@ -1,8 +1,12 @@
 
 import { 
-  GET_ORCAMENTOS, SALVAR_ORCAMENTO, 
-  EDITAR_ORCAMENTO, NOVO_ORCAMENTO, 
-  ATUALIZAR_ORCAMENTO, CARREGANDO_ORCAMENTO } 
+  GET_ORCAMENTOS, 
+  SALVAR_ORCAMENTO, 
+  EDITAR_ORCAMENTO, 
+  NOVO_ORCAMENTO, 
+  ATUALIZAR_ORCAMENTO, 
+  CARREGANDO_ORCAMENTO,
+  REMOVER_ORCAMENTO } 
 from './OrcamentosActionTypes'
 
 import * as api from '../../api/QuantoCustaApi'
@@ -43,5 +47,13 @@ export function editarOrcamento(orcamento) {
 export function novoOrcamento() {
   return {
     "type": NOVO_ORCAMENTO,
+  }
+}
+
+export function removerOrcamento(orcamento) {
+  let request = api.removerOrcamento(orcamento)
+  return {
+    "type": REMOVER_ORCAMENTO,
+    "payload": request
   }
 }

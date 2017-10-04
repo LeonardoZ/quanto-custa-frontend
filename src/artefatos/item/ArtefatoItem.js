@@ -6,7 +6,7 @@ import Table, {
 } from 'material-ui/Table'
 import { formatarMoeda } from '../../util/number_format/NumberFormat'
 
-const ArtefatoItem = ({ artefato, editarArtefato }) => {
+const ArtefatoItem = ({ artefato, editarArtefato, removerArtefato }) => {
   return (
     // TODO - editar e limpar form
     <TableRow>
@@ -17,6 +17,12 @@ const ArtefatoItem = ({ artefato, editarArtefato }) => {
           onClick={() => editarArtefato(artefato)}
           label="Editar" />
       </TableRowColumn>
+      <TableRowColumn>
+        <RaisedButton
+          onClick={() => removerArtefato(artefato)}
+          label="Remover" />
+      </TableRowColumn>
+
     </TableRow>
   )
 }

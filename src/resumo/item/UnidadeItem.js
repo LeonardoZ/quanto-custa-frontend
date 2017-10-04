@@ -10,7 +10,7 @@ const styles = {
   textAlign: 'center'
 }
 
-const UnidadeItem = ({ unidade, editarCallback, artefatosCallback }) => {
+const UnidadeItem = ({ unidade, editarCallback, artefatosCallback, removerCallback }) => {
   return (
     <TableRow selectable={true}>
       <TableRowColumn style={styles}>{unidade.titulo}</TableRowColumn>
@@ -20,6 +20,9 @@ const UnidadeItem = ({ unidade, editarCallback, artefatosCallback }) => {
       </TableRowColumn>
       <TableRowColumn style={styles}>
         <FlatButtom onClick={() => artefatosCallback(unidade)} secondary={true} label="Artefatos" />
+      </TableRowColumn>
+      <TableRowColumn style={styles}>
+        <FlatButtom onClick={() => removerCallback(unidade)} secondary={true} label="Remover" />
       </TableRowColumn>
     </TableRow>
   )

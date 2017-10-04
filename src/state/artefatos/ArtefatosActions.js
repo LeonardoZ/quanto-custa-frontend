@@ -1,7 +1,12 @@
 
 import {
-  SALVAR_ARTEFATO, EDITAR_ARTEFATO, CARREGANDO_ARTEFATOS,
-  NOVO_ARTEFATO, GET_ARTEFATOS, ATUALIZAR_ARTEFATO
+  SALVAR_ARTEFATO, 
+  EDITAR_ARTEFATO, 
+  CARREGANDO_ARTEFATOS,
+  NOVO_ARTEFATO, 
+  GET_ARTEFATOS, 
+  ATUALIZAR_ARTEFATO,
+  REMOVER_ARTEFATO
 } from './ArtefatosActionTypes'
 
 import * as api from '../../api/QuantoCustaApi'
@@ -39,12 +44,20 @@ export function atualizarArtefato(artefatoAtivo, data) {
 
 export function novoArtefato() {
   return {
-    "type": NOVO_ARTEFATO,
+    "type": NOVO_ARTEFATO
   }
 }
 
 export function carregandoArtefatos() {
   return {
-    "type": CARREGANDO_ARTEFATOS,
+    "type": CARREGANDO_ARTEFATOS
+  }
+}
+
+export function removerArtefato(artefato) {
+  let request = api.removerArtefato(artefato)
+  return {
+    "type": REMOVER_ARTEFATO,
+    "payload": request
   }
 }

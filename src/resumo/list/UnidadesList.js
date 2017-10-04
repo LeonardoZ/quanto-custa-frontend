@@ -18,7 +18,7 @@ const styles = {
   textAlign: 'center'
 }
 
-const UnidadesList = ({ unidades, editarCallback, artefatosCallback }) => {
+const UnidadesList = ({ unidades, editarCallback, artefatosCallback, remover }) => {
   if (unidades.length === 0) {
     return <NenhumItem tipoDoItem="Unidade de Software" feminino={true} />
   }
@@ -26,7 +26,8 @@ const UnidadesList = ({ unidades, editarCallback, artefatosCallback }) => {
   let items = unidades.map((uni, idx) => {
     return <UnidadeItem key={idx} unidade={uni}
       editarCallback={uni => editarCallback(uni)}
-      artefatosCallback={uni => artefatosCallback(uni)} />
+      artefatosCallback={uni => artefatosCallback(uni)}
+      removerCallback={() => remover(uni)} />
   })
 
   let valorTotal = unidades.map(x => x.subTotal).reduce((acc = 0, x) => acc + x)
@@ -40,8 +41,9 @@ const UnidadesList = ({ unidades, editarCallback, artefatosCallback }) => {
             <TableRow>
               <TableHeaderColumn style={styles}>Unidade de software</TableHeaderColumn>
               <TableHeaderColumn style={styles}>SubTotal</TableHeaderColumn>
-              <TableHeaderColumn style={styles}>Editar</TableHeaderColumn>
               <TableHeaderColumn style={styles}>Artefatos</TableHeaderColumn>
+              <TableHeaderColumn style={styles}>Editar</TableHeaderColumn>
+              <TableHeaderColumn style={styles}>Remover</TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false}>
@@ -54,6 +56,8 @@ const UnidadesList = ({ unidades, editarCallback, artefatosCallback }) => {
               </TableHeaderColumn>
               <TableHeaderColumn style={styles}>
                 <strong>{valorTotal}</strong>
+              </TableHeaderColumn>
+              <TableHeaderColumn>
               </TableHeaderColumn>
               <TableHeaderColumn>
               </TableHeaderColumn>

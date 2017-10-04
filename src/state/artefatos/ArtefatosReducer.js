@@ -4,7 +4,8 @@ import {
   EDITAR_ARTEFATO,
   ATUALIZAR_ARTEFATO,
   NOVO_ARTEFATO,
-  CARREGANDO_ARTEFATOS
+  CARREGANDO_ARTEFATOS,
+  REMOVER_ARTEFATO
 } from './ArtefatosActionTypes'
 
 const ARTEFATO_ATIVO = {
@@ -32,7 +33,9 @@ export default (state = {
     case NOVO_ARTEFATO:
       return novoArtefato(state, action)
     case CARREGANDO_ARTEFATOS:
-      return carregando(state, action)
+      return carregando(state, action)    
+    case REMOVER_ARTEFATO:
+      return removerArtefato(state, action)
     default:
       return state
   }
@@ -77,5 +80,16 @@ function carregando(state, action) {
   return {
     ...state,
     carregandoArtefatos: true
+  }
+}
+
+function removerArtefato(state, action) {
+  if (action.payload.status === 200) {
+    return { ...state,
+             artefatoAtivo: ARTEFATO_ATIVO, 
+             artefatos: state.artefatos.filter(a => a.uuid !== action.payload.data.uuid), 
+             carregandoArtefatos: false }
+  } else {
+    return state
   }
 }

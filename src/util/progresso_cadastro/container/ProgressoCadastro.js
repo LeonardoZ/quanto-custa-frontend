@@ -19,7 +19,6 @@ class ProgressoCadastro extends Component {
 
 
 function mapStateToProps({ stepperStateTree }) {
-  console.log(stepperStateTree)
   return {
     estado: stepperStateTree
   }

@@ -4,8 +4,11 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { salvarOrcamento } from '../../state/orcamentos/OrcamentosActions'
 import {
-  novaUnidadeDeSoftware, editarUnidade, 
-  carregarUnidades, configurarUnidadeParaAtiva
+  novaUnidadeDeSoftware,
+  editarUnidade,
+  carregarUnidades, 
+  configurarUnidadeParaAtiva,
+  removerUnidade
 } from '../../state/unidades_de_software/UnidadesActions'
 import { finalizar } from '../../state/stepper/StepperActions'
 import UnidadesList from '../list/UnidadesList'
@@ -14,6 +17,7 @@ import Pagina from '../pagina/ResumoOrcamentoPagina'
 import ButtonBar from '../button_bar/ButtonBar'
 import Carregando from '../../util/carregando/CarregandoPanel'
 import OrcamentoNaoDefinido from '../../util/orcamento_nao_definido/OrcamentoNaoDefinido'
+import RemoverRegistro from '../../util/remover_registro/RemoverRegistro'
 
 class ResumoOrcamento extends Component {
 
@@ -30,6 +34,7 @@ class ResumoOrcamento extends Component {
       this.props.carregarUnidades(orcamento)
     }
     this.props.finalizar()
+    this.setState({ removerUnidade: false })
   }
 
   novaUnidade() {
@@ -59,10 +64,20 @@ class ResumoOrcamento extends Component {
     this.props.history.push("/")
   }
 
+  selecionarParaRemover(unidade) {
+    this.props.configurarUnidadeParaAtiva(unidade)
+    this.setState({ removerUnidade: true })
+  }
+
+  aoRemoverUnidade() {
+    this.props.removerUnidade(this.props.unidadeAtiva)
+    this.setState({ removerUnidade: false })
+  }
+
   render() {
     let orcamenoNaoDefinido = !this.props.carregandoOrcamento && !this.props.orcamento.uuid
-    
-     if (orcamenoNaoDefinido) {
+
+    if (orcamenoNaoDefinido) {
       return <OrcamentoNaoDefinido
         voltarAoInicio={() => this.voltarAoInicio()} />
     }
@@ -73,10 +88,16 @@ class ResumoOrcamento extends Component {
           novaUnidade={() => this.novaUnidade()}
           editarOrcamento={() => this.editarOrcamento()}
           finalizarOrcamento={() => this.finalizarOrcamento()} />
+        <RemoverRegistro
+          abrirModal={this.state.removerUnidade}
+          titulo={this.props.unidadeAtiva ? this.props.unidadeAtiva.titulo : ""}
+          texto="Deseja remover a Unidade de Software?"
+          aoRemover={() => this.aoRemoverUnidade()} />
         <UnidadesList
           unidades={this.props.unidades}
           editarCallback={(unidade) => this.editarUnidadeCallback(unidade)}
-          artefatosCallback={(unidade) => this.artefatosCallback(unidade)} />
+          artefatosCallback={(unidade) => this.artefatosCallback(unidade)}
+          remover={(unidade) => this.selecionarParaRemover(unidade)} />
       </Pagina>
     )
   }
@@ -87,6 +108,7 @@ function mapDispatchToProps(dispatch) {
     salvarOrcamento,
     novaUnidadeDeSoftware,
     editarUnidade,
+    removerUnidade,
     carregarUnidades,
     configurarUnidadeParaAtiva,
     finalizar
