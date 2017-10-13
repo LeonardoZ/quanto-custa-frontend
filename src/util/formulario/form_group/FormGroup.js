@@ -16,11 +16,11 @@ export const MyInput = React.createClass({
       <Row>
         <Col xs={12} >
           <TextField
-            hintText={this.props.title}
+            name={this.props.name}
+            floatingLabelText={this.props.title}
             fullWidth={true}
             type={this.props.type}
             errorText={errorMessage}
-            name={this.props.name}
             onChange={this.changeValue}
             value={this.getValue() == null ? '' : this.getValue()}
           />

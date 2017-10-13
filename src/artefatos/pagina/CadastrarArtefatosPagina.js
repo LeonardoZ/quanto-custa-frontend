@@ -12,10 +12,7 @@ export const CadastrarArtefatosPagina = (props) => {
   return (
     <Col xs={12}>
       <Row>
-        <Col xs={12} className="hideOnLarge" style={style.resumo}>
-          <ProgressoCadastro isVertical={true} />
-        </Col>
-        <Col md={12} className="hideOnMobile" style={style.resumo}>
+        <Col xs={12} style={style.resumo}>
           <ProgressoCadastro isVertical={false} />
         </Col>
         {props.children}

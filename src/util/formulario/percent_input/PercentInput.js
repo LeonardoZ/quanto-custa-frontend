@@ -6,12 +6,15 @@ export const MoneyInput = (props) => {
   return (
     <NumberFormat
       {...props}
-      hintText="R$ 0,00"
+      allowNegative={false}
+      isAllowed={(values) => {
+        return !(values.floatValue > 100.00)
+      }}
       customInput={TextField}
       thousandSeparator={"."}
       decimalPrecision={2}
       decimalSeparator={","}
-      prefix={"R$ "}
+      suffix={" %"}
     />
   )
 }

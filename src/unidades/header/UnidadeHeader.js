@@ -79,14 +79,6 @@ const UnidadeHeader = ({ orcamento, unidadeAtiva }) => {
           </div>
         </CardText>
       </Card>
-      // <Paper style={style}  zDepth={3} rounded={false}>
-      //   <h1>Unidades de software do Orçamento</h1>
-      //   <strong>
-      //     Orçamento:
-      //     </strong>
-      //   <span>{orcamento.nome} - {orcamento.cliente}</span>
-      //   {block}
-      // </Paper>
     )
   else
     return (<p>Carregando orçamento...</p>)

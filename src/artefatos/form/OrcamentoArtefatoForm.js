@@ -74,13 +74,13 @@ class OrcamentoArtefatoForm extends Component {
         </Toolbar>
         <Paper zDepth={1} rounded={false} style={style}>
           <Formsy.Form
-            ref={(event) => { this.artefatoForm = event; }}
+            ref={(event) => { this.artefatoForm = event }}
             onSubmit={this.submit}
             onValid={this.enableButton}
             onInvalid={this.disableButton}>
-            <h3>Artefatos</h3>
+            <h3>Artefato e Custo</h3>
             <Row className="show-grid">
-              <Col xs>
+              <Col xs={12} md={6}>
                 <MyInput name="nome" title="Artefato"
                   value={this.state.nome}
                   validations="maxLength:150,minLength:3"
@@ -88,36 +88,33 @@ class OrcamentoArtefatoForm extends Component {
                     minLength: "O nome do artefato não deve possuir menos de 3 caracteres",
                     maxLength: "O nome do artefato não deve possuir mais de 200 caracteres"
                   }} required />
-
               </Col>
-              <Col xs>
+              <Col xs={12} md={6}>
                 <NumberFormat
                   name="custo"
+                  floatingLabelText="Valor"
                   fullWidth={true}
-                  hintText="R$ 0,00"
-                  customInput={TextField}
-                  className="form-control"
-                  value={this.state.custo}
-                  thousandSeparator={"."}
-                  decimalPrecision={2}
-                  decimalSeparator={","}
-                  prefix={"R$ "}
                   onChange={(e, values) => {
                     this.setState({
                       valorFormatado: values.formattedValue,
                       custo: values.floatValue,
                       valor: values.value
                     })
-                  }} />
+                  }}
+                  value={this.state.custo}
+                  hintText="R$ 0,00"
+                  customInput={TextField}
+                  thousandSeparator={"."}
+                  decimalPrecision={2}
+                  decimalSeparator={","}
+                  prefix={"R$ "}
+                />
               </Col>
             </Row>
-            <Row around="xs">
+            <Row>
               <Col xs={12} md={6}>
                 <RaisedButton type="submit" disabled={!this.state.canSubmit}
                   label={!this.state.ehArtefatoVelho ? "Adicionar" : "Atualizar"} />
-              </Col>
-
-              <Col xs={12} md={6}>
                 <RaisedButton type="reset" onClick={() => this.resetForm()}
                   label={"Limpar"} />
               </Col>

@@ -11,7 +11,10 @@ let res = (function () {
 function criarAxios() {
   return axios.create({
     baseURL: 'http://localhost:8080/quantocusta/api/',
-    responseType: 'json'
+    responseType: 'json',  
+    validateStatus: function (status) {
+      return status >= 200 && status < 500; // default
+    }
   });
 }
 
@@ -40,7 +43,7 @@ export function salvarUnidade(orcamentoAtivo, unidade) {
   let request = cliente.post("/unidade/do/orcamento/" + orcamentoAtivo.uuid, unidade)
   return request
 }
- 
+
 export function carregarUnidades(orcamento) {
   let request = cliente.get('/unidades/do/orcamento/' + orcamento.uuid)
   let orcamentoPromise = Promise.resolve(orcamento)
@@ -102,7 +105,6 @@ export function cadastrarUsuario(usuario) {
   return request
 }
 
-
 export function reenviarEmail(email) {
   let request = cliente.post("/reenviar/email", { email })
   return request
@@ -110,7 +112,7 @@ export function reenviarEmail(email) {
 
 export function validarEmail(validar) {
   let request = cliente.post("/validar", validar)
-   
+
   return request
 }
 
@@ -123,3 +125,37 @@ export function alterarSenha(alterarSenha) {
   let request = cliente.post("/alterar/senha", alterarSenha)
   return request
 }
+
+export function salvarPagamento(pagamento, orcamento) {
+  let request = cliente.post("/orcamento/" + orcamento.uuid + "/pagamento", pagamento)
+  return request
+}
+
+export function atualizarPagamento(pagamento, orcamento) {
+  let request = cliente.put("/orcamento/" + orcamento.uuid + "/pagamento", pagamento)
+  return request
+}
+
+export function removerPagamento(pagamento) {
+  let request = cliente.delete("/orcamento/" + pagamento.orcamentoUuid + "/pagamento")
+  return request
+}
+
+export function carregaPagamento(orcamento) {
+  let request = cliente.get("/orcamento/" + orcamento.uuid + "/pagamento")
+    .then(req => {
+      return Promise.resolve(req)
+    }).catch(err => {
+      if (err.repsonse) {
+        return Promise.reject(err.response)
+      }
+    })
+  return request
+}
+
+export function calcularPagamento(pagamento, orcamento) {
+  let request = cliente.post("/orcamento/" + orcamento.uuid + "/pagamento/calcula", pagamento)
+  let pagamentoEnviado = Promise.resolve(pagamento)
+  return Promise.all([request, pagamentoEnviado])
+}
+

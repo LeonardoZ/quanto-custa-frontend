@@ -6,7 +6,7 @@ const styles = {
   marginTop: "8px",
 }
 
-export const ButtonBar = ({ novaUnidade, editarOrcamento, finalizarOrcamento }) => (
+export const ButtonBar = ({ novaUnidade, editarOrcamento, irParaPagamento }) => (
   <Col xs={12} style={styles}>
     <Row around="xs">
       <Col xs={12} md={4}>
@@ -16,7 +16,7 @@ export const ButtonBar = ({ novaUnidade, editarOrcamento, finalizarOrcamento }) 
         <RaisedButton fullWidth={true} secondary={true} onClick={() => novaUnidade()} label="Nova Unidade de Software" />
       </Col>
       <Col xs={12} md={4}>
-        <RaisedButton fullWidth={true} primary={true} onClick={() => finalizarOrcamento()} label="Finalizar Orçamento" />
+        <RaisedButton fullWidth={true} primary={true} onClick={() => irParaPagamento()} label="Definir Pagamento" />
       </Col>
       <hr />
     </Row>

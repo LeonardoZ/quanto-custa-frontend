@@ -28,7 +28,7 @@ const styles = {
     marginTop: '8px',
   }
 }
-const OrcamentosList = ({ orcamentos, editarOrcamento, abrirResumo, remover }) => {
+const OrcamentosList = ({ orcamentos, editarOrcamento, abrirResumo, remover, ver }) => {
   if (orcamentos.lengTableHeaderColumn === 0) {
     return <NenhumItem tipoDoItem="Orçamento" />
   }
@@ -39,7 +39,8 @@ const OrcamentosList = ({ orcamentos, editarOrcamento, abrirResumo, remover }) =
           orcamento={orc} 
           editarOrcamento={() => editarOrcamento(orc)}  
           abrirResumo={() =>  abrirResumo(orc)}
-          remover={() => remover(orc)}/>
+          remover={() => remover(orc)}
+          ver={() => ver(orc)} />
       </Col>
     )
   })

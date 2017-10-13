@@ -24,20 +24,25 @@ export const StepperPanel = (props) => {
         </ToolbarGroup>
       </Toolbar>
       <Stepper linear={false}
-        orientation={orientation}>
+        orientation={"vertical"}>
         <Step completed={estado.informacaoOrcamento}>
           <StepLabel>
-            Informações sobre o Orçamento
+            Defina detalhes sobre o Orçamento.
           </StepLabel>
         </Step>
         <Step completed={estado.cadastroUnidades}>
           <StepLabel>
-            Definir Unidades de Software
+            Especificar Unidades de Software.
           </StepLabel>
         </Step>
         <Step completed={estado.cadastroArtefatos}>
           <StepLabel>
-            Definir Artefatos
+            Definir Artefatos de uma Unidade de Software.
+          </StepLabel>
+        </Step>
+        <Step completed={estado.cadastroArtefatos}>
+          <StepLabel>
+            Detalhar a forma como o Pagamento será realizado.
           </StepLabel>
         </Step>
         <Step completed={estado.finalizar}>

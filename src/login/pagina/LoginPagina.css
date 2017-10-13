@@ -5,3 +5,25 @@
   width: 100%;
   overflow: hidden;
 }
+
+
+/* https://github.com/roylee0704/react-flexbox-grid/issues/57#issuecomment-314114985 */
+
+@media screen and (max-width: 768px) {
+   :global .hideOnMobile {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 768px) {
+   :global .hideOnLarge {
+    display: none;
+  }
+}
+
+
+/* Chrome autocomplete color removed */
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px white inset;
+}

@@ -12,11 +12,8 @@ export const ResumoOrcamentoPagina = (props) => {
   return (
     <Col xs={12}>
       <Row>
-        <Col xs={12} className="hideOnLarge">
-          <ProgressoCadastro isVertical={true}  styles={style.resumo} />
-        </Col>
-        <Col md={12} className="hideOnMobile">
-          <ProgressoCadastro isVertical={false} styles={style.resumo} />
+        <Col xs={12}>
+          <ProgressoCadastro styles={style.resumo} />
         </Col>
         {props.children}
       </Row>

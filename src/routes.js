@@ -13,6 +13,8 @@ import ValidarCadastro from './login/validar_cadastro/container/ValidarCadastro'
 import AtivarCadastro from './login/ativar/container/AtivarCadastro'
 import EsqueciSenha from './login/esqueceu_senha/container/EsqueciSenha'
 import AlterarSenha from './login/alterar_senha/container/AlterarSenha'
+import Pagamento from './pagamento/container/Pagamento'
+import Visualizar from './visualizar/container/Visualizar'
 import { Admin } from './app/admin/Admin'
 
 const PrivateRoute =
@@ -48,7 +50,13 @@ export const getRoutes = (erro, limparErros, isAuthenticated) => {
     <PrivateRoute key='orcamento-unidades' exact isUserAuthenticated={isAuthenticated}
       erro={erro} limparErros={limparErros}
       path='/resumo/orcamento' component={ResumoOrcamento} />,
-    <Route key='login' path='/login' component={Principal} />,    
+    <PrivateRoute key='pagamentos' exact isUserAuthenticated={isAuthenticated}
+      erro={erro} limparErros={limparErros}
+      path='/pagamento' component={Pagamento} />,
+    <PrivateRoute key='visualizar' exact isUserAuthenticated={isAuthenticated}
+      erro={erro} limparErros={limparErros}
+      path='/ver/orcamento' component={Visualizar} />,
+    <Route key='login' path='/login' component={Principal} />,
     <Route key='ativar' path='/ativar/cadastro' component={AtivarCadastro} />,
     <Route key='validar' path='/validar/token/:token/email/:email' component={ValidarCadastro} />,
     <Route key='esqueci' path='/esqueci/senha' component={EsqueciSenha} />,

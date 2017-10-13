@@ -22,7 +22,7 @@ const UnidadeItem = ({ unidade, editarCallback, artefatosCallback, removerCallba
         <FlatButtom onClick={() => artefatosCallback(unidade)} secondary={true} label="Artefatos" />
       </TableRowColumn>
       <TableRowColumn style={styles}>
-        <FlatButtom onClick={() => removerCallback(unidade)} secondary={true} label="Remover" />
+        <FlatButtom onClick={() => removerCallback(unidade)} label="Remover" />
       </TableRowColumn>
     </TableRow>
   )

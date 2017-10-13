@@ -14,6 +14,9 @@ import {
 import { formatarMoeda } from '../../util/number_format/NumberFormat'
 import Paper from 'material-ui/Paper'
 
+const blockStyles = {
+  marginBottom: "16px"
+}
 const styles = {
   textAlign: 'center'
 }
@@ -34,7 +37,7 @@ const UnidadesList = ({ unidades, editarCallback, artefatosCallback, remover }) 
   valorTotal = formatarMoeda(valorTotal)
 
   return (
-    <Col xs={12} className="show-grid">
+    <Col xs={12} className="show-grid" style={blockStyles}>
       <Paper zDepth={1}>
         <Table>
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>

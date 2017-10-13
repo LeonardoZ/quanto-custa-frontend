@@ -56,8 +56,8 @@ class ResumoOrcamento extends Component {
     this.props.history.push("/artefatos")
   }
 
-  finalizarOrcamento() {
-    this.props.history.push("/")
+  irParaPagamento() {
+    this.props.history.push("/pagamento")
   }
 
   voltarAoInicio() {
@@ -87,7 +87,7 @@ class ResumoOrcamento extends Component {
         <ButtonBar
           novaUnidade={() => this.novaUnidade()}
           editarOrcamento={() => this.editarOrcamento()}
-          finalizarOrcamento={() => this.finalizarOrcamento()} />
+          irParaPagamento={() => this.irParaPagamento()} />
         <RemoverRegistro
           abrirModal={this.state.removerUnidade}
           titulo={this.props.unidadeAtiva ? this.props.unidadeAtiva.titulo : ""}

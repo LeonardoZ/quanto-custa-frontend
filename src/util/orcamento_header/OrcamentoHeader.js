@@ -2,8 +2,8 @@ import React from 'react'
 import Paper from 'material-ui/Paper'
 import { Col } from 'react-flexbox-grid'
 import { Card, CardActions, CardTitle, CardText, CardHeader } from 'material-ui/Card'
-import Chip from 'material-ui/Chip'
 import FontIcon from 'material-ui/FontIcon'
+import Chip from 'material-ui/Chip'
 import Avatar from 'material-ui/Avatar'
 import SvgIconFace from 'material-ui/svg-icons/action/face'
 import {
@@ -13,6 +13,7 @@ import {
   amber700,
   cyan100
 } from 'material-ui/styles/colors'
+import Chips from '../orcamento_chips/OrcamentoChips'
 
 const styles = {
   root: {
@@ -23,7 +24,7 @@ const styles = {
     fontSize: 20
   },
   chip: {
-    margin: 4,
+      margin: "4px",
   },
   wrapper: {
     display: 'flex',
@@ -32,11 +33,16 @@ const styles = {
   }
 }
 
-const OrcamentoHeader = ({ orcamento, unidade, subtitulo }) => {
+const OrcamentoHeader = ({ orcamento, unidade, subtitulo, completo = false }) => {
   let primeiraLetra = orcamento.nome.substring(0, 1)
   let titulo = ""
   if (unidade) {
     titulo = <CardTitle title={unidade.titulo} subtitle="Unidade de Software" />
+  }
+
+  let chips = ""
+  if (completo) {
+    chips = <Chips orcamento={orcamento} />
   }
 
   if (orcamento)
@@ -54,14 +60,14 @@ const OrcamentoHeader = ({ orcamento, unidade, subtitulo }) => {
           <CardText expandable={false}>
             <div style={styles.wrapper}>
               <Chip style={styles.chip} backgroundColor={cyan100}>
-                <Avatar size={32} backgroundColor={cyan700}>V</Avatar>
+                <Avatar backgroundColor={cyan700}>V</Avatar>
                 <strong>Cliente: </strong>{orcamento.cliente}
               </Chip>
               <Chip style={styles.chip} backgroundColor={amber100}>
-                <Avatar backgroundColor={amber700} size={32} icon={<SvgIconFace />} />
+                <Avatar backgroundColor={amber700} icon={<SvgIconFace />} />
                 <strong>Responsável:</strong> {orcamento.responsavel}
               </Chip>
-              {this}
+              {chips}
             </div>
           </CardText>
           {titulo}

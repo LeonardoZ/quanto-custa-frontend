@@ -5,6 +5,7 @@ import Artefatos from './artefatos/ArtefatosReducer'
 import Erros from './erros/ErrosReducer'
 import Auth from './autenticacao/AuthReducer'
 import Stepper from './stepper/StepperReducer'
+import Pagamentos from './pagamentos/PagamentosReducers'
 
 const rootReducer = combineReducers({
     errosStateTree: Erros,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
     unidadesStateTree: Unidades,
     artefatosStateTree: Artefatos,
     authStateTree: Auth,
-    stepperStateTree: Stepper
+    stepperStateTree: Stepper,
+    pagamentosStateTree: Pagamentos
 })
 
 export default rootReducer

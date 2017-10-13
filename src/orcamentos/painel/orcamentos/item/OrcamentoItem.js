@@ -15,16 +15,9 @@ import FontIcon from 'material-ui/FontIcon'
 import Avatar from 'material-ui/Avatar'
 import SvgIconFace from 'material-ui/svg-icons/action/face'
 import {
-  green100,
-  green700,
-  deepOrange100,
-  deepOrange700,
-  cyan700,
   cyan500,
-  amber100,
-  amber700,
-  cyan100
 } from 'material-ui/styles/colors'
+import Chips from '../../../../util/orcamento_chips/OrcamentoChips'
 
 const styles = {
   root: {
@@ -36,12 +29,7 @@ const styles = {
   },
   chip: {
     margin: 4,
-  },
-  wrapper: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    flexDirection: 'column'
-  },
+  }
 }
 
 const textStyles = {
@@ -50,7 +38,7 @@ const textStyles = {
   fontSize: 20
 }
 
-const OrcamentoItem = ({ key, orcamento, editarOrcamento, abrirResumo, remover }) => {
+const OrcamentoItem = ({ key, orcamento, editarOrcamento, abrirResumo, remover, ver }) => {
   let primeiraLetra = orcamento.nome.substring(0, 1)
 
   const cliente = "Cliente: " + orcamento.cliente
@@ -78,36 +66,15 @@ const OrcamentoItem = ({ key, orcamento, editarOrcamento, abrirResumo, remover }
           <FlatButton
             label="Remover"
             primary={true}
-            onClick={() => remover(orcamento)} />
+            onClick={() => remover(orcamento)} />    
+          <FlatButton
+            label="Ver"
+            primary={true}
+            onClick={() => ver(orcamento)} />
         </CardActions>
 
         <CardText expandable={true}>
-          <div style={styles.wrapper}>
-            <Chip style={styles.chip} backgroundColor={amber100}>
-              <Avatar backgroundColor={amber700} size={32} icon={<SvgIconFace />} />
-              <strong>Responsável:</strong> {orcamento.responsavel}
-            </Chip>
-            <Chip style={styles.chip} backgroundColor={cyan100}>
-              <Avatar size={32} backgroundColor={cyan700}>C</Avatar>
-              <strong>Criado em:</strong> {parseToFormat(orcamento.criadoEm)}
-            </Chip>
-            <Chip style={styles.chip} backgroundColor={cyan100}>
-              <Avatar size={32} backgroundColor={cyan700}>V</Avatar>
-              <strong>Válido até:</strong> {parseToFormat(orcamento.validoAte)}
-            </Chip>
-            <Chip style={styles.chip} backgroundColor={green100}>
-              <Avatar size={32} backgroundColor={green700}>U</Avatar>
-              <strong>Unidades de software:</strong> 10
-              </Chip>
-            <Chip style={styles.chip} backgroundColor={green100}>
-              <Avatar size={32} backgroundColor={green700}>A</Avatar>
-              <strong>Artefatos</strong> 62
-              </Chip>
-            <Chip style={styles.chip} backgroundColor={deepOrange100}>
-              <Avatar size={32} backgroundColor={deepOrange700}>T</Avatar>
-              <strong>Valor total: </strong> R$ 42,500.50
-              </Chip>
-          </div>
+          <Chips orcamento={orcamento} />
         </CardText>
       </Card>
     </Paper>

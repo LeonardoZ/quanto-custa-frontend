@@ -41,8 +41,13 @@ class OrcamentosPainel extends Component {
   }
 
   aoRemoverCallback() {
-    this.props.removerOrcamento(this.props.orcamento)    
+    this.props.removerOrcamento(this.props.orcamento)
     this.setState({ remover: false })
+  }
+
+  verOrcamento(orcamento) {
+    this.props.editarOrcamento(orcamento)
+    this.props.history.push("/ver/orcamento")
   }
 
   render() {
@@ -54,16 +59,17 @@ class OrcamentosPainel extends Component {
 
     return (
       <Pagina novoOrcamento={() => this.novoOrcamento()}>
-        <RemoverRegistro 
-            abrirModal={this.state.remover} 
-            titulo={this.props.orcamento ? this.props.orcamento.nome : ""}
-            texto="Deseja remover completamente o Orçamento?"
-            aoRemover={() => this.aoRemoverCallback()} />
+        <RemoverRegistro
+          abrirModal={this.state.remover}
+          titulo={this.props.orcamento ? this.props.orcamento.nome : ""}
+          texto="Deseja remover completamente o Orçamento?"
+          aoRemover={() => this.aoRemoverCallback()} />
         <OrcamentoList
           orcamentos={orcamentos}
           editarOrcamento={(orcamento) => this.editarOrcamento(orcamento)}
           abrirResumo={(orcamento) => this.abrirResumo(orcamento)}
-          remover={(orcamento) => this.selecionarParaRemover(orcamento)} />
+          remover={(orcamento) => this.selecionarParaRemover(orcamento)}
+          ver={(orcamento) => this.verOrcamento(orcamento)} />
       </Pagina>
     )
   }
@@ -71,15 +77,15 @@ class OrcamentosPainel extends Component {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    getOrcamentos, 
+    getOrcamentos,
     editarOrcamento,
-    novoOrcamento, 
+    novoOrcamento,
     setCarregandoOrcamento,
     removerOrcamento
   }, dispatch)
 }
 
-function mapStateToProps({orcamentoStateTree, authStateTree}) {
+function mapStateToProps({ orcamentoStateTree, authStateTree }) {
   return {
     orcamento: orcamentoStateTree.orcamento,
     carregando: orcamentoStateTree.carregandoOrcamento,

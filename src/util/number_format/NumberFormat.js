@@ -1,6 +1,5 @@
 import numeral from 'numeral'
 
-
 numeral.register('locale', 'pt-br', {
   delimiters: {
       thousands: '.',
@@ -15,5 +14,9 @@ numeral.register('locale', 'pt-br', {
 numeral.locale('pt-br');
 
 export function formatarMoeda(valor) {
-  return numeral(valor).format('$ 0,0.00')
+  return numeral(valor).format('$ 0.00')
+}
+
+export function formatarPorcentagem(valor) {
+  return numeral(valor).format('0.00%')
 }

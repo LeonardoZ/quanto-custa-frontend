@@ -53,8 +53,7 @@ class ArtefatosCadastro extends Component {
   }
 
   selecionarParaRemover(artefato) {
-    this.setState({artefatoParaRemover: artefato})
-    this.setState({ removerArtefato: true })
+    this.setState({ artefatoParaRemover: artefato, removerArtefato: true })
   }
 
   aoRemoverArtefato() {
@@ -75,9 +74,10 @@ class ArtefatosCadastro extends Component {
       && !this.state.carregando
       && this.props.artefatos.length === 0
     if (unidadeCarregadaEArtefatosNaoCarregados) {
-      this.setState({ carregando: true })
-      this.props.carregandoArtefatos()
-      this.props.getArtefatos(this.props.unidadeAtiva)
+      this.setState({ carregando: true }, () => {
+        this.props.carregandoArtefatos()
+        this.props.getArtefatos(this.props.unidadeAtiva)
+      })
     }
   }
 

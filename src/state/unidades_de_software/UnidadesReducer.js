@@ -79,7 +79,7 @@ function carregarUnidades(state, action) {
   let orcamentoAtivo = action.payload[1]
   let unidadesSemOsNovos = state.unidades.filter(a => a.orcamentoUuid !== orcamentoAtivo.uuid) || []
   let unidades = [...unidadesSemOsNovos, ...novasUnidades]
-  return { ...state, unidades: unidades }
+  return { ...state, unidades: unidades, processandoUnidade: false }
 }
 
 function setUnidadeParaAtiva(state, action) {
