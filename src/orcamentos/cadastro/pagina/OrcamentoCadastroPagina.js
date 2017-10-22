@@ -1,6 +1,6 @@
 import React from 'react'
 import { Row, Col } from 'react-flexbox-grid'
-import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-ui/Toolbar'
+import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar'
 import ProgressoCadastro from '../../../util/progresso_cadastro/container/ProgressoCadastro'
 
 export const OrcamentoCadastroPagina = (props) => {

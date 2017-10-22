@@ -1,9 +1,8 @@
 import React from 'react'
-import { Row, Col } from 'react-flexbox-grid'
+import { Col } from 'react-flexbox-grid'
 import Paper from 'material-ui/Paper'
 import { List, ListItem } from 'material-ui/List'
 import Subheader from 'material-ui/Subheader'
-import Divider from 'material-ui/Divider'
 import { formatarMoeda } from '../number_format/NumberFormat'
 import Chip from 'material-ui/Chip'
 import Avatar from 'material-ui/Avatar'
@@ -11,7 +10,6 @@ import { calcularTotalDeUnidades } from '../../modelo/unidade_de_software'
 import {
   red200,
   red600,
-  lime200,
   lime700,
 } from 'material-ui/styles/colors'
 

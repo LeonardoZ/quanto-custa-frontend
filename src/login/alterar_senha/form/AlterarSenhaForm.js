@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Formsy from 'formsy-react'
 import { MyInput } from '../../../util/formulario/form_group/FormGroup'
 import { Row, Col } from 'react-flexbox-grid'
-import FlatButton from 'material-ui/FlatButton'
 import Paper from 'material-ui/Paper'
 import RaisedButton from 'material-ui/RaisedButton'
 

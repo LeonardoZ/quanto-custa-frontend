@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Formsy from 'formsy-react'
-import { Grid, Row, Col } from 'react-flexbox-grid'
+import { Row, Col } from 'react-flexbox-grid'
 import RaisedButton from 'material-ui/RaisedButton'
 import Paper from 'material-ui/Paper'
 import { MyInput } from '../../util/formulario/form_group/FormGroup'

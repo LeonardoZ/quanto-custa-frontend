@@ -1,7 +1,13 @@
-import { FAZER_LOGIN, GET_USUARIO, 
-         CADASTRAR_USUARIO, REENVIAR_EMAIL, 
-         VALIDAR_EMAIL, ENVIAR_EMAIL_SENHA,
-         ALTERAR_SENHA } from './AuthActionTypes'
+import { 
+  FAZER_LOGIN, 
+  GET_USUARIO, 
+  CADASTRAR_USUARIO, 
+  REENVIAR_EMAIL, 
+  VALIDAR_EMAIL, 
+  ENVIAR_EMAIL_SENHA,
+  ALTERAR_SENHA,
+  LIMPAR_CADASTRO 
+} from './AuthActionTypes'
 
 import * as api from '../../api/QuantoCustaApi'
 
@@ -16,12 +22,19 @@ export function fazerLogin(dadosLogin) {
 export function cadastrarUsuario(usuario) {
   let request = api.cadastrarUsuario(usuario)
   return {
-    "type": CADASTRAR_USUARIO
+    "type": CADASTRAR_USUARIO,
+    "payload": request
+  }
+}
+
+
+export function limparCadastro() {
+  return {
+    "type": LIMPAR_CADASTRO,
   }
 }
 
 export function getUsuario() {
-  let token = sessionStorage.getItem("jwtToken")
   let request = api.getUsuario()
   return {
     "type": GET_USUARIO,
@@ -54,7 +67,6 @@ export function enviarEmailEsqueciSenha(email, callback) {
     "payload": request
   }
 }
-
 
 export function alterarSenha(alterarSenha) {
   let request = api.alterarSenha(alterarSenha)

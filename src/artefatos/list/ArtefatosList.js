@@ -1,12 +1,11 @@
 import React from 'react'
-import { Grid, Row, Col } from 'react-flexbox-grid'
+import { Col } from 'react-flexbox-grid'
 import {
   Table,
   TableBody,
   TableHeader,
   TableHeaderColumn,
   TableRow,
-  TableRowColumn,
   TableFooter
 } from 'material-ui/Table'
 import Paper from 'material-ui/Paper'

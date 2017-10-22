@@ -1,7 +1,6 @@
 import React from 'react'
-import { Row, Col } from 'react-flexbox-grid'
+import { Col } from 'react-flexbox-grid'
 import Paper from 'material-ui/Paper'
-import { List, ListItem } from 'material-ui/List'
 import Subheader from 'material-ui/Subheader'
 import Divider from 'material-ui/Divider'
 import { formatarMoeda, formatarPorcentagem } from '../number_format/NumberFormat'

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { withRouter, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import LoginPagina from '../../pagina/LoginPagina'
 import Form from '../form/AtivarCadastroForm'

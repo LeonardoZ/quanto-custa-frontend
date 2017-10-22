@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import { getOrcamentos, editarOrcamento, novoOrcamento, setCarregandoOrcamento, removerOrcamento }
   from '../../../state/orcamentos/OrcamentosActions'
 import OrcamentoList from '../orcamentos/list/OrcamentosList'
-import BotaoNovo from '../botao_novo/BotaoNovoOrcamento'
 import CarregandoPanel from '../../../util/carregando/CarregandoPanel'
 import Pagina from '../pagina/OrcamentoPanelPagina'
 import RemoverRegistro from '../../../util/remover_registro/RemoverRegistro'

@@ -18,7 +18,6 @@ import {
   calcularPagamento,
   invalidarPagamento
 } from '../../state/pagamentos/PagamentosActions'
-import { calcularTotalDeUnidades } from '../../modelo/unidade_de_software'
 import PainelPagamentoSimples from '../../util/painel_pagamento/PainelPagamentoSimples'
 import RemoverRegistro from '../../util/remover_registro/RemoverRegistro'
 

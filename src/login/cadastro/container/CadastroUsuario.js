@@ -1,24 +1,45 @@
 import React, { Component } from 'react'
-import { connect, bindAction } from 'react-redux'
+import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import CadastroUsuarioForm from '../form/CadastroUsuarioForm'
-import { cadastrarUsuario } from '../../../state/autenticacao/AuthActions'
+import { cadastrarUsuario, limparCadastro } from '../../../state/autenticacao/AuthActions'
+import Redirecionar from '../redirecionar/Redirecionar'
 
 class CadastroUsuario extends Component {
 
   cadastrarUsuario(dados) {
     this.props.cadastrarUsuario(dados)
-    this.props.history.push("/confirmar")
+  }
+
+  redirecionar() {
+    this.props.limparCadastro()
+    this.props.history.push({
+      pathname: "login",
+      search: "?loginSelecionado=true"
+    })
   }
 
   render() {
-    return <CadastroUsuarioForm cadastrarUsuarioSubmit={(dados) => this.cadastrarUsuario(dados)} />
+    if (this.props.cadastroSucesso) {
+      return <Redirecionar redirecionar={() => this.redirecionar()}/>
+    }
+    return (
+      <CadastroUsuarioForm
+          erro={this.props.erro}  
+          cadastrarUsuarioSubmit={(dados) => this.cadastrarUsuario(dados)} /> )
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ cadastrarUsuario }, dispatch)
+  return bindActionCreators({ cadastrarUsuario, limparCadastro }, dispatch)
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(CadastroUsuario))
+function mapStateToProps({errosStateTree, authStateTree}) {
+  return {
+    erro: errosStateTree.erro,
+    cadastroSucesso: authStateTree.cadastroSucesso
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CadastroUsuario))

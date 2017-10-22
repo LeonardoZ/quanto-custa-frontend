@@ -3,8 +3,6 @@ import Formsy from 'formsy-react'
 import { MyInput } from '../../../util/formulario/form_group/FormGroup'
 import { Row, Col } from 'react-flexbox-grid'
 import RaisedButton from 'material-ui/RaisedButton'
-import FlatButton from 'material-ui/FlatButton'
-import { BrowserRouter as Router, Link } from 'react-router-dom'
 import Paper from 'material-ui/Paper'
 
 const style = {
@@ -40,13 +38,19 @@ class CadastroUsuarioForm extends Component {
   }
 
   render() {
+    let block = ""
+    let erro = this.props.erro
+
+    if (erro && erro.temErro) {
+      block = <p>{this.props.erro.mensagem}</p>
+    }
     return (
       <Paper zDepth={1} rounded={false} style={style}>
         <Formsy.Form
           onSubmit={this.submit}
           onValid={this.enableButton}
           onInvalid={this.disableButton}>
-
+          {block}
           <Row className="show-grid">
             <Col xs>
               <MyInput name="email" title="E-mail"

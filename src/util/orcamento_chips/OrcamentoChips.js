@@ -5,15 +5,12 @@ import SvgIconFace from 'material-ui/svg-icons/action/face'
 import {
   green100,
   green700,
-  deepOrange100,
-  deepOrange700,
   cyan700,
   amber100,
   amber700,
   cyan100
 } from 'material-ui/styles/colors'
-import { parseToFormat, daysBetween } from '../date_util/ApiDateParser'
-import { formatarMoeda } from '../number_format/NumberFormat'
+import { parseToFormat } from '../date_util/ApiDateParser'
 
 const styles = {
   wrapper: {

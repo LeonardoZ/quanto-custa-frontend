@@ -15,7 +15,6 @@ import UnidadesList from '../list/UnidadesList'
 import OrcamentoHeader from '../../util/orcamento_header/OrcamentoHeader'
 import Pagina from '../pagina/ResumoOrcamentoPagina'
 import ButtonBar from '../button_bar/ButtonBar'
-import Carregando from '../../util/carregando/CarregandoPanel'
 import OrcamentoNaoDefinido from '../../util/orcamento_nao_definido/OrcamentoNaoDefinido'
 import RemoverRegistro from '../../util/remover_registro/RemoverRegistro'
 

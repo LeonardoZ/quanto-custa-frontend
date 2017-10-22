@@ -3,8 +3,6 @@ import Formsy from 'formsy-react'
 import { MyInput } from '../../../util/formulario/form_group/FormGroup'
 import { Row, Col } from 'react-flexbox-grid'
 import RaisedButton from 'material-ui/RaisedButton'
-import FlatButton from 'material-ui/FlatButton'
-import { BrowserRouter as Router, Link } from 'react-router-dom'
 import Paper from 'material-ui/Paper'
 
 const style = {
@@ -13,11 +11,6 @@ const style = {
 
 const btnSubmitStyle = {
   alignSelf: 'flex-end'
-}
-
-
-const btnEsqueceuStyle = {
-  alignSelf: 'flex-start'
 }
 
 class AtivarCadastroForm extends Component {

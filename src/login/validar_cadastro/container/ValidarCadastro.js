@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { withRouter, Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Mensagem from '../mensagem/Mensagem'
 import LoginPagina from '../../pagina/LoginPagina'
-import { cadastrarUsuario, validarEmail } from '../../../state/autenticacao/AuthActions'
+import { validarEmail } from '../../../state/autenticacao/AuthActions'
 import { limparErros } from '../../../state/erros/ErrosActions'
 
 class ValidarCadastro extends Component {

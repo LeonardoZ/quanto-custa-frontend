@@ -1,14 +1,13 @@
 import React from 'react'
 import UnidadeItem from '../item/UnidadeItem'
 import NenhumItem from '../../util/nenhum_item_registrado/NenhumItemRegistrado'
-import { Grid, Row, Col } from 'react-flexbox-grid'
+import { Col } from 'react-flexbox-grid'
 import {
   Table,
   TableBody,
   TableHeader,
   TableHeaderColumn,
   TableRow,
-  TableRowColumn,
   TableFooter
 } from 'material-ui/Table'
 import { formatarMoeda } from '../../util/number_format/NumberFormat'

@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
-import Dialog from 'material-ui/Dialog'
 import Formsy from 'formsy-react'
 import { Row, Col } from 'react-flexbox-grid'
 import RaisedButton from 'material-ui/RaisedButton'
 import Paper from 'material-ui/Paper'
 import MoneyInput from '../../util/formulario/money_input/MoneyInput'
 import PercentInput from '../../util/formulario/percent_input/PercentInput'
-import TextField from 'material-ui/TextField'
 import IntInput from '../../util/formulario/int_input/IntInput'
-import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-ui/Toolbar'
+import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar'
 
 const colStyle = {
   marginTop: "8px"
@@ -45,7 +43,6 @@ class PagamentoForm extends Component {
 
   componentWillMount() {
     this.setState({ canSubmit: false, ehParcelado: false })
-    this.props.pagamentoAtivo
   }
 
   enableButton() {

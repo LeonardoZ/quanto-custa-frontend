@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import './App.css'
-import { BrowserRouter as Router, Link } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getRoutes } from '../../routes'
-import { Admin } from '../admin/Admin'
 import { limparErros } from '../../state/erros/ErrosActions'
 import { getUsuario } from '../../state/autenticacao/AuthActions'
 
@@ -27,7 +26,7 @@ class App extends Component {
 
 	logarSeTiverTokenRegistrado() {
 		let token = sessionStorage.getItem("jwtToken")
-		if (token) {
+		if (token && token !== "undefined") {
 			this.props.getUsuario(token)
 		}
 	}

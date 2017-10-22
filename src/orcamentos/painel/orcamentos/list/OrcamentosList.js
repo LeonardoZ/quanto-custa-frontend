@@ -1,16 +1,7 @@
 import React from 'react'
 import { Grid, Row, Col } from 'react-flexbox-grid'
-import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn,
-} from 'material-ui/Table'
 import OrcamentoItem from '../item/OrcamentoItem'
 import NenhumItem from '../../../../util/nenhum_item_registrado/NenhumItemRegistrado'
-import { GridList } from 'material-ui/GridList'
 
 const styles = {
   root: {

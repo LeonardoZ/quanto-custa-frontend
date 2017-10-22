@@ -1,6 +1,7 @@
 function lidarComErro(state, action) {
-  if (action.payload.response) {
-    let data = action.payload.response.data
+  // TODO unificar no backend estrutura de retorna do exceptions previstas ou não
+  if (action.payload.data) {
+    let data = action.payload.data
     return { ...state, 
       erro: { 
           temErro: true, 
@@ -9,7 +10,7 @@ function lidarComErro(state, action) {
         } 
       }
   } else {
-    let mensagem = action.payload.message || action.payload.mensagem
+    let mensagem = action.payload.response.data.message
     return { ...state, erro: { temErro: true, mensagem: mensagem } }
   }
 

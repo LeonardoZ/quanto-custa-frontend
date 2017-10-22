@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Col } from 'react-flexbox-grid'
+import { Col } from 'react-flexbox-grid'
 import RaisedButton from 'material-ui/RaisedButton'
 
 const style = {

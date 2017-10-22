@@ -63,7 +63,6 @@ function editarArtefato(state, action) {
 
 function atualizarArtefato(state, action) {
   let artefatoAtualizado = action.payload.data
-  let artefatoAtivo = state.artefatoAtivo
   let artefatosDiferentesDoAtualizado = state.artefatos.filter(a => a.uuid !== artefatoAtualizado.uuid)
   let novosArtefatos = [...artefatosDiferentesDoAtualizado, artefatoAtualizado]
   return { ...state, artefatos: novosArtefatos, artefatoAtivo: ARTEFATO_ATIVO }

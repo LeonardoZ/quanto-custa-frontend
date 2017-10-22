@@ -4,14 +4,16 @@ let cliente = criarAxios()
 
 let res = (function () {
   let token = sessionStorage.getItem('jwtToken')
-  axios.defaults.headers.common['Authorization'] = token ? "Bearer " + token : null;
+    ? "Bearer " + token
+    : null;
 })();
 
+console.log(res)
 
 function criarAxios() {
   return axios.create({
     baseURL: 'http://localhost:8080/quantocusta/api/',
-    responseType: 'json',  
+    responseType: 'json',
     validateStatus: function (status) {
       return status >= 200 && status < 500; // default
     }
@@ -29,7 +31,10 @@ export function salvarOrcamento(usuario, orcamento) {
 }
 
 export function atualizarOrcamento(orcamentoAtivo, orcamentoData) {
-  let data = { ...orcamentoData, validoAte: orcamentoAtivo.validoAte }
+  let data = {
+    ...orcamentoData,
+    validoAte: orcamentoAtivo.validoAte
+  }
   let request = cliente.put("/orcamento/" + orcamentoAtivo.uuid, data)
   return request
 }
@@ -83,16 +88,25 @@ export function removerArtefato(artefato) {
 
 export function fazerLogin(loginData) {
   axios.defaults.headers.common['Authorization'] = null
-  let request = cliente.post("/auth", loginData)
+  let request = cliente
+    .post("/auth", loginData)
     .then((resultado) => {
-      sessionStorage.setItem("jwtToken", resultado.data.token)
-      axios.defaults.headers.common['Authorization'] = "Bearer " + sessionStorage.getItem('jwtToken')
-      let usuarioPromise = getUsuario()
-      return Promise.all([resultado, usuarioPromise])
-    }).catch(err => {
-      return { ...err, error: true }
+      switch (resultado.status) {
+        case 200:
+          sessionStorage.setItem("jwtToken", resultado.data.token)
+          axios.defaults.headers.common['Authorization'] = "Bearer " + sessionStorage.getItem('jwtToken')
+          let usuarioPromise = getUsuario()
+          return Promise.all([resultado, usuarioPromise])
+        default:
+          return resultado
+      }
     })
-  return request
+    .catch(err => {
+      return {
+        ...err,
+        error: true
+      }
+    })
 }
 
 export function getUsuario() {
@@ -106,7 +120,7 @@ export function cadastrarUsuario(usuario) {
 }
 
 export function reenviarEmail(email) {
-  let request = cliente.post("/reenviar/email", { email })
+  let request = cliente.post("/reenviar/email", {email})
   return request
 }
 
@@ -117,7 +131,7 @@ export function validarEmail(validar) {
 }
 
 export function enviarEmailEsqueciSenha(email) {
-  let request = cliente.post("/esqueci/senha", { email })
+  let request = cliente.post("/esqueci/senha", {email})
   return request
 }
 
@@ -142,15 +156,17 @@ export function removerPagamento(pagamento) {
 }
 
 export function carregaPagamento(orcamento) {
-  let request = cliente.get("/orcamento/" + orcamento.uuid + "/pagamento")
+  let request = cliente
+    .get("/orcamento/" + orcamento.uuid + "/pagamento")
     .then(req => {
       return Promise.resolve(req)
-    }).catch(err => {
+    })
+    .catch(err => {
       if (err.repsonse) {
         return Promise.reject(err.response)
       }
     })
-  return request
+    return request
 }
 
 export function calcularPagamento(pagamento, orcamento) {
@@ -158,4 +174,3 @@ export function calcularPagamento(pagamento, orcamento) {
   let pagamentoEnviado = Promise.resolve(pagamento)
   return Promise.all([request, pagamentoEnviado])
 }
-

@@ -3,7 +3,7 @@ import { withRouter, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import LoginForm from '../form/LoginForm'
-import { fazerLogin, getUsuario } from '../../../state/autenticacao/AuthActions'
+import { fazerLogin } from '../../../state/autenticacao/AuthActions'
 import { limparErros } from '../../../state/erros/ErrosActions'
 
 class Login extends Component {
@@ -16,6 +16,12 @@ class Login extends Component {
     }
     this.props.fazerLogin(login)
   }
+  
+  componentDidMount() {
+    // limpar algum erro anterior
+    this.props.limparErros()
+  }
+  
 
   ativarCadastro() {
     this.props.history.push("/ativar/cadastro")
@@ -34,7 +40,7 @@ class Login extends Component {
     } else
       return (
         <LoginForm 
-            erro={this.props.erro} 
+            erro={this.props.erro}
             onLoginSubmit={(formData) => this.onLoginSubmit(formData)}
             esqueciSenha={() => this.esqueciSenha()}
             ativarCadastro={() => this.ativarCadastro()} />

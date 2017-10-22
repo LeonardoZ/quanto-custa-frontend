@@ -1,5 +1,5 @@
 import React from 'react'
-import Table, {
+import {
   TableRowColumn,
   TableRow,
 } from 'material-ui/Table'
