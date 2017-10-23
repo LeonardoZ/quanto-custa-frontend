@@ -74,7 +74,7 @@ function limparCadastro(state, action) {
 }
 
 function fazerLogin(state, action) {
-  let status = action.payload.status || action.payload[0].status
+  let status = action.payload[0] === undefined ? action.payload.status : action.payload[0].status
   switch (status) {
     case 200:
       let tokenRequest = action.payload[0]

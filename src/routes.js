@@ -24,8 +24,8 @@ const PrivateRoute =
         <Admin erro={erro} limparErros={() => limparErros()} >
           <Component {...props} />
         </Admin>
-      ) : (
-          <Redirect to={{
+      ) : 
+      ( <Redirect to={{
             pathname: '/login',
             state: { from: props.location }
           }} />

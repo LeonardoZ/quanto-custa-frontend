@@ -1,10 +1,22 @@
 import React from 'react'
-import { Col } from 'react-flexbox-grid'
+import { Row, Col } from 'react-flexbox-grid'
+import ProgressoCadastro from '../../util/progresso_cadastro/container/ProgressoCadastro'
+
+const style = {
+  resumo: {
+    marginBottom: "8px"
+  }
+}
 
 export const PagamentoPagina = (props) => {
   return (
     <Col xs={12}>
-      {props.children}
+      <Row>
+        <Col xs={12}>
+          <ProgressoCadastro styles={style.resumo}/>
+        </Col>
+        {props.children}
+      </Row>
     </Col>
   )
 }

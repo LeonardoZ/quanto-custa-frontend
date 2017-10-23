@@ -10,7 +10,7 @@ function lidarComErro(state, action) {
         } 
       }
   } else {
-    let mensagem = action.payload.response.data.message
+    let mensagem = action.payload ? action.payload.response.data.message : "Serviço indisponível"
     return { ...state, erro: { temErro: true, mensagem: mensagem } }
   }
 

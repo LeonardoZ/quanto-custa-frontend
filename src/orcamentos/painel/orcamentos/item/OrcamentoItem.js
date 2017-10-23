@@ -10,7 +10,8 @@ import Chips from '../../../../util/orcamento_chips/OrcamentoChips'
 
 const styles = {
   root: {
-    flexGrow: 1
+    width: "100%",
+    minWidth: "390px"
   },
   textStyle: {
     color: 'rgb(0, 188, 212)',

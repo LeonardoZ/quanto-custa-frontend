@@ -62,6 +62,7 @@ class PagamentoForm extends Component {
     this.setState({ canSubmit: vezesValido && jurosMensaisValido && entradaValida && descontoAVistaValido })
     this.setState({ ehParcelado: pagamentoAtivo.pagamentoEmVezes > 1 })
     if (!this.props.pagamentoInvalido) {
+      console.log(this.props.pagamentoInvalido)
       this.props.aoMudar()
     }
   }

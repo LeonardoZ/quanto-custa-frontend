@@ -9,7 +9,10 @@ import {
   teal700
 } from 'material-ui/styles/colors'
 
-export const PainelPagamentoSimples = ({ calculoPagamento = [], pagamentoInvalido = false, pagamentoInvalidoMensagem = "" }) => {
+export const PainelPagamentoSimples = ({ 
+  calculoPagamento = [], 
+  pagamentoInvalido = false, 
+  pagamentoInvalidoMensagem = "" }) => {
 
   const styles = {
     padding: "8px",

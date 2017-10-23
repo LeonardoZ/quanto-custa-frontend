@@ -1,13 +1,17 @@
 import {
-  INFORMACAO_ORCAMENTO, CADASTRO_UNIDADES,
-  CADASTRO_ARTEFATOS, FINALIZAR
+  INFORMACAO_ORCAMENTO,
+  CADASTRO_UNIDADES,
+  CADASTRO_ARTEFATOS, 
+  FINALIZAR_UNIDADES,
+  DEFINIR_PAGAMENTO
 } from './StepperActionTypes'
 
 const STATE = {
   informacaoOrcamento: false,
   cadastroUnidades: false,
   cadastroArtefatos: false,
-  finalizar: false
+  finalizarUnidades: false,
+  definirPagamento: false
 }
 
 export default (state = STATE, action) => {
@@ -17,28 +21,40 @@ export default (state = STATE, action) => {
         informacaoOrcamento: true,
         cadastroUnidades: false,
         cadastroArtefatos: false,
-        finalizar: false
+        finalizarUnidades: false,
+        definirPagamento: false
       }
     case CADASTRO_UNIDADES:
       return {
         informacaoOrcamento: false,
         cadastroUnidades: true,
         cadastroArtefatos: false,
-        finalizar: false
+        finalizarUnidades: false,
+        definirPagamento: false
       }
     case CADASTRO_ARTEFATOS:
       return {
         informacaoOrcamento: false,
         cadastroUnidades: false,
         cadastroArtefatos: true,
-        finalizar: false
+        finalizarUnidades: false,
+        definirPagamento: false
       }
-    case FINALIZAR:
+    case FINALIZAR_UNIDADES:
       return {
         informacaoOrcamento: false,
         cadastroUnidades: false,
         cadastroArtefatos: false,
-        finalizar: true
+        finalizarUnidades: true,
+        definirPagamento: false
+      }
+    case DEFINIR_PAGAMENTO:
+      return {
+        informacaoOrcamento: false,
+        cadastroUnidades: false,
+        cadastroArtefatos: false,
+        finalizarUnidades: false,
+        definirPagamento: true
       }
     default:
       return state

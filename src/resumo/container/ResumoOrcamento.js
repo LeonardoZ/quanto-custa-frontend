@@ -10,7 +10,7 @@ import {
   configurarUnidadeParaAtiva,
   removerUnidade
 } from '../../state/unidades_de_software/UnidadesActions'
-import { finalizar } from '../../state/stepper/StepperActions'
+import { finalizarUnidades } from '../../state/stepper/StepperActions'
 import UnidadesList from '../list/UnidadesList'
 import OrcamentoHeader from '../../util/orcamento_header/OrcamentoHeader'
 import Pagina from '../pagina/ResumoOrcamentoPagina'
@@ -32,7 +32,7 @@ class ResumoOrcamento extends Component {
     } else {
       this.props.carregarUnidades(orcamento)
     }
-    this.props.finalizar()
+    this.props.finalizarUnidades()
     this.setState({ removerUnidade: false })
   }
 
@@ -110,7 +110,7 @@ function mapDispatchToProps(dispatch) {
     removerUnidade,
     carregarUnidades,
     configurarUnidadeParaAtiva,
-    finalizar
+    finalizarUnidades
   }, dispatch)
 }
 

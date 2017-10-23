@@ -34,8 +34,8 @@ export function limparCadastro() {
   }
 }
 
-export function getUsuario() {
-  let request = api.getUsuario()
+export function getUsuario(token) {
+  let request = api.getUsuario(token)
   return {
     "type": GET_USUARIO,
     "payload": request

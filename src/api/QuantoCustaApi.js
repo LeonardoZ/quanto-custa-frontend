@@ -7,7 +7,7 @@ let res = (function () {
     ? "Bearer " + token
     : null;
 })();
-
+// evitando warning de não utilizado de 'res' - TODO procurar alternativa
 console.log(res)
 
 function criarAxios() {
@@ -93,13 +93,15 @@ export function fazerLogin(loginData) {
     .then((resultado) => {
       switch (resultado.status) {
         case 200:
-          sessionStorage.setItem("jwtToken", resultado.data.token)
-          axios.defaults.headers.common['Authorization'] = "Bearer " + sessionStorage.getItem('jwtToken')
-          let usuarioPromise = getUsuario()
+          let token = resultado.data.token
+          sessionStorage.setItem("jwtToken", token)
+          axios.defaults.headers.common["Authorization"] = "Bearer " + token
+          let usuarioPromise = getUsuario(token)
           return Promise.all([resultado, usuarioPromise])
         default:
           return resultado
       }
+      return resultado
     })
     .catch(err => {
       return {
@@ -107,9 +109,11 @@ export function fazerLogin(loginData) {
         error: true
       }
     })
+    return request  
 }
 
-export function getUsuario() {
+export function getUsuario(token) {
+  axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
   let request = cliente.get("/usuario")
   return request
 }

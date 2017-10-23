@@ -26,12 +26,11 @@ class App extends Component {
 
 	logarSeTiverTokenRegistrado() {
 		let token = sessionStorage.getItem("jwtToken")
-		if (token && token !== "undefined") {
+		if (token && (token !== "undefined" || token !== undefined)) {
 			this.props.getUsuario(token)
 		}
 	}
 }
-
 
 function mapStateToProps({ errosStateTree, authStateTree }) {
 	return {

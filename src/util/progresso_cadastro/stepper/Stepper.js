@@ -34,14 +34,14 @@ export const StepperPanel = (props) => {
             Definir Artefatos de uma Unidade de Software.
           </StepLabel>
         </Step>
-        <Step completed={estado.cadastroArtefatos}>
+        <Step completed={estado.finalizarUnidades}>
           <StepLabel>
-            Detalhar a forma como o Pagamento será realizado.
+            Finalizar Unidades de Software
           </StepLabel>
         </Step>
-        <Step completed={estado.finalizar}>
+        <Step completed={estado.definirPagamento}>
           <StepLabel>
-            Finalizar Orçamento
+            Detalhar a forma como o Pagamento será realizado.
           </StepLabel>
         </Step>
       </Stepper>

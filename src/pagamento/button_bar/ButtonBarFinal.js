@@ -4,6 +4,7 @@ import { Row, Col } from 'react-flexbox-grid'
 
 const styles = {
   marginTop: "8px",
+  marginBottom: "8px",
 }
 
 export const ButtonBar = ({ podeFinalizar, revisar, finalizar }) => (

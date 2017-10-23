@@ -46,7 +46,8 @@ export default (state = pagamentoInitialState, action) => {
 
 function salvarPagamento(state, action) {
   return {
-    ...state, pagamentoAtivo: action.payload.data,
+    ...state, 
+    pagamentoAtivo: action.payload.data,
     calculoPagamento: action.payload.data.calculoPagamento,
     pagamentoInvalido: false,
     pagamentoInvalidoMensagem: ""

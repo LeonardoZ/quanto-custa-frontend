@@ -17,10 +17,13 @@ const styles = {
   item: {
     marginBottom: '8px',
     marginTop: '8px',
+    flexGrow: 0,
+    flexShrink: 0,
+    flexBasis: "50%",
   }
 }
 const OrcamentosList = ({ orcamentos, editarOrcamento, abrirResumo, remover, ver }) => {
-  if (orcamentos.lengTableHeaderColumn === 0) {
+  if (orcamentos.length === 0) {
     return <NenhumItem tipoDoItem="Orçamento" />
   }
   let items = orcamentos.map((orc, idx) => {

@@ -18,6 +18,7 @@ import {
   calcularPagamento,
   invalidarPagamento
 } from '../../state/pagamentos/PagamentosActions'
+import { definirPagamento } from '../../state/stepper/StepperActions'
 import PainelPagamentoSimples from '../../util/painel_pagamento/PainelPagamentoSimples'
 import RemoverRegistro from '../../util/remover_registro/RemoverRegistro'
 
@@ -25,6 +26,7 @@ class Pagamento extends Component {
 
   componentWillMount() {
     this.setState({ podeFinalizar: false, remover: false })
+    this.props.definirPagamento()
   }
 
   componentDidMount() {
@@ -43,6 +45,7 @@ class Pagamento extends Component {
     } else {
       this.props.salvarPagamento(dados, this.props.orcamento)
     }
+    this.avaliaPagamentoEhValido(this.props.pagamentoAtivo)
   }
 
   revisar() {
@@ -103,7 +106,8 @@ class Pagamento extends Component {
           podeFinalizar={this.props.pagamentoAtivo && this.props.pagamentoAtivo.orcamentoUuid ? true : false}
           revisar={() => this.revisar()}
           finalizar={() => this.finalizar()} />
-      </Pagina>)
+      </Pagina>
+    )
   }
 }
 
@@ -127,7 +131,8 @@ function mapDispatchToProps(dispatch, ownProps) {
     novoPagamento,
     removerPagamento,
     calcularPagamento,
-    invalidarPagamento
+    invalidarPagamento,
+    definirPagamento
   }, dispatch)
 }
 

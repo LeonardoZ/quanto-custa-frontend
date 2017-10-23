@@ -16,8 +16,8 @@ export const UnidadeCadastroPagina = ({ children }) => {
         </Col>
         <Col xs={12}>
           <Row style={style}>
-            <Col xs={12} md={4} style={margin}>
-              <ProgressoCadastro isVertical={true} />
+            <Col xs={12} style={margin}>
+              <ProgressoCadastro />
             </Col>
             <Col xs={12} md={8} style={margin}>
               <Toolbar>
